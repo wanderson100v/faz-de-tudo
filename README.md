@@ -1,5 +1,5 @@
 # FAZ DE TUDO
-<img src = "res/logo-faz-de-tudo.png" width= 200px height = 200px>
+<img src = "res/img/logo-faz-de-tudo.png" width= 200px height = 200px>
 Site para empresa - Faz de tudo: manutenção domiciliar/empresarial -
 
 <p>

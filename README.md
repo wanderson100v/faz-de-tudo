@@ -7,7 +7,7 @@ Site para empresa - Faz de tudo: manutenção domiciliar/empresarial -
     como também como site para empresa fictícia desenvolvida na disciplina de Empreendedorismo e Legislação(EL)
 </p>
 
-<h1>Descrição</h1>
+<h2>Descrição</h2>
 
 <p>
     A empresa fornece serviços de manutenção domiciliar/empresarial, do tipo faz-tudo, desde limpezas a manutenções, 
@@ -29,3 +29,5 @@ Site para empresa - Faz de tudo: manutenção domiciliar/empresarial -
     avisos, ou utilização desses dados para por ex. marketing direcionado. O cliente ao logar têm a possibilidade de selecionar 
     os serviços que deseja requisitar como também data e horário para que cada um ocorra.
 </p>
+
+<h3>Mais detalhes na documentação do projeto</h3>

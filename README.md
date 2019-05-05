@@ -30,4 +30,4 @@ Site para empresa - Faz de tudo: manutenção domiciliar/empresarial -
     os serviços que deseja requisitar como também data e horário para que cada um ocorra.
 </p>
 
-<h3>Mais detalhes na documentação do projeto</h3>
+<h3>Mais detalhes(tais como, DER, MER e requisitos) na documentação do projeto</h3>

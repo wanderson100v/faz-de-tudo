@@ -7,15 +7,7 @@ class Usuario extends Entidade{
     private $ativo;
     private $login;
     private $senha;
-
-    public function __construct($id ,$ativo, $login, $senha)
-    {
-        parent::__construct($id);
-        $this->ativo = $ativo;
-        $this->login = $login;
-        $this->senha = $senha;
-    }
-    
+  
     public function getAtivo()
     {
         return $this->ativo;

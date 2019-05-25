@@ -7,9 +7,8 @@ class Adm extends Entidade{
     private $gralAcesso;
     private $usuario;
 
-    public function __construct($id, $gralAcesso ,$usuario)
+    public function __construct($gralAcesso ,$usuario)
     {
-        parent::__construct($id);
         $this->gralAcesso = $gralAcesso;
         $this->usuario = $usuario;
     }

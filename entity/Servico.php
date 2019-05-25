@@ -8,16 +8,7 @@ class Servico extends Entidade{
     private $valor;
     private $horas;
     private $descricao;
-    
-    public function __construct($id, $ativo, $valor, $horas, $descricao)
-    {
-        parent::__construct($id);
-        $this->ativo = $ativo ;
-        $this->valor = $valor ;
-        $this->horas = $horas ;
-        $this->descricao = $descricao ;
-    }
-    
+   
     public function getAtivo()
     {
         return $this->ativo;

@@ -1,8 +1,11 @@
 <?php 
 
-
-use dao\UsuarioDao;
+use dao\ServicoDao;
 
 require_once('Config.php');
 
-echo var_dump((new UsuarioDao())->read("a"));
+
+$servico = (new ServicoDao())->read("a")[0];
+$servico->setDescricao("Nova descrição");
+var_dump((new ServicoDao())->update($servico));
+

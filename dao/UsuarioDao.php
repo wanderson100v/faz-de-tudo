@@ -1,7 +1,7 @@
 <?php
 namespace dao;
 
-use PDO;
+use entity\Usuario;
 
 /**
  * Não inicia transções (depente de transações iniciadas por terceiros)
@@ -10,24 +10,6 @@ use PDO;
  */
 class UsuarioDao extends Dao
 {
-    public function read($busca)
-    {
-        $buscaLike = '%'.$busca.'%' ;
-        
-        $stm = $this->pdo->prepare(
-            "SELECT * FROM usuario 
-            where  ativo = 1 
-            and CONCAT(id,login) like :busca");
-        $stm->bindParam("busca",$buscaLike);
-        
-        if($stm->execute()){
-            $usuarios = array();
-            while($linha = $stm->fetch(PDO::FETCH_ASSOC))
-                array_push($usuarios,$linha);
-            return $usuarios;
-        }
-    }
-
     public function create($entity)
     {
         $login = $entity->getLogin();
@@ -60,31 +42,45 @@ class UsuarioDao extends Dao
         $stm->bindParam("id",$id);
         
         $stm->execute();
-        $entity->setId($this->pdo->lastInsertId());
     }
     
-    /**
-     * Eclusão lógica de user
-     * {@inheritDoc}
-     * @see \dao\IDao::delete()
-     */
-    public function delete($entity)
+    protected function castRsObject($rowRs)
     {
-        try{
-            $this->pdo->beginTransaction();
-            $id = $entity->getId();
-            
-            $stm = $this->pdo->prepare(
-                "UPDATE `fdt`.`usuario`
-                SET `ativo` = 0 
-                WHERE `id` = :id");
-            $stm->bindParam("id",$id);
-            
-            $stm->execute();
-            $stm->commit();
-        }catch (\PDOException $e){
-            $this->pdo->rollBack();
-            print("\nErro ao cadastrar administrador: ".$e->getMessage());
-        }
+        $u = new Usuario();
+        $u->setId($rowRs['id']);
+        $u->setAtivo($rowRs['ativo']);
+        $u->setLogin($rowRs['login']);
+        $u->setSenha($rowRs['senha']);
+        return $u;
     }
+
+    protected function getSqlRead()
+    {
+        return  "SELECT * FROM usuario
+                where  ativo = 1
+                and CONCAT(id,login) like :busca";
+    }
+    
+    protected function getUpdateInputParameters()
+    {}
+
+    protected function getCreateInputParameters()
+    {}
+
+    protected function getDeleteInputParameters()
+    {}
+
+    protected function getSqlUpdate()
+    {}
+
+    protected function getSqlCreate()
+    {}
+
+    protected function getSqlDelete()
+    {
+        return "UPDATE `fdt`.`usuario`
+                SET `ativo` = 0
+                WHERE `id` = :id";
+    }
+
 }

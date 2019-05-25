@@ -18,8 +18,4 @@ class Connection{
         }
         return Connection::$mysqlPDO;
     }
-
-    public static function closeConnect(){
-        Connection::$mysqlPDO->close();
-    }
 }

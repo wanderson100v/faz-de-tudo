@@ -7,12 +7,6 @@ class Adm extends Entidade{
     private $gralAcesso;
     private $usuario;
 
-    public function __construct($gralAcesso ,$usuario)
-    {
-        $this->gralAcesso = $gralAcesso;
-        $this->usuario = $usuario;
-    }
-
     public function getGralAcesso()
     {
         return $this->gralAcesso;

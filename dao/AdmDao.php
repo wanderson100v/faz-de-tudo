@@ -1,6 +1,9 @@
 <?php
 namespace dao;
 
+use entity\Adm;
+use entity\Usuario;
+
 class AdmDao extends Dao
 {
     
@@ -11,12 +14,7 @@ class AdmDao extends Dao
         parent::__construct();
         $this->usuarioDao = new UsuarioDao();
     }
-    
-    public function read($busca)
-    {
-        
-    }
-    
+  
     public function create($entity)
     {
         try{
@@ -69,8 +67,58 @@ class AdmDao extends Dao
         }
     }
 
+    /**
+     * Exclusão lógica
+     * {@inheritDoc}
+     * @see \dao\IDao::delete()
+     */
     public function delete($entity)
     {
-        
+        $this->usuarioDao->delete($entity);
     }
+    
+    
+    /**
+     * busca através de login de usuario e gral de acesso
+     * {@inheritDoc}
+     * @see \dao\IDao::read()
+     */
+    
+    function castRsObject($rowRs)
+    {
+        $adm = new Adm();
+        $adm->setId($rowRs['id']);
+        $adm->setGralAcesso($rowRs['gral_acesso']);
+        $usuario = new Usuario();
+        $usuario->setId($rowRs["usuario_id"]);
+        $adm->setUsuario($usuario);
+        return $adm;
+    }
+
+    function getSqlRead()
+    {
+        return "select  a.*
+                from adm as a inner join usuario as u on (a.usuario_id = u.id)
+                where u.ativo = 1 
+                and CONCAT(a.gral_acesso, u.login) like :busca";
+    }
+   
+    public function getUpdateInputParameters()
+    {}
+
+    public function getCreateInputParameters()
+    {}
+
+    public function getDeleteInputParameters()
+    {}
+
+    public function getSqlUpdate()
+    {}
+
+    public function getSqlCreate()
+    {}
+
+    public function getSqlDelete()
+    {}
+
 }

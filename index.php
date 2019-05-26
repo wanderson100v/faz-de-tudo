@@ -1,12 +1,17 @@
 <?php 
 
+
+use dao\ServicoMeiDao;
+use entity\Solicitacao;
+use dao\SolicitacaoDao;
+use dao\ClienteDao;
 use dao\EnderecoDao;
 
 require_once('Config.php');
 
-$ed = new EnderecoDao();
 
-$e = $ed->read("5050-550")[0];
+(new SolicitacaoDao())->delete((new SolicitacaoDao())->read("")[0]);
 
-var_dump($e);
-$ed->delete($e);
+
+
+

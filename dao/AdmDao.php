@@ -6,78 +6,109 @@ use entity\Usuario;
 
 class AdmDao extends Dao
 {
-    
-    private $usuarioDao;
-    
-    public function __construct()
-    {
-        parent::__construct();
-        $this->usuarioDao = new UsuarioDao();
-    }
-  
+    /**
+     * cadastrando usuário e administrador em cascata
+     * {@inheritDoc}
+     * @see \dao\Dao::create()
+     */
     public function create($entity)
     {
         try{
             $this->pdo->beginTransaction();
-            //cadastrando em cascata
-            $this->usuarioDao->create($entity->getUsuario());
             
-            $gralAcesso = $entity->getGralAcesso();
-            $usuarioId = $entity->getUsuario()->getId();
+            //cadastrando usuário
+            $usuario = $entity->getUsuario();
+            
+            $login = $usuario->getLogin();
+            $senha = $usuario->getSenha();
             
             $stm = $this->pdo->prepare(
-                "INSERT INTO `fdt`.`adm`(`gral_acesso`,`usuario_id`)
-                VALUES(:gral_acesso , :usuario_id)");
-            $stm->bindParam("gral_acesso",$gralAcesso);
-            $stm->bindParam("usuario_id", $usuarioId);
+                "INSERT INTO `fdt`.`usuario` (`login`, `senha`)
+            VALUES(:login, :senha)");
+            $stm->bindParam("login",$login);
+            $stm->bindParam("senha",$senha);
             
-            $stm->execute();
-            $entity->setId($this->pdo->lastInsertId());
-            $this->pdo->commit();
+            if($stm->execute()){
+                $usuario->setId($this->pdo->lastInsertId());
+                //fim cadastro usuário
+                
+                // cadastrando adm
+                $gralAcesso = $entity->getGralAcesso();
+                $usuarioId = $usuario->getId();
+                
+                $stm = $this->pdo->prepare(
+                    "INSERT INTO `fdt`.`adm`(`gral_acesso`,`usuario_id`)
+                    VALUES(:gral_acesso , :usuario_id)");
+                $stm->bindParam("gral_acesso",$gralAcesso);
+                $stm->bindParam("usuario_id", $usuarioId);
+                
+                if($stm->execute()){
+                    $entity->setId($this->pdo->lastInsertId());
+                    $this->pdo->commit();
+                }else
+                    throw new \PDOException("Erro ao cadastrar administrador");
+            }else 
+                throw new \PDOException("Erro ao cadastrar usuário de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
             print("\nErro ao cadastrar administrador: ".$e->getMessage());
         }
     }
     
+    /**
+     * editando usuário e administrador em cascata
+     * {@inheritDoc}
+     * @see \dao\Dao::update()
+     */
     public function update($entity)
     {
         try{
             $this->pdo->beginTransaction();
-            //editando em cascata
-            $this->usuarioDao->update($entity->getUsuario());
             
-            $gralAcesso = $entity->getGralAcesso();
-            $usuarioId = $entity->getUsuario()->getId();
-            $id = $entity->getId();
+            //editando usuário
+            $usuario = $entity->getUsuario();
+            
+            $login = $usuario->getLogin();
+            $senha = $usuario->getSenha();
+            $ativo = $usuario->getAtivo();
+            $id = $usuario->getId();
             
             $stm = $this->pdo->prepare(
-                "UPDATE `fdt`.`adm`
-                SET `gral_acesso` = :gral_acesso, `usuario_id` =:usuario_id:
-                WHERE `id` = :id");
-            $stm->bindParam("gral_acesso",$gralAcesso);
-            $stm->bindParam("usuario_id", $usuarioId);
-            $stm->bindParam("id", $id);
-            $stm->execute();
-            $entity->setId($this->pdo->lastInsertId());
-            $this->pdo->commit();
+                "UPDATE `fdt`.`usuario`
+            SET `ativo` = :ativo, `login` = :login, `senha` = :senha
+            WHERE `id` = :id");
+            $stm->bindParam("ativo",$ativo);
+            $stm->bindParam("login",$login);
+            $stm->bindParam("senha",$senha);
+            $stm->bindParam("id",$id);
+            
+            if($stm->execute()){
+                // fim edição usuário
+                
+                // edição administrador
+                $gralAcesso = $entity->getGralAcesso();
+                $usuarioId = $entity->getUsuario()->getId();
+                $id = $entity->getId();
+                
+                $stm = $this->pdo->prepare(
+                    "UPDATE `fdt`.`adm`
+                    SET `gral_acesso` = :gral_acesso, `usuario_id` =:usuario_id:
+                    WHERE `id` = :id");
+                $stm->bindParam("gral_acesso",$gralAcesso);
+                $stm->bindParam("usuario_id", $usuarioId);
+                $stm->bindParam("id", $id);
+                if($stm->execute()){
+                    $this->pdo->commit();
+                }else
+                    throw new \PDOException("Erro ao editar administrador");
+            }else
+                throw new \PDOException("Erro ao editar usuário de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
             print("\nErro ao editar administrador: ".$e->getMessage());
         }
     }
-
-    /**
-     * Exclusão lógica
-     * {@inheritDoc}
-     * @see \dao\IDao::delete()
-     */
-    public function delete($entity)
-    {
-        $this->usuarioDao->delete($entity);
-    }
-    
-    
+ 
     /**
      * busca através de login de usuario e gral de acesso
      * {@inheritDoc}
@@ -91,34 +122,43 @@ class AdmDao extends Dao
         $adm->setGralAcesso($rowRs['gral_acesso']);
         $usuario = new Usuario();
         $usuario->setId($rowRs["usuario_id"]);
+        $usuario->setAtivo($rowRs["ativo"]);
+        $usuario->setLogin($rowRs["login"]);
+        $usuario->setSenha($rowRs["senha"]);
         $adm->setUsuario($usuario);
         return $adm;
     }
 
-    function getSqlRead()
+    protected  function getSqlRead()
     {
-        return "select  a.*
+        return "select  a.id as id, a.gral_acesso, a.usuario_id, u.ativo, u.login, u.senha
                 from adm as a inner join usuario as u on (a.usuario_id = u.id)
                 where u.ativo = 1 
                 and CONCAT(a.gral_acesso, u.login) like :busca";
     }
+    
+    /**
+     * exclusão lógica
+     * {@inheritDoc}
+     * @see \dao\Dao::getSqlDelete()
+     */
+    protected function getSqlDelete()
+    {
+        return "UPDATE adm as a
+                INNER JOIN usuario as u on(a.usuario_id = u.id)
+                SET u.ativo = 0
+                WHERE a.id = :id";
+    }
    
-    public function getUpdateInputParameters()
+    protected function getUpdateInputParameters()
     {}
 
-    public function getCreateInputParameters()
+    protected function getCreateInputParameters()
+    {}
+    
+    protected function getSqlUpdate()
     {}
 
-    public function getDeleteInputParameters()
+    protected function getSqlCreate()
     {}
-
-    public function getSqlUpdate()
-    {}
-
-    public function getSqlCreate()
-    {}
-
-    public function getSqlDelete()
-    {}
-
 }

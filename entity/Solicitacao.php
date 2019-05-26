@@ -5,7 +5,7 @@ namespace entity;
 class Solicitacao extends Entidade{
     
     private $aceita;
-    private $status;
+    private $estado;
     private $ptsCliente;
     private $ptsMei;
     private $horario;
@@ -13,27 +13,19 @@ class Solicitacao extends Entidade{
     private $servicoMei;
     private $endereco;
     
-    public function __construct($id, $aceita, $status, $ptsCliente, $ptsMei, $horario, $cliente, $servicoMei, $endereco)
+    public function getEstado()
     {
-        parent::__construct($id);
-        $this->aceita = $aceita;
-        $this->status = $status;
-        $this->ptsCliente = $ptsCliente;
-        $this->ptsMei = $ptsMei;
-        $this->horario = $horario;
-        $this->cliente = $cliente;
-        $this->servicoMei = $servicoMei;
-        $this->endereco = $endereco;
+        return $this->estado;
+    }
+
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
     }
 
     public function getAceita()
     {
         return $this->aceita;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     public function getPtsCliente()
@@ -69,11 +61,6 @@ class Solicitacao extends Entidade{
     public function setAceita($aceita)
     {
         $this->aceita = $aceita;
-    }
-
-    public function setStatus($status)
-    {
-        $this->status = $status;
     }
 
     public function setPtsCliente($ptsCliente)

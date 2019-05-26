@@ -11,17 +11,6 @@ class Cliente extends Entidade{
     private $sexo;
     private $usuario;
 
-    public function __construct($id, $tipo ,$cpfCnpj, $nome ,$nasc, $sexo ,$usuario)
-    {
-        parent::__construct($id);
-        $this->tipo = $tipo;
-        $this->cpfCnpj = $cpfCnpj;
-        $this->nome = $nome;
-        $this->nasc = $nasc;
-        $this->sexo = $sexo;
-        $this->usuario = $usuario;
-    }
- 
     public function getTipo()
     {
         return $this->tipo;

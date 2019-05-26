@@ -30,7 +30,7 @@ class CidadeDao extends Dao
     protected function getCreateInputParameters($entity)
     {
         return array(
-            'nome' => $entity->getNome(),
+            'nome' => $entity->getNome()
         );
     }
     
@@ -45,7 +45,7 @@ class CidadeDao extends Dao
     {
         return array(
             'id' => $entity->getId(),
-            'nome' => $entity->getNome(),
+            'nome' => $entity->getNome()
         );
     }
     

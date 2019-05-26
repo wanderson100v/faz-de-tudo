@@ -5,24 +5,17 @@ namespace entity;
 class Contato extends Entidade{
     
     private $tipo;
-    private $descrica;
+    private $descricao;
     private $usuario;
-    
-    public function __construct($id ,$tipo, $descrica, $usuario){
-        parent::__construct($id);
-        $this->tipo = $tipo;
-        $this->descrica = $descrica;
-        $this->usuario = $usuario;
-    }
     
     public function getTipo()
     {
         return $this->tipo;
     }
     
-    public function getDescrica()
+    public function getDescricao()
     {
-        return $this->descrica;
+        return $this->descricao;
     }
     
     public function getUsuario()
@@ -35,9 +28,9 @@ class Contato extends Entidade{
         $this->tipo = $tipo;
     }
     
-    public function setDescrica($descrica)
+    public function setDescricao($descricao)
     {
-        $this->descrica = $descrica;
+        $this->descricao = $descricao;
     }
     
     public function setUsuario($usuario)

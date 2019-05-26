@@ -2,7 +2,7 @@
 
 namespace entity;
 
-class ServicoMei{
+class ServicoMei extends Entidade{
    
     private $ativo;
     private $valor;
@@ -10,16 +10,6 @@ class ServicoMei{
     private $servico;
     private $mei;
     
-    public function __construct($id, $ativo, $valor, $horas, $servico, $mei)
-    {
-        parent::__construct($id);
-        $this->ativo = $ativo;
-        $this->valor = $valor.
-        $this->horas = $horas;
-        $this->servico = $servico;
-        $this->mei = $mei;
-    }
-
     public function getAtivo()
     {
         return $this->ativo;

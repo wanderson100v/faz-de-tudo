@@ -61,10 +61,10 @@ class UsuarioDao extends Dao
                 and CONCAT(id,login) like :busca";
     }
     
-    protected function getUpdateInputParameters()
+    protected function getUpdateInputParameters($entity)
     {}
 
-    protected function getCreateInputParameters()
+    protected function getCreateInputParameters($entity)
     {}
 
     protected function getDeleteInputParameters()

@@ -13,18 +13,6 @@ class Endereco extends Entidade{
     private $pais;
     private $usuario;
     
-    public function __construct($id ,$cep,  $num, $logradouro, $bairro, $cidade, $estado, $pais, $usuario){
-        parent::__construct($id);
-        $this->cep ; $cep;
-        $this->num ; $num;
-        $this->logradouro ; $logradouro;
-        $this->bairro ; $bairro;
-        $this->cidade ; $cidade;
-        $this->estado ; $estado;
-        $this->pais ; $pais;
-        $this->usuario ; $usuario;
-    }
-    
     public function getCep()
     {
         return $this->cep;

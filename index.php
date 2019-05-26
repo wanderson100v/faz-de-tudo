@@ -1,11 +1,12 @@
 <?php 
 
-use dao\ServicoDao;
+use dao\EnderecoDao;
 
 require_once('Config.php');
 
+$ed = new EnderecoDao();
 
-$servico = (new ServicoDao())->read("a")[0];
-$servico->setDescricao("Nova descrição");
-var_dump((new ServicoDao())->update($servico));
+$e = $ed->read("5050-550")[0];
 
+var_dump($e);
+$ed->delete($e);

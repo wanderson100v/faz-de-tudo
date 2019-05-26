@@ -7,12 +7,6 @@ class Cidade extends Entidade{
     private $nome;
     private $meis;    
 
-    public function __construct($id, $nome)
-    {
-        parent::__construct($id);
-        $this->nome = $nome;
-    }
-
     public function getNome()
     {
         return $this->nome;

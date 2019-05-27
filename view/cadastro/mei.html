@@ -1,3 +1,78 @@
 <html>
-    
+<head>
+    <title>Cadastro passo 2</title>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/cadastro.css">
+</head>
+<body>
+    <section>
+        <header>
+            <h1>Cadastro Passo 2</h1>
+            <h2>Informe seus dados para criar uma conta como MEI</h2>
+        </header>
+        <article>
+            <h1 id = 'mei'>
+                <span class = 'img-replacement'>Logo do site</span>
+            </h1>
+            <p>
+            descrição do que é uma conta MEI  descrição do que é uma conta MEI
+            descrição do que é uma conta MEI  descrição do que é uma conta MEI
+            descrição do que é uma conta MEI  descrição do que é uma conta MEI
+            descrição do que é uma conta MEI  descrição do que é uma conta MEI
+            descrição do que é uma conta MEI  descrição do que é uma conta MEI
+            descrição do que é uma conta MEI  descrição do que é uma conta MEI
+            </p>
+        </article>
+        <article>
+            <form>
+                <fieldset>
+                    <legend>Dados de acesso</legend>
+                    
+                    <label for="loginId">Nome de usuário</label>
+                    <input type="text" name="loginFld", id="loginId"><br>
+                    
+                    <label for="senhaId">Senha</label>
+                    <input type="password" name="senhaFld", id="senhaId"><br>
+                    
+                    <label for="conSenhaId">Confirmar senha</label>
+                    <input type="password" name="conSenhaFld", id="conSenhaId"><br>
+                </fieldset>
+                <fieldset>
+                    <legend>Informações MEI</legend>
+                    <fieldset>
+                        <legend>Tipo</legend>
+                        
+                        <label for="fisicoId">Físico</label>
+                        <input type="radio" name="tipoFld", value="físico", id="fisicoId"><br>
+                        
+                        <label for="juridicoId">Jurídico</label>
+                        <input type="radio" name="tipoFld", value="jurídico", id="juridicoId"><br>
+                    </fieldset>
+
+                    <label for="cpfCnpjId">CPF/CNPJ</label>
+                    <input type="text" name="cpfCnpjFld" id ="cpfCnpjId"><br>
+
+                    <label for="nascId">Data de Nascimento</label><br>
+                    <input type="date" name="nascFld" id="nascId">
+
+                    <fieldset>
+                        <legend>Sexo</legend>
+
+                        <label for="mascId">Masculino</label>
+                        <input type="radio" name="sexoFld" value="masculino" id="mascId"><br>
+
+                        <label for="femId">Feminino</label>
+                        <input type="radio" name="sexoFld" value="feminino" id="femId"><br>
+
+                        <label for="outroId">Outro</label>
+                        <input type="radio" name="sexoFld" value="outro" id="outroId"><br>
+                    </fieldset>
+                </fieldset>
+                <input type="submit" value="Finalizar cadastro">
+            </form>
+        </article>
+    </section>
+</body>
 </html>

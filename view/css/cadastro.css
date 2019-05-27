@@ -1,5 +1,5 @@
 #mei{
-    background-image: url("../../res/img/logo-faz-de-tudo.png") ;
+    background-image: url("../../res/img/mei-img.png") ;
     margin-top: 20px;
     width : 250px;
     height: 250px;
@@ -8,7 +8,7 @@
 }
 
 #cliente{
-    background-image: url("../../res/img/logo-faz-de-tudo.png") ;
+    background-image: url("../../res/img/cliente-img.png") ;
     margin-top: 20px;
     width : 250px;
     height: 250px;
@@ -16,16 +16,18 @@
     margin-right: auto;
 }
 
+a{
+    text-align: center;
+    display: block;
+}
+
 article{
-    margin-top: 50px;
     float: right;
     width: 500px;
     display: block;
-    text-align: center;
 }
 
 section{
-    
     width: 1000;
     margin: 20 auto;
     overflow: hidden;

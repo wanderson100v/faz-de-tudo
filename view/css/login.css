@@ -1,0 +1,19 @@
+section#login{    
+    width : 600px;
+    height: 400px;
+    margin: 100px auto 100px auto;
+    border-color: black;
+    text-align: center;
+}
+#login input {
+    width: 300px;
+    display: block;
+    margin: 5px auto;
+}
+#login form {
+    margin-top: 70px;
+}
+#login button{
+    margin-top: 70px;
+    text-align: right;
+}

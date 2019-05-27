@@ -1,0 +1,40 @@
+#logo{
+    background-image: url("../../res/img/logo-faz-de-tudo.png") ;
+    margin-top: 20px;
+    width : 250px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* nav futuante*/
+nav{
+    background-color: #252525;
+    overflow: hidden;
+}
+
+nav > ul{
+    margin : 5px 30px 5px 0px;
+    float: right;
+    font-size: 24px;
+}
+
+nav > ul > li > a{
+    text-decoration: none;
+}
+
+nav > ul > li{
+    display: inline-block;
+    padding: 5px;
+    margin: 0px;
+    border: 2px solid black;
+    background-color : white;
+    width: 120px;
+    text-align: center;
+    transition-duration: 0.5s;
+}
+
+nav > ul > li:hover{
+    background-color: black;
+    color: white;
+}

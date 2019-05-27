@@ -3,9 +3,39 @@ namespace dao;
 
 use entity\Adm;
 use entity\Usuario;
+use PDO;
 
 class AdmDao extends Dao
 {
+    
+
+    public function buscarUsuario($login, $senha){
+        
+        try{
+            $stm = $this->pdo->prepare(
+                "select  a.id as id, a.gral_acesso, a.usuario_id, u.ativo, u.login, u.senha
+                from adm as a inner join usuario as u on (a.usuario_id = u.id)
+                where u.ativo = 1
+                AND u.login = :login 
+                AND u.senha = :senha"
+                );
+            
+            $stm->bindParam("login",$login);
+            $stm->bindParam("senha",$senha);
+            
+            if($stm->execute()){
+                $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
+                if($rowRs != null){
+                    return $this->castRsObject($rowRs);
+                }
+            }
+            return null;
+        }catch(\PDOException $e){
+            print("\nErro ao buscar: ".$e->getMessage());
+        }
+    }
+
+    
     /**
      * cadastrando usuário e administrador em cascata
      * {@inheritDoc}
@@ -150,10 +180,10 @@ class AdmDao extends Dao
                 WHERE a.id = :id";
     }
    
-    protected function getUpdateInputParameters()
+    protected function getUpdateInputParameters($entity)
     {}
 
-    protected function getCreateInputParameters()
+    protected function getCreateInputParameters($entity)
     {}
     
     protected function getSqlUpdate()

@@ -3,7 +3,7 @@ namespace dao;
 
 use PDO;
 /**
- * Classe generalizada com operações de CRUD
+ * Classe generalizada com operaï¿½ï¿½es de CRUD
  * @author wanderson p
  *
  */
@@ -18,23 +18,27 @@ abstract class Dao implements IDao
     
     public function read($busca)
     {
-        $buscaLike = '%'.$busca.'%' ;
-        $sql = $this->getSqlRead();
-        
-        $stm = $this->pdo->prepare($sql);
-        $stm->bindParam("busca",$buscaLike);
-        
-        if($stm->execute()){
-            $adms = array();
-            while($rowRs = $stm->fetch(PDO::FETCH_ASSOC)){
-                array_push($adms,$this->castRsObject($rowRs));
-            }return $adms;
+        try{
+            $buscaLike = '%'.$busca.'%' ;
+            $sql = $this->getSqlRead();
+            
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam("busca",$buscaLike);
+            
+            if($stm->execute()){
+                $adms = array();
+                while($rowRs = $stm->fetch(PDO::FETCH_ASSOC)){
+                    array_push($adms,$this->castRsObject($rowRs));
+                }return $adms;
+            }
+        }catch(\PDOException $e){
+            print("\nErro ao buscar: ".$e->getMessage());
         }
     }
     
     /**
      * Converte linha de registro de resultset com o tipo fetch_assoc 
-     * para objeto. Tal método é auxiliar para buscas, assim pode-se
+     * para objeto. Tal mï¿½todo ï¿½ auxiliar para buscas, assim pode-se
      * generalizar.
      * @param $rowRs
      */
@@ -68,7 +72,7 @@ abstract class Dao implements IDao
      }
      
      /**
-      * @return 'sql' para inserção
+      * @return 'sql' para inserï¿½ï¿½o
       */
      protected abstract function getSqlCreate();
      
@@ -97,7 +101,7 @@ abstract class Dao implements IDao
      }
      
      /**
-      * @return 'sql' para edição
+      * @return 'sql' para ediï¿½ï¿½o
       */
      protected abstract function getSqlUpdate();
      
@@ -127,7 +131,7 @@ abstract class Dao implements IDao
      }
      
      /**
-      * @return 'sql' para deleção
+      * @return 'sql' para deleï¿½ï¿½o
       */
      protected abstract function getSqlDelete();
      

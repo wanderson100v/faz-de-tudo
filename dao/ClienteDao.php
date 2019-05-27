@@ -3,12 +3,44 @@ namespace dao;
 
 use entity\Cliente;
 use entity\Usuario;
+use PDO;
 
 class ClienteDao extends Dao
 {
     
+    public function buscarUsuario($login, $senha){
+        print("função chamada");
+        try{
+            $stm = $this->pdo->prepare(
+                "SELECT c.id, c.tipo, c.cpf_cnpj, c.nome, c.nasc, c.sexo,
+                    c.usuario_id, u.ativo, u.login, u.senha 
+                FROM CLIENTE as c 
+                INNER JOIN USUARIO as u ON (c.usuario_id = u.id)
+                WHERE u.ativo = 1 
+                AND u.login = :login 
+                AND u.senha = :senha"
+            );
+
+            $stm->bindParam("login",$login);
+            $stm->bindParam("senha",$senha);
+            print("indo executar");
+            if($stm->execute()){
+                $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
+                if($rowRs != null){
+                    $usuario = $this->castRsObject($rowRs);
+                    return $usuario;
+                }
+            }else
+                print("não executei");
+            return null;
+        }catch(\PDOException $e){
+            print("\nErro ao buscar: ".$e->getMessage());
+        }
+    }
+
+
     /**
-     * cadastrando usuário e cliente em cascata
+     * cadastrando usuï¿½rio e cliente em cascata
      * {@inheritDoc}
      * @see \dao\Dao::create()
      */
@@ -17,7 +49,7 @@ class ClienteDao extends Dao
         try{
             $this->pdo->beginTransaction();
             
-            //cadastrando usuário
+            //cadastrando usuï¿½rio
             $usuario = $entity->getUsuario();
             
             $login = $usuario->getLogin();
@@ -25,13 +57,13 @@ class ClienteDao extends Dao
             
             $stm = $this->pdo->prepare(
                 "INSERT INTO `fdt`.`usuario` (`login`, `senha`)
-            VALUES(:login, :senha)");
+                VALUES(:login, :senha)");
             $stm->bindParam("login",$login);
             $stm->bindParam("senha",$senha);
             
             if($stm->execute()){
                 $usuario->setId($this->pdo->lastInsertId());
-                //fim cadastro usuário
+                //fim cadastro usuï¿½rio
                 
                 // cadastrando cliente
                 $sql = $this->getSqlCreate();
@@ -44,7 +76,7 @@ class ClienteDao extends Dao
                 }else
                     throw new \PDOException("Erro ao cadastrar cliente");
             }else
-                throw new \PDOException("Erro ao cadastrar usuário de cliente");
+                throw new \PDOException("Erro ao cadastrar usuï¿½rio de cliente");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
             print("\nOcorreu algum erro ao cadastrar cliente: ".$e->getMessage());
@@ -52,7 +84,7 @@ class ClienteDao extends Dao
     }
     
     /**
-     * editando usuário e cliente em cascata
+     * editando usuï¿½rio e cliente em cascata
      * {@inheritDoc}
      * @see \dao\Dao::update()
      */
@@ -61,7 +93,7 @@ class ClienteDao extends Dao
         try{
             $this->pdo->beginTransaction();
             
-            //editando usuário
+            //editando usuï¿½rio
             $usuario = $entity->getUsuario();
             
             $login = $usuario->getLogin();
@@ -79,9 +111,9 @@ class ClienteDao extends Dao
             $stm->bindParam("id",$id);
             
             if($stm->execute()){
-                // fim edição usuário
+                // fim ediï¿½ï¿½o usuï¿½rio
                 
-                // edição cliente
+                // ediï¿½ï¿½o cliente
                 $sql = $this->getSqlUpdate();
                 $stm = $this->pdo->prepare($sql);
                 
@@ -91,7 +123,7 @@ class ClienteDao extends Dao
                 }else
                     throw new \PDOException("Erro ao editar administrador");
             }else
-                throw new \PDOException("Erro ao editar usuário de administrador");
+                throw new \PDOException("Erro ao editar usuï¿½rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
             print("\nErro ao editar administrador: ".$e->getMessage());

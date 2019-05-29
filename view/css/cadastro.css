@@ -16,6 +16,10 @@
     margin-right: auto;
 }
 
+input[name='sexoFld']{
+    color:red;
+}
+
 a{
     text-align: center;
     display: block;

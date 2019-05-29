@@ -7,9 +7,8 @@ use PDO;
 
 class AdmDao extends Dao
 {
-    
-
-    public function buscarUsuario($login, $senha){
+    public function buscarUsuario($login, $senha)
+    {
         
         try{
             $stm = $this->pdo->prepare(
@@ -25,11 +24,10 @@ class AdmDao extends Dao
             
             if($stm->execute()){
                 $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
-                if($rowRs != null){
+                if(!empty($rowRs)){
                     return $this->castRsObject($rowRs);
                 }
             }
-            return null;
         }catch(\PDOException $e){
             print("\nErro ao buscar: ".$e->getMessage());
         }

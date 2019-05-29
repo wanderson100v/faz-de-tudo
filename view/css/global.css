@@ -27,3 +27,9 @@ fieldset{
     border-color: black;
     padding: 5px;
 }
+
+.feedback{
+    color: red;
+    font-size: 75%;
+    text-align: right;
+}

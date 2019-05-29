@@ -30,38 +30,41 @@
                 <fieldset>
                     <legend>Dados de acesso</legend>
                     
-                    <label for="loginId">Nome de usuário</label>
-                    <input type="text" name="loginFld", id="loginId"><br>
+                    <label for="loginId">Nome de usuário*</label>
+                    <input type="text" name="loginFld" id="loginId"><br>
                     
-                    <label for="senhaId">Senha</label>
-                    <input type="password" name="senhaFld", id="senhaId"><br>
+                    <label for="senhaId">Senha*</label>
+                    <input type="password" name="senhaFld" id="senhaId"><br>
                     
-                    <label for="conSenhaId">Confirmar senha</label>
-                    <input type="password" name="conSenhaFld", id="conSenhaId"><br>
+                    <label for="conSenhaId">Confirmar senha*</label>
+                    <input type="password" name="conSenhaFld" id="conSenhaId"><br>
                 </fieldset>
                 <fieldset>
-                    <legend>Informações MEI</legend>
+                    <legend>Informações Cliente</legend>
                     <fieldset>
                         <legend>Tipo</legend>
                         
                         <label for="fisicoId">Físico</label>
-                        <input type="radio" name="tipoFld", value="físico", id="fisicoId"><br>
+                        <input checked onclick="alterarFisico()" type="radio" name="tipoFld" value="físico" id="fisicoId"><br>
                         
                         <label for="juridicoId">Jurídico</label>
-                        <input type="radio" name="tipoFld", value="jurídico", id="juridicoId"><br>
+                        <input onclick="alterarJuridico()" type="radio" name="tipoFld" value="jurídico" id="juridicoId"><br>
                     </fieldset>
 
-                    <label for="cpfCnpjId">CPF/CNPJ</label>
+                    <label for="nomeId">Nome*</label>
+                    <input type="text" name="nomeFld" id ="nomeId"><br>
+
+                    <label for="cpfCnpjId">CPF*</label>
                     <input type="text" name="cpfCnpjFld" id ="cpfCnpjId"><br>
 
                     <label for="nascId">Data de Nascimento</label><br>
                     <input type="date" name="nascFld" id="nascId">
 
-                    <fieldset>
+                    <fieldset id = 'sexoFsID'>
                         <legend>Sexo</legend>
 
                         <label for="mascId">Masculino</label>
-                        <input type="radio" name="sexoFld" value="masculino" id="mascId"><br>
+                        <input checked type="radio" name="sexoFld" value="masculino" id="mascId"><br>
 
                         <label for="femId">Feminino</label>
                         <input type="radio" name="sexoFld" value="feminino" id="femId"><br>
@@ -70,9 +73,11 @@
                         <input type="radio" name="sexoFld" value="outro" id="outroId"><br>
                     </fieldset>
                 </fieldset>
-                <input type="submit" value="Finalizar cadastro">
             </form>
+            <span class = 'feedback'></span><br>
+            <button onclick="cadastroClienteMei('mei')">Finalizar cadastro</button>
         </article>
     </section>
+    <script src ="../js/cClienteMei.js"></script>
 </body>
 </html>

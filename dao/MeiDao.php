@@ -15,7 +15,8 @@ class MeiDao extends Dao
         $this->clienteDao = new ClienteDao();
     }
     
-    public function buscarUsuario($login, $senha){
+    public function buscarUsuario($login, $senha)
+    {
         
         try{
             $stm = $this->pdo->prepare(
@@ -34,19 +35,18 @@ class MeiDao extends Dao
             
             if($stm->execute()){
                 $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
-                if($rowRs != null){
+                if(!empty($rowRs)){
                     return $this->castRsObject($rowRs);
                 }
             }
-            return null;
         }catch(\PDOException $e){
-            print("\nErro ao buscar: ".$e->getMessage());
+           echo "\nErro ao buscar: ".$e->getMessage();
         }
     }
     
     
     /**
-     * cadastrando usuário, cliente e mei em cascata
+     * cadastrando usuï¿½rio, cliente e mei em cascata
      * {@inheritDoc}
      * @see \dao\Dao::create()
      */
@@ -55,7 +55,7 @@ class MeiDao extends Dao
         try{
             $this->pdo->beginTransaction();
             
-            //cadastrando usuário
+            //cadastrando usuï¿½rio
             $usuario = $entity->getCliente()->getUsuario();
             
             $login = $usuario->getLogin();
@@ -69,7 +69,7 @@ class MeiDao extends Dao
             
             if($stm->execute()){
                 $usuario->setId($this->pdo->lastInsertId());
-                //fim cadastro usuário
+                //fim cadastro usuï¿½rio
                 
                 // cadastrando cliente
                 $sql = $this->clienteDao->getSqlCreate();
@@ -91,20 +91,22 @@ class MeiDao extends Dao
                         $entity->setId($this->pdo->lastInsertId());
                         // fim cadastro MEI
                         $this->pdo->commit();
+                        return "sucesso ao cadastrar";
                     }else
                         throw new \PDOException("Erro ao cadastrar MEI");
                 }else
-                    throw new \PDOException("Erro ao cadastrar cliente");
+                    throw new \PDOException("Erro ao cadastrar cliente de MEI");
             }else
-                throw new \PDOException("Erro ao cadastrar usuário de cliente");
+                throw new \PDOException("Erro ao cadastrar usuÃ¡rio de MEI");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
-            print("\nOcorreu algum erro ao cadastrar cliente: ".$e->getMessage());
+            return "Ocorreu algum erro ao cadastrar MEI :"
+                .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
     
     /**
-     * editando usuário, cliente e mei em cascata
+     * editando usuï¿½rio, cliente e mei em cascata
      * {@inheritDoc}
      * @see \dao\Dao::update()
      */
@@ -113,7 +115,7 @@ class MeiDao extends Dao
         try{
             $this->pdo->beginTransaction();
             
-            //editando usuário
+            //editando usuï¿½rio
             $usuario = $entity->getCliente()->getUsuario();
             
             $login = $usuario->getLogin();
@@ -131,31 +133,31 @@ class MeiDao extends Dao
             $stm->bindParam("id",$id);
             
             if($stm->execute()){
-                // fim edição usuário
+                // fim ediï¿½ï¿½o usuï¿½rio
                 
-                // edição cliente
+                // ediï¿½ï¿½o cliente
                 $sql = $this->clienteDao->getSqlUpdate();
                 $stm = $this->pdo->prepare($sql);
                 
                 $cliente = $entity->getCliente();
                 $inputParameters = $this->clienteDao->getUpdateInputParameters($cliente);
                 if($stm->execute($inputParameters)){
-                    // fim edição cliente
+                    // fim ediï¿½ï¿½o cliente
                     
-                    // edição MEI
+                    // ediï¿½ï¿½o MEI
                     $sql = $this->getSqlUpdate();
                     $stm = $this->pdo->prepare($sql);
                     
                     $inputParameters = $this->getUpdateInputParameters($entity);
                     if($stm->execute($inputParameters)){
-                        // fim edição MEI
+                        // fim ediï¿½ï¿½o MEI
                         $this->pdo->commit();
                     }else
                         throw new \PDOException("Erro ao editar MEI");
                 }else
                     throw new \PDOException("Erro ao editar administrador");
             }else
-                throw new \PDOException("Erro ao editar usuário de administrador");
+                throw new \PDOException("Erro ao editar usuï¿½rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
             print("\nErro ao editar administrador: ".$e->getMessage());
@@ -231,7 +233,7 @@ class MeiDao extends Dao
     }
     
     /**
-     * exclusão lógica
+     * exclusï¿½o lï¿½gica
      * {@inheritDoc}
      * @see \dao\Dao::getSqlDelete()
      */

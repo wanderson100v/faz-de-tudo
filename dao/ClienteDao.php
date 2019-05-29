@@ -8,8 +8,8 @@ use PDO;
 class ClienteDao extends Dao
 {
     
-    public function buscarUsuario($login, $senha){
-        print("função chamada");
+    public function buscarUsuario($login, $senha)
+    {
         try{
             $stm = $this->pdo->prepare(
                 "SELECT c.id, c.tipo, c.cpf_cnpj, c.nome, c.nasc, c.sexo,
@@ -23,16 +23,13 @@ class ClienteDao extends Dao
 
             $stm->bindParam("login",$login);
             $stm->bindParam("senha",$senha);
-            print("indo executar");
             if($stm->execute()){
                 $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
-                if($rowRs != null){
+                if(!empty($rowRs)){
                     $usuario = $this->castRsObject($rowRs);
                     return $usuario;
                 }
-            }else
-                print("não executei");
-            return null;
+            }
         }catch(\PDOException $e){
             print("\nErro ao buscar: ".$e->getMessage());
         }
@@ -73,13 +70,15 @@ class ClienteDao extends Dao
                 if($stm->execute($inputParameters)){
                     $entity->setId($this->pdo->lastInsertId());
                     $this->pdo->commit();
+                    return "sucesso ao cadastrar";
                 }else
                     throw new \PDOException("Erro ao cadastrar cliente");
             }else
-                throw new \PDOException("Erro ao cadastrar usuï¿½rio de cliente");
+                throw new \PDOException("Erro ao cadastrar usuÃ¡rio de cliente");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
-            print("\nOcorreu algum erro ao cadastrar cliente: ".$e->getMessage());
+            return "Ocorreu algum erro ao cadastrar cliente :"
+                .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
     

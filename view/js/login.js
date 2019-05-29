@@ -4,9 +4,11 @@ function logar(){
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-           // window.location.href = "https://www.google.com";
            if(this.response.includes("Alerta")){
                document.querySelector(".feedback").innerHTML = this.response;
+           }else{
+                alert(this.response+"/inicio.php");
+                window.location.href= this.response+"/inicio.php";
            }
         }
     };

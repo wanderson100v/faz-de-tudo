@@ -7,7 +7,7 @@ use PDO;
 
 class AdmDao extends Dao
 {
-    public function buscarUsuario($login, $senha)
+    public function buscarUsuario($login)
     {
         
         try{
@@ -15,12 +15,10 @@ class AdmDao extends Dao
                 "select  a.id as id, a.gral_acesso, a.usuario_id, u.ativo, u.login, u.senha
                 from adm as a inner join usuario as u on (a.usuario_id = u.id)
                 where u.ativo = 1
-                AND u.login = :login 
-                AND u.senha = :senha"
+                AND u.login = :login"
                 );
             
             $stm->bindParam("login",$login);
-            $stm->bindParam("senha",$senha);
             
             if($stm->execute()){
                 $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
@@ -35,7 +33,7 @@ class AdmDao extends Dao
 
     
     /**
-     * cadastrando usuário e administrador em cascata
+     * cadastrando usuï¿½rio e administrador em cascata
      * {@inheritDoc}
      * @see \dao\Dao::create()
      */
@@ -44,7 +42,7 @@ class AdmDao extends Dao
         try{
             $this->pdo->beginTransaction();
             
-            //cadastrando usuário
+            //cadastrando usuï¿½rio
             $usuario = $entity->getUsuario();
             
             $login = $usuario->getLogin();
@@ -58,7 +56,7 @@ class AdmDao extends Dao
             
             if($stm->execute()){
                 $usuario->setId($this->pdo->lastInsertId());
-                //fim cadastro usuário
+                //fim cadastro usuï¿½rio
                 
                 // cadastrando adm
                 $gralAcesso = $entity->getGralAcesso();
@@ -76,7 +74,7 @@ class AdmDao extends Dao
                 }else
                     throw new \PDOException("Erro ao cadastrar administrador");
             }else 
-                throw new \PDOException("Erro ao cadastrar usuário de administrador");
+                throw new \PDOException("Erro ao cadastrar usuï¿½rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
             print("\nErro ao cadastrar administrador: ".$e->getMessage());
@@ -84,7 +82,7 @@ class AdmDao extends Dao
     }
     
     /**
-     * editando usuário e administrador em cascata
+     * editando usuï¿½rio e administrador em cascata
      * {@inheritDoc}
      * @see \dao\Dao::update()
      */
@@ -93,7 +91,7 @@ class AdmDao extends Dao
         try{
             $this->pdo->beginTransaction();
             
-            //editando usuário
+            //editando usuï¿½rio
             $usuario = $entity->getUsuario();
             
             $login = $usuario->getLogin();
@@ -111,9 +109,9 @@ class AdmDao extends Dao
             $stm->bindParam("id",$id);
             
             if($stm->execute()){
-                // fim edição usuário
+                // fim ediï¿½ï¿½o usuï¿½rio
                 
-                // edição administrador
+                // ediï¿½ï¿½o administrador
                 $gralAcesso = $entity->getGralAcesso();
                 $usuarioId = $entity->getUsuario()->getId();
                 $id = $entity->getId();
@@ -130,7 +128,7 @@ class AdmDao extends Dao
                 }else
                     throw new \PDOException("Erro ao editar administrador");
             }else
-                throw new \PDOException("Erro ao editar usuário de administrador");
+                throw new \PDOException("Erro ao editar usuï¿½rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
             print("\nErro ao editar administrador: ".$e->getMessage());
@@ -138,7 +136,7 @@ class AdmDao extends Dao
     }
  
     /**
-     * busca através de login de usuario e gral de acesso
+     * busca atravï¿½s de login de usuario e gral de acesso
      * {@inheritDoc}
      * @see \dao\IDao::read()
      */
@@ -166,7 +164,7 @@ class AdmDao extends Dao
     }
     
     /**
-     * exclusão lógica
+     * exclusï¿½o lï¿½gica
      * {@inheritDoc}
      * @see \dao\Dao::getSqlDelete()
      */

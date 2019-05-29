@@ -1,0 +1,20 @@
+
+aside{
+    background-color: #252525;
+    float: right;
+}
+
+aside button{
+    background-color : white;
+    color: black;
+}
+aside button:hover{
+    background-color: black;
+    color: white;
+}
+
+section{
+    float: center;
+    width: 800px;
+    
+}

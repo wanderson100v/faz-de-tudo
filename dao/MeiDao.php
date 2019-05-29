@@ -15,7 +15,7 @@ class MeiDao extends Dao
         $this->clienteDao = new ClienteDao();
     }
     
-    public function buscarUsuario($login, $senha)
+    public function buscarUsuario($login)
     {
         
         try{
@@ -26,13 +26,11 @@ class MeiDao extends Dao
                 INNER JOIN CLIENTE as c ON (m.cliente_id = c.id)
                 INNER JOIN USUARIO as u ON (c.usuario_id = u.id)
                 WHERE u.ativo = 1
-                AND u.login = :login 
-                AND u.senha = :senha"
+                AND u.login = :login"
                 );
             
             $stm->bindParam("login",$login);
-            $stm->bindParam("senha",$senha);
-            
+   
             if($stm->execute()){
                 $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
                 if(!empty($rowRs)){

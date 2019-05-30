@@ -1,3 +1,7 @@
+<?php
+    require_once("../controller/autenticar.php");
+    autenticarTipo();
+?>
 <html>
 <head>
     <title>Acesso ao sistema</title>

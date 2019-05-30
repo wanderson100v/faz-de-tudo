@@ -1,5 +1,6 @@
 <?php
     require_once("../../controller/autenticar.php");
+    autenticarTipo("adm");
 ?>
 <html>
 <head>
@@ -12,18 +13,11 @@
 <body>
     <nav>
         <ul>
-           <?php
-                echo  "<li><span id ='nome'>".$login."</span></li>";
-            ?>
+            <li id = 'current'><a href="inicio.php">Inicio</a></li>
+            <li><a href="perfil.php">Perfil</a></li>
             <li><a href="../../controller/logout.php">Sair</a></li>
         </ul>
     </nav>
-    <aside>
-        <ul>
-            <button>Perfil</button>
-            <button>Solicitações</button>
-        </ul>
-    </aside>
     <section id = 'conteudo'>
 
     </section>

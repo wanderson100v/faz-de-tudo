@@ -7,7 +7,6 @@ function logar(){
            if(this.response.includes("Alerta")){
                document.querySelector(".feedback").innerHTML = this.response;
            }else{
-                alert(this.response+"/inicio.php");
                 window.location.href= this.response+"/inicio.php";
            }
         }

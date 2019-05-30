@@ -37,6 +37,7 @@ if(empty($usuario) || (!empty($usuario) && $senha != $senhaRetorno))
     echo "Alerta: Dados de acesso inválidos";
 else{
     $_SESSION['logado'] = $login;
+    $_SESSION['tipo'] = $tipo;
     echo $tipo;
 }
 

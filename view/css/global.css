@@ -13,6 +13,10 @@ p{
     padding: 20px;
 }
 
+section{
+    padding: 20px;
+}
+
 h1{
     font-size: 40px;
     text-align: center;
@@ -60,6 +64,11 @@ nav > ul > li{
     text-align: center;
     transition-duration: 0.5s;
 }
+
+nav > ul > li#current{
+    border: 4px solid green;
+}
+
 
 nav > ul > li:hover{
     background-color: black;

@@ -3,8 +3,8 @@
 use dao\AdmDao;
 use dao\ClienteDao;
 use dao\MeiDao;
-
 require_once('../Config.php');
+
 $login = $_POST['login'];
 $senha = $_POST['senha'];
 
@@ -40,6 +40,7 @@ else{
     $_SESSION['tipo'] = $tipo;
     echo $tipo;
 }
+
 
 
 

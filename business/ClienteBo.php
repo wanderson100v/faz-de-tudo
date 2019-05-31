@@ -33,7 +33,9 @@ class ClienteBo
     }
     
     public function validar(Cliente $cliente){
-        $erro = UsuarioBo::getInstance()->validar($cliente->getUsuario());
+        $erro ="";
+        if(!empty($cliente->getUsuario))
+            $erro = UsuarioBo::getInstance()->validar($cliente->getUsuario());
         $cliente->setNome(trim($cliente->getNome()));
         $cliente->setCpfCnpj(trim($cliente->getCpfCnpj()));
         if($cliente->getNome() == null || ( $cliente->getNome() != null && $cliente->getNome() == "") )

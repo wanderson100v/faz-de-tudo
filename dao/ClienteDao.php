@@ -53,7 +53,7 @@ class ClienteDao extends Dao
             
             $stm = $this->pdo->prepare(
                 "INSERT INTO `fdt`.`usuario` (`login`, `senha`)
-                VALUES(:login, :senha)");
+                 VALUES(:login, :senha)");
             $stm->bindParam("login",$login);
             $stm->bindParam("senha",$senha);
             
@@ -101,8 +101,8 @@ class ClienteDao extends Dao
             
             $stm = $this->pdo->prepare(
                 "UPDATE `fdt`.`usuario`
-            SET `ativo` = :ativo, `login` = :login, `senha` = :senha
-            WHERE `id` = :id");
+                SET `ativo` = :ativo, `login` = :login, `senha` = :senha
+                WHERE `id` = :id");
             $stm->bindParam("ativo",$ativo);
             $stm->bindParam("login",$login);
             $stm->bindParam("senha",$senha);
@@ -124,7 +124,8 @@ class ClienteDao extends Dao
                 throw new \PDOException("Erro ao editar usu�rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
-            print("\nErro ao editar administrador: ".$e->getMessage());
+            echo "Ocorreu algum erro ao editar cliente :"
+                .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
     

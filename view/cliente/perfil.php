@@ -30,7 +30,7 @@
                 </div>
                 <button onclick = "cancelEditUser()">cancelar</button>
                 <button onclick = "showEditUser()">editar</button>
-                <button>salvar</button>
+                <button onclick = "saveEditUser()">salvar</button>
             </fieldset>
             <fieldset>
                 <legend>Informações Cliente</legend>
@@ -39,7 +39,11 @@
                 </div>
                 <button onclick = "cancelEditCliente()">cancelar</button>
                 <button onclick = "showEditCliente()">editar</button>
-                <button>salvar</button>
+                <button onclick = "saveEditCliente()">salvar</button>
+            </fieldset>
+            <fieldset>
+                <legend>Desativar conta de usuário</legend>
+                <button onclick = "desativarUsuario()">Desativar</button>
             </fieldset>
             <span class = 'feedback'></span><br>
         </article>

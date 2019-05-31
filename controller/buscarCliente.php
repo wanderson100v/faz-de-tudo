@@ -6,12 +6,11 @@ require_once 'util.php';
 
 if(isset($_SESSION['logado'])){
     $cliente = (new ClienteDao())->buscarUsuario($_SESSION['logado']);
-    
     if(!empty($cliente)){
-        echo json_encode(castObjectClassInArray($cliente));
+        echo json_encode(castObjectClassInArray($cliente),JSON_UNESCAPED_UNICODE);
     }else{
-        "Nada encontrado!" ;       
+        echo "Nada encontrado!" ;       
     }
 }else{
-    "Usuário não está autenticado" ;
+    echo "Usuário não está autenticado" ;
 }

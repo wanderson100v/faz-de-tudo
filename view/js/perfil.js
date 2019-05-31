@@ -64,10 +64,10 @@ function saveEditUser(){
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.querySelector(".feedback").innerHTML = this.response;
-                if(this.responseText == "Usuário editado com sucesso"){
+                if(this.responseText.includes("Usuário editado com sucesso")){
                     cliente['usuario']['login'] = login;
                     cliente['usuario']['senha'] = senhaNova;
-                    cancelEditUser(); 
+                    window.location = "/faz-de-tudo/view/login.php";
                 }
             }
         };
@@ -137,7 +137,6 @@ function saveEditCliente(){
     {
         tipo = "Físico";
         nasc = document.querySelector("#nascId").value;
-        alert(nasc);
         let masc = document.querySelector("#mascId");
         let fem = document.querySelector("#femId");
         let outro = document.querySelector("#outroId");

@@ -20,8 +20,7 @@ if(isset($_SESSION['logado'])){
         if(!empty($cliente)){
             $cliente->setUsuario($usuario);
             $clienteDao->update($cliente);
-            
-            echo "Usuário editado com sucesso";
+            session_destroy();
         }else{
             echo "Erro ao editar usuário!" ;       
         }

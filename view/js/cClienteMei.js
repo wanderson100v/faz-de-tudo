@@ -20,7 +20,7 @@ function cadastroClienteMei(cadastro){
     let sexo;
     if(document.querySelector("#fisicoId").checked == true)
     {
-        tipo = "físico";
+        tipo = "Físico";
         nasc = document.querySelector("#nascId").value;
         
         let masc = document.querySelector("#mascId");
@@ -37,7 +37,7 @@ function cadastroClienteMei(cadastro){
     }
     else
     {
-        tipo = "jurídico";
+        tipo = "Jurídico";
         if(cpfCnpj == "")
             erro+= "*CNPJ não informado<br>";
     }

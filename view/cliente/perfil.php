@@ -32,9 +32,11 @@
         </article>
         <span class = 'feedback'></span><br>
     </section>
-    <script src = "../js/perfil.js"></script>
     <script src = "../js/info_usuario.js"></script>
     <script src = "../js/info_cliente.js"></script>
+    <script src = "../js/contatos.js"></script>
+    <script src = "../js/enderecos.js"></script>
+    <script src = "../js/perfil.js"></script>
     <script> showInfoCliente()</script>
 </body>
 </html>

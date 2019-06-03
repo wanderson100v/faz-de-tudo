@@ -32,6 +32,7 @@
     </section>
     <script src = "../js/perfil.js"></script>
     <script src = "../js/info_usuario.js"></script>
+    <script src = "../js/contatos.js"></script>
     <script> showInfoAdm()</script>
 </body>
 </html>

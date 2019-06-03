@@ -41,6 +41,7 @@ function showInfoEndereco(){
     requisicao.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200){
             document.querySelector("#conteudo").innerHTML = this.responseText;
+            initInfoEnderecos();
         }
            
     };
@@ -55,6 +56,7 @@ function showInfoContato(){
     requisicao.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200){
             document.querySelector("#conteudo").innerHTML = this.responseText;
+            initInfoContatos();
         }
            
     };

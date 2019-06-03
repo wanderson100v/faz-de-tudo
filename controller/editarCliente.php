@@ -1,7 +1,6 @@
 <?php
 
 use dao\ClienteDao;
-use business\ClienteBo;
 
 require_once '../Config.php';
 

@@ -3,7 +3,6 @@
 use dao\ClienteDao;
 use dao\AdmDao;
 use entity\Usuario;
-use business\UsuarioBo;
 
 require_once '../Config.php';
 
@@ -14,7 +13,7 @@ if(isset($_SESSION['logado'])){
     $usuario->setLogin($_POST["login"]);
     $usuario->setSenha($_POST["senha"]);
     
-    $dao;
+    $dao = null;
     if($_SESSION['tipo']!='adm'){
         $dao = new ClienteDao();
     }else{

@@ -3,9 +3,32 @@ namespace dao;
 
 use entity\Endereco;
 use entity\Usuario;
+use PDO;
 
 class EnderecoDao extends Dao
 {
+    public function buscarEnderecosUsuario($usuarioId){
+        try{
+          
+            $sql = "select * from endereco as e
+                    where e.usuario_id = :usuario_id";
+            
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam("usuario_id",$usuarioId);
+            
+            if($stm->execute()){
+                $adms = array();
+                while($rowRs = $stm->fetch(PDO::FETCH_ASSOC))
+                {
+                    array_push($adms,$this->castRsObject($rowRs));
+                }
+                return $adms;
+            }
+        }catch(\PDOException $e){
+            print("\nErro ao buscar: ".$e->getMessage());
+        }
+    }
+    
     protected function getSqlRead()
     {
         return "select * from endereco as e

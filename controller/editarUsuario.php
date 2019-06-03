@@ -1,6 +1,7 @@
 <?php
 
 use dao\ClienteDao;
+use dao\AdmDao;
 use entity\Usuario;
 use business\UsuarioBo;
 
@@ -15,12 +16,17 @@ if(isset($_SESSION['logado'])){
     
     $erro = (UsuarioBo::getInstance())->validar($usuario);
     if($erro == ""){
-        $clienteDao = new ClienteDao();
-        $cliente = $clienteDao->buscarUsuario($_SESSION['logado']);
-        if(!empty($cliente)){
-            $cliente->setUsuario($usuario);
-            $clienteDao->update($cliente);
-            session_destroy();
+        $dao;
+        if($_SESSION['tipo']!='adm'){
+            $dao = new ClienteDao();
+        }else{
+            $dao = new AdmDao();  
+        }
+        $usuarioBuscado = $dao->buscarUsuario($_SESSION['logado']);
+        if(!empty($usuarioBuscado)){
+                $usuarioBuscado->setUsuario($usuario);
+                $dao->update($usuarioBuscado);
+                session_destroy();
         }else{
             echo "Erro ao editar usuário!" ;       
         }

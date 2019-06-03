@@ -38,6 +38,11 @@ fieldset{
     text-align: right;
 }
 
+.feedback-sucess{
+    color: green;
+}
+
+
 /* nav futuante*/
 nav{
     background-color: #252525;

@@ -1,9 +1,13 @@
 <?php
 use entity\Usuario;
 use entity\Cliente;
-use business\MeiBo;
 use entity\Mei;
-use business\ClienteBo;
+use entity\Contato;
+use dao\ContatoDao;
+use dao\ClienteDao;
+use dao\MeiDao;
+
+require_once('../Config.php');
 
 $cadastro = $_POST['cadastro'];
 $login = $_POST['login'];
@@ -13,8 +17,6 @@ $nome = $_POST['nome'];
 $cpfCnpj = $_POST['cpfCnpj'];
 $nasc = $_POST['nasc'];
 $sexo = $_POST['sexo'];
-
-require_once('../Config.php');
 
 $usuario = new Usuario();
 $usuario->setLogin($login);
@@ -30,13 +32,27 @@ $cliente->setUsuario($usuario);
 
 if($cadastro == "mei")
 {
+    $tipoContato = $_POST["tipoContato"];
+    $descContato = $_POST["descContato"];
+    
     $mei = new Mei();
     $mei->setCliente($cliente);
-    echo MeiBo::getInstance()->create($mei);
+    
+    $contato = new Contato();
+    $contato->setDescricao($descContato);
+    $contato->setTipo($tipoContato);
+    $contato->setUsuario($usuario);
+   
+    $retorno = array();
+    array_push($retorno,((new MeiDao())->create($mei)));
+    array_push($retorno,((new ContatoDao())->create($contato)));
+    echo json_encode($retorno);
 }
 else
 {
-    echo ClienteBo::getInstance()->create($cliente);
+    $retorno = array();
+    array_push($retorno,(new ClienteDao())->create($cliente));
+    echo json_encode($retorno);
 }
 
 

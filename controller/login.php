@@ -16,7 +16,8 @@ if(empty($usuario))
 {
     $usuario = (new MeiDao())->buscarUsuario($login);
     $tipo = "mei";
-}else{
+}else
+{
     $senhaRetorno = $usuario->getUsuario()->getSenha();
 }
 
@@ -29,20 +30,16 @@ if(empty($usuario))
     {
         $senhaRetorno = $usuario->getUsuario()->getSenha();
     }
-}else{
+}else
+{
     $senhaRetorno = $usuario->getCliente()->getUsuario()->getSenha();
 }
 
 if(empty($usuario) || (!empty($usuario) && $senha != $senhaRetorno))
     echo "Alerta: Dados de acesso inválidos";
-else{
+else
+{
     $_SESSION['logado'] = $login;
     $_SESSION['tipo'] = $tipo;
     echo $tipo;
 }
-
-
-
-
-
-

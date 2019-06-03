@@ -18,7 +18,29 @@
         </ul>
     </nav>
     <section id = 'conteudo'>
+        <header>
+            <h1>Perfil</h1>
+        </header>
+        <article>
+            <fieldset>
+                <legend>Dados de acesso</legend>
+                <div id = "dados-acesso">
+                    
+                </div>
+                <button onclick = "cancelEditUser()">cancelar</button>
+                <button onclick = "showEditUser()">editar</button>
+                <button onclick = "saveEditUser()">salvar</button>
+            </fieldset>
+            <fieldset>
+                <legend>Desativar conta de usuário</legend>
+                <button onclick = "desativarUsuario()">Desativar</button>
+            </fieldset>
+            <span class = 'feedback'></span><br>
+        </article>
+        <article>
 
+        </article>
     </section>
+    <script src = "../js/perfil.js"></script>
 </body>
 </html>

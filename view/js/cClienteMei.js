@@ -41,20 +41,54 @@ function cadastroClienteMei(cadastro){
         if(cpfCnpj == "")
             erro+= "*CNPJ não informado<br>";
     }
+    let tipoContato;
+    let descContato;
+    if(cadastro == "mei"){
+        tipoContato = (document.querySelector("#telefoneId").checked)?
+            document.querySelector("#telefoneId").value : document.querySelector("#emailId").value;
+        descContato = document.querySelector("#descConatoId").value;
+    }
+
+    if(descContato == ""){
+        erro +="*Nehuma descrição para o contato foi informada";
+    }
+
     if(erro != "Alerta: ")
         document.querySelector(".feedback").innerHTML = erro;
     else{
     	let xhttp = new XMLHttpRequest();
 	    xhttp.onreadystatechange = function() {
-	        if (this.readyState == 4 && this.status == 200) {
-               document.querySelector(".feedback").innerHTML = this.response;
+            if (this.readyState == 4 && this.status == 200) {
+               try{
+                    let textoRetorno ="";
+                    let msgs = JSON.parse(this.responseText);
+                    for(let linha in msgs){
+                        let msg = msgs[''+linha+'']
+                        if(msg != null){
+                            if(msg.includes("Sucesso"))
+                                textoRetorno +=  "<span class = 'feedback-sucess'>"+msg+"</span><br>";
+                            else
+                                textoRetorno +=  msg+"<br>";
+                        }
+                       
+                    }
+                    document.querySelector(".feedback").innerHTML = textoRetorno;
+                }catch(e){
+                   console.log("erro ao cadastrar "+cadastro);
+                }
 	        }
 	    };
 	    xhttp.open("POST", "../../controller/cClienteMei.php", true);
 	    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	    xhttp.send("cadastro="+cadastro+"&login="+login+"&senha="+senha+"&tipo="+tipo
-	    		+"&nome="+nome+"&cpfCnpj="+cpfCnpj+"&nasc="+nasc+"&sexo="+sexo);
-	}
+        if(cadastro == "mei"){
+            xhttp.send("cadastro="+cadastro+"&login="+login+"&senha="+senha+"&tipo="+tipo
+                    +"&nome="+nome+"&cpfCnpj="+cpfCnpj+"&nasc="+nasc+"&sexo="+sexo
+                    +"&tipoContato="+tipoContato+"&descContato="+descContato);
+        }else{
+            xhttp.send("cadastro="+cadastro+"&login="+login+"&senha="+senha+"&tipo="+tipo
+                    +"&nome="+nome+"&cpfCnpj="+cpfCnpj+"&nasc="+nasc+"&sexo="+sexo);
+        }
+    }
 }
 
 function alterarFisico(){

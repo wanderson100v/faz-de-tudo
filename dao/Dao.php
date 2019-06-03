@@ -65,9 +65,11 @@ abstract class Dao implements IDao
              $entity->setId($this->pdo->lastInsertId());
              
              $this->pdo->commit();
+             return "Sucesso ao cadastrar";
          }catch (\PDOException $e){
              $this->pdo->rollBack();
-             print("\nErro ao cadastrar: ".$e->getMessage());
+             return "Ocorreu algum erro ao cadastrar:"
+                 .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
          }
      }
      
@@ -94,9 +96,11 @@ abstract class Dao implements IDao
              $stm->execute($inputParameters);
              
              $this->pdo->commit();
+             return "Sucesso ao editar";
          }catch (\PDOException $e){
              $this->pdo->rollBack();
-             print("\nErro ao editar: ".$e->getMessage());
+             return "Ocorreu algum erro ao editar:"
+                 .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
          }
      }
      
@@ -124,9 +128,11 @@ abstract class Dao implements IDao
              $stm->execute();
              
              $this->pdo->commit();
+             return "Sucesso ao deletar";
          }catch (\PDOException $e){
              $this->pdo->rollBack();
-             print("\nErro ao excluir: ".$e->getMessage());
+             return "Ocorreu algum erro ao deletar:"
+                 .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
          }
      }
      

@@ -27,7 +27,8 @@ class AdmDao extends Dao
                 }
             }
         }catch(\PDOException $e){
-            print("\nErro ao buscar: ".$e->getMessage());
+            echo "Ocorreu um erro ao buscar dados de Usuário de Administrador :"
+            .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
 
@@ -50,7 +51,8 @@ class AdmDao extends Dao
             
             $stm = $this->pdo->prepare(
                 "INSERT INTO `fdt`.`usuario` (`login`, `senha`)
-            VALUES(:login, :senha)");
+                 VALUES(:login, :senha)"
+                );
             $stm->bindParam("login",$login);
             $stm->bindParam("senha",$senha);
             
@@ -110,7 +112,8 @@ class AdmDao extends Dao
             
             if($stm->execute()){
                 // fim edi��o usu�rio
-                
+                echo "*Usuário editado com sucesso!<br>";
+
                 // edi��o administrador
                 $gralAcesso = $entity->getGralAcesso();
                 $usuarioId = $entity->getUsuario()->getId();
@@ -125,13 +128,15 @@ class AdmDao extends Dao
                 $stm->bindParam("id", $id);
                 if($stm->execute()){
                     $this->pdo->commit();
+                    echo "*Administrador editado com sucesso!<br>";
                 }else
                     throw new \PDOException("Erro ao editar administrador");
             }else
                 throw new \PDOException("Erro ao editar usu�rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
-            print("\nErro ao editar administrador: ".$e->getMessage());
+            echo "Ocorreu algum erro ao editar administrador :"
+                .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
  

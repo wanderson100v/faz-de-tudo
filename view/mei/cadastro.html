@@ -45,10 +45,10 @@
                         <legend>Tipo</legend>
                         
                         <label for="fisicoId">Físico</label>
-                        <input checked onclick="alterarFisico()" type="radio" name="tipoFld" value="Físico" id="fisicoId"><br>
+                        <input checked onclick="alterarFisico()" type="radio" name="tipoFld" value="Físico" id="fisicoId">
                         
                         <label for="juridicoId">Jurídico</label>
-                        <input onclick="alterarJuridico()" type="radio" name="tipoFld" value="Jurídico" id="juridicoId"><br>
+                        <input onclick="alterarJuridico()" type="radio" name="tipoFld" value="Jurídico" id="juridicoId">
                     </fieldset>
 
                     <label for="nomeId">Nome*</label>
@@ -57,20 +57,33 @@
                     <label for="cpfCnpjId">CPF*</label>
                     <input type="text" name="cpfCnpjFld" id ="cpfCnpjId"><br>
 
-                    <label for="nascId">Data de Nascimento</label><br>
-                    <input type="date" name="nascFld" id="nascId">
+                    <label for="nascId">Data de Nascimento</label>
+                    <input type="date" name="nascFld" id="nascId"><br>
 
                     <fieldset id = 'sexoFsID'>
                         <legend>Sexo</legend>
 
                         <label for="mascId">Masculino</label>
-                        <input checked type="radio" name="sexoFld" value="M" id="mascId"><br>
+                        <input checked type="radio" name="sexoFld" value="M" id="mascId">
 
                         <label for="femId">Feminino</label>
-                        <input type="radio" name="sexoFld" value="F" id="femId"><br>
+                        <input type="radio" name="sexoFld" value="F" id="femId">
 
                         <label for="outroId">Outro</label>
-                        <input type="radio" name="sexoFld" value="O" id="outroId"><br>
+                        <input type="radio" name="sexoFld" value="O" id="outroId">
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Contato</legend>
+
+                        <label for="emailId">E-mail</label>
+                        <input checked type="radio" name="contatoFld" value="e-mail" id="emailId">
+
+                        <label for="telefoneId">Telefone</label>
+                        <input type="radio" name="contatoFld" value="tel" id="telefoneId">
+
+                        <input type="email" id="descConatoId" placeholder="Digite contato">
+
                     </fieldset>
                 </fieldset>
             </form>

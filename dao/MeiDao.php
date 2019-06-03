@@ -38,7 +38,8 @@ class MeiDao extends Dao
                 }
             }
         }catch(\PDOException $e){
-           echo "\nErro ao buscar: ".$e->getMessage();
+            echo "Ocorreu um erro ao buscar dados de Usuário de MEI :"
+            .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
     
@@ -89,7 +90,7 @@ class MeiDao extends Dao
                         $entity->setId($this->pdo->lastInsertId());
                         // fim cadastro MEI
                         $this->pdo->commit();
-                        return "sucesso ao cadastrar";
+                        return "Sucesso ao cadastrar MEI";
                     }else
                         throw new \PDOException("Erro ao cadastrar MEI");
                 }else

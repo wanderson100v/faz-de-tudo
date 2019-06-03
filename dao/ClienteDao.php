@@ -30,7 +30,8 @@ class ClienteDao extends Dao
                 }
             }
         }catch(\PDOException $e){
-            print("\nErro ao buscar: ".$e->getMessage());
+            echo "Ocorreu um erro ao buscar dados de Usuário de Cliente :"
+            .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
 
@@ -69,7 +70,7 @@ class ClienteDao extends Dao
                 if($stm->execute($inputParameters)){
                     $entity->setId($this->pdo->lastInsertId());
                     $this->pdo->commit();
-                    return "sucesso ao cadastrar";
+                    return "Sucesso ao cadastrar cliente";
                 }else
                     throw new \PDOException("Erro ao cadastrar cliente");
             }else

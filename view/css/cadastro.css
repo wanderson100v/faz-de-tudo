@@ -16,24 +16,7 @@
     margin-right: auto;
 }
 
-input[name='sexoFld']{
-    color:red;
-}
-
 a{
     text-align: center;
-    display: block;
-}
-
-article{
-    float: right;
-    width: 500px;
-    display: block;
-}
-
-section{
-    width: 1000;
-    margin: 20 auto;
-    overflow: hidden;
     display: block;
 }

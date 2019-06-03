@@ -4,13 +4,13 @@
 ?>
 <html>
 <head>
-    <title>Faz de tudo: Perfil</title>
+    <title>Faz de tudo: Perfil Cliente</title>
     <meta charset="utf8">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/global.css">
 </head>
 <body>
-     <nav>
+     <nav class = "flutuante">
         <ul>
             <li><a href="inicio.php">Inicio</a></li>
             <li id = 'current'><a href="perfil.php">Perfil</a></li>
@@ -18,39 +18,23 @@
             <li><a href="../../controller/logout.php">Sair</a></li>
         </ul>
     </nav>
-    <section id = 'conteudo'>
+    <section>
         <header>
-            <h1>Perfil</h1>
+            <h1>Perfil Cliente</h1>
         </header>
-        <article>
-            <fieldset>
-                <legend>Dados de acesso</legend>
-                <div id = "dados-acesso">
-                    
-                </div>
-                <button onclick = "cancelEditUser()">cancelar</button>
-                <button onclick = "showEditUser()">editar</button>
-                <button onclick = "saveEditUser()">salvar</button>
-            </fieldset>
-            <fieldset>
-                <legend>Informações Cliente</legend>
-                <div id = "info-cliente">
-
-                </div>
-                <button onclick = "cancelEditCliente()">cancelar</button>
-                <button onclick = "showEditCliente()">editar</button>
-                <button onclick = "saveEditCliente()">salvar</button>
-            </fieldset>
-            <fieldset>
-                <legend>Desativar conta de usuário</legend>
-                <button onclick = "desativarUsuario()">Desativar</button>
-            </fieldset>
-            <span class = 'feedback'></span><br>
+        <article id = 'conteudo'>
+            <h2>Carregando...</h2>
         </article>
-        <article>
-
+        <nav class = "menu">
+            <button onclick = "showInfoCliente()">Informação Geral</button></li>
+            <button onclick="showInfoEndereco()">Endereços</button></li>
+            <button onclick="showInfoContato()">Contatos</button></li>
         </article>
+        <span class = 'feedback'></span><br>
     </section>
     <script src = "../js/perfil.js"></script>
+    <script src = "../js/info_usuario.js"></script>
+    <script src = "../js/info_cliente.js"></script>
+    <script> showInfoCliente()</script>
 </body>
 </html>

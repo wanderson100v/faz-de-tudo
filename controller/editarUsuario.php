@@ -14,24 +14,20 @@ if(isset($_SESSION['logado'])){
     $usuario->setLogin($_POST["login"]);
     $usuario->setSenha($_POST["senha"]);
     
-    $erro = (UsuarioBo::getInstance())->validar($usuario);
-    if($erro == ""){
-        $dao;
-        if($_SESSION['tipo']!='adm'){
-            $dao = new ClienteDao();
-        }else{
-            $dao = new AdmDao();  
-        }
-        $usuarioBuscado = $dao->buscarUsuario($_SESSION['logado']);
-        if(!empty($usuarioBuscado)){
-                $usuarioBuscado->setUsuario($usuario);
-                $dao->update($usuarioBuscado);
-                session_destroy();
-        }else{
-            echo "Erro ao editar usuário!" ;       
-        }
-    }else
-        echo $erro;
+    $dao;
+    if($_SESSION['tipo']!='adm'){
+        $dao = new ClienteDao();
+    }else{
+        $dao = new AdmDao();  
+    }
+    $usuarioBuscado = $dao->buscarUsuario($_SESSION['logado']);
+    if(!empty($usuarioBuscado)){
+            $usuarioBuscado->setUsuario($usuario);
+            $dao->update($usuarioBuscado);
+            session_destroy();
+    }else{
+        echo "Erro ao editar usuário!" ;       
+    }
 }else{
     echo "Usuário não está autenticado" ;
 }

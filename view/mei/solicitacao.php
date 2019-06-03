@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/global.css">
 </head>
 <body>
-    <nav>
+    <nav class = "flutuante">
         <ul>
             <li><a href="inicio.php">Inicio</a></li>
             <li><a href="perfil.php">Perfil</a></li>

@@ -30,8 +30,8 @@ class ClienteDao extends Dao
                 }
             }
         }catch(\PDOException $e){
-            echo "Ocorreu um erro ao buscar dados de Usuário de Cliente :"
-            .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
+            print("Ocorreu um erro ao buscar dados de Usuário de Cliente :"
+            .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage()));
         }
     }
 

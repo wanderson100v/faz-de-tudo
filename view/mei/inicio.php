@@ -11,7 +11,7 @@
     
 </head>
 <body>
-    <nav>
+    <nav  class = "flutuante">
         <ul>
             <li id = 'current'><a href="inicio.php">Inicio</a></li>
             <li><a href="perfil.php">Perfil</a></li>

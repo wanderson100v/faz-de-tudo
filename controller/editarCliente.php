@@ -15,16 +15,12 @@ if(isset($_SESSION['logado'])){
     $cliente->setNasc($_POST["nasc"]);
     $cliente->setSexo($_POST["sexo"]);
     
-    $erro = (ClienteBo::getInstance())->validar($cliente);
-    if($erro == ""){
-        if(!empty($cliente)){
-            $clienteDao->update($cliente);
-            echo "Dados de cliente editado com sucesso";
-        }else{
-            echo "Erro ao editar informações de cliente!" ;       
-        }
-    }else
-        echo $erro;
+    if(!empty($cliente)){
+        $clienteDao->update($cliente);
+        echo "Dados de cliente editado com sucesso";
+    }else{
+        echo "Erro ao editar informações de cliente!" ;       
+    }
 }else{
     echo "Usuário não está autenticado" ;
 }

@@ -22,8 +22,7 @@ if(isset($_SESSION['logado'])){
     $usuarioBuscado = $dao->buscarUsuario($_SESSION['logado']);
     if(!empty($usuarioBuscado)){
             $usuarioBuscado->setUsuario($usuario);
-            $dao->update($usuarioBuscado);
-            session_destroy();
+            echo $dao->update($usuarioBuscado);
     }else{
         echo "Erro ao editar usuário!" ;       
     }

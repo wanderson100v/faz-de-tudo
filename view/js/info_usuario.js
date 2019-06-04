@@ -67,10 +67,15 @@ function saveEditUser(){
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.querySelector(".feedback").innerHTML = this.response;
-                if(this.responseText.includes("Usuário editado com sucesso")){
+                if(this.responseText.includes("Sucesso")){
                     usuario['login'] = login;
                     usuario['senha'] = senhaNova;
-                    window.location = "/faz-de-tudo/view/login.php";
+                    document.querySelector(".feedback").innerHTML = "<span class = 'feedback-sucess'>"+this.responseText+" você será desconectado </span>";
+                    setTimeout(function() {
+                            window.location = "../../controller/logout.php";
+                        },2000);
+                }else{
+                    document.querySelector(".feedback").innerHTML = this.responseText;
                 }
             }
         };

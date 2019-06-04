@@ -21,7 +21,34 @@
         </ul>
     </nav>
     <section>
-        <h1>Em produção</h1>
+        <h1>Administradores</h1>
+        <h2>Apenas um administrador pode cadastrar outro</h2>
+        <form>
+            <fieldset>
+                <legend>Dados de acesso</legend>
+                
+                <label for="loginId">Nome de usuário*</label>
+                <input type="text" id="loginId"><br>
+                
+                <label for="senhaId">Senha*</label>
+                <input type="password" id="senhaId"><br>
+                
+                <label for="conSenhaId">Confirmar senha*</label>
+                <input type="password" id="conSenhaId"><br>
+            </fieldset>
+            <fieldset>
+                <legend>Informações ADM</legend>
+                <label for="gral-acessoId">Nível de acesso*</label>
+                <select id="gral-acessoId">
+                    <option value="baixo">baixo</option>
+                    <option value="moderado">Moderado</option>
+                    <option value="alto">Alto</option>
+                </select>
+            </fieldset>
+        </form>
+        <button onclick = 'cadastrarAdm()'>Adicionar</button>
+        <span class = 'feedback'></span><br>
+        <script src = "../js/admins.js"></script>
     </section>
 </body>
 </html>

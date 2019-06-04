@@ -72,13 +72,15 @@ class AdmDao extends Dao
                 if($stm->execute()){
                     $entity->setId($this->pdo->lastInsertId());
                     $this->pdo->commit();
+                    return "Sucesso ao cadastrar novo Administrador";
                 }else
                     throw new \PDOException("Erro ao cadastrar administrador");
             }else 
                 throw new \PDOException("Erro ao cadastrar usu�rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
-            print("\nErro ao cadastrar administrador: ".$e->getMessage());
+            return "Ocorreu algum erro ao cadastrar Administrador :"
+            .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
     
@@ -111,8 +113,7 @@ class AdmDao extends Dao
             
             if($stm->execute()){
                 // fim edi��o usu�rio
-                echo "*Usuário editado com sucesso!<br>";
-
+               
                 // edi��o administrador
                 $gralAcesso = $entity->getGralAcesso();
                 $usuarioId = $entity->getUsuario()->getId();
@@ -120,21 +121,21 @@ class AdmDao extends Dao
                 
                 $stm = $this->pdo->prepare(
                     "UPDATE `fdt`.`adm`
-                    SET `gral_acesso` = :gral_acesso, `usuario_id` =:usuario_id:
+                    SET `gral_acesso` = :gral_acesso, `usuario_id` =:usuario_id
                     WHERE `id` = :id");
                 $stm->bindParam("gral_acesso",$gralAcesso);
                 $stm->bindParam("usuario_id", $usuarioId);
                 $stm->bindParam("id", $id);
                 if($stm->execute()){
                     $this->pdo->commit();
-                    echo "*Administrador editado com sucesso!<br>";
+                    return "*Sucesso ao editar adm!<br>";
                 }else
                     throw new \PDOException("Erro ao editar administrador");
             }else
                 throw new \PDOException("Erro ao editar usu�rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
-            echo "Ocorreu algum erro ao editar administrador :"
+            return "Ocorreu algum erro ao editar administrador :"
                 .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }

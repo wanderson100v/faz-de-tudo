@@ -14,6 +14,8 @@
     <nav class = "flutuante"s>
         <ul>
             <li id = 'current'><a href="inicio.php">Inicio</a></li>
+            <li><a href="cidades.php">Cidades</a></li>
+            <li><a href="servicos.php">Serviços</a></li>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="../../controller/logout.php">Sair</a></li>
         </ul>

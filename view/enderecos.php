@@ -16,7 +16,6 @@
     <tbody id = "enderecos">
     </tbody>
 </table>
-
 <form>
     <fieldset>
         <legend>Dados para novo endereço</legend>

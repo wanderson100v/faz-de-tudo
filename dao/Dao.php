@@ -15,6 +15,27 @@ abstract class Dao implements IDao
     {
         $this->pdo = Connection::getMysqlPDO();
     }
+
+    public function readId($id)
+    {
+        try{
+            $sql = $this->getSqlReadId();
+            
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam("id",$id);
+            
+            if($stm->execute()){
+                $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
+                if(!empty($rowRs)){
+                    return $this->castRsObject($rowRs);
+                }
+            }
+        }catch(\PDOException $e){
+            print("\nErro ao buscar por id: ".$e->getMessage());
+        }
+    }
+
+    protected abstract function getSqlReadId();
     
     public function read($busca)
     {

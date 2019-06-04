@@ -5,6 +5,12 @@ use entity\Cidade;
 
 class CidadeDao extends Dao
 {
+    protected function getSqlReadId()
+    {
+        return "select * from cidade as c
+                where c.id = :id";
+    }
+    
     protected function getSqlRead()
     {
         return "select * from cidade as c

@@ -31,7 +31,6 @@ class AdmDao extends Dao
             .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }
-
     
     /**
      * cadastrando usu�rio e administrador em cascata
@@ -160,12 +159,20 @@ class AdmDao extends Dao
         return $adm;
     }
 
+    protected function getSqlReadId()
+    {
+        return "select  a.id as id, a.gral_acesso, a.usuario_id, u.ativo, u.login, u.senha
+                from adm as a inner join usuario as u on (a.usuario_id = u.id)
+                where u.ativo = 1 
+                and a.id = :id";
+    }
+
     protected  function getSqlRead()
     {
         return "select  a.id as id, a.gral_acesso, a.usuario_id, u.ativo, u.login, u.senha
                 from adm as a inner join usuario as u on (a.usuario_id = u.id)
                 where u.ativo = 1 
-                and CONCAT(a.gral_acesso, u.login) like :busca";
+                and CONCAT_WS(a.gral_acesso, u.login) like :busca";
     }
     
     /**

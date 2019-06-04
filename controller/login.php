@@ -12,27 +12,31 @@ $senhaRetorno = "";
 
 $tipo = "adm";
 $usuario = (new AdmDao())->buscarUsuario($login);
+$id = -1;
 
-if(empty($usuario)) // não é adm
+if(empty($usuario))
 {
     $usuario = (new MeiDao())->buscarUsuario($login);
     $tipo = "mei";
-    if(empty($usuario)) // não é mei nem adm
+    if(empty($usuario))
     {
         $usuario = (new ClienteDao())->buscarUsuario($login);
         $tipo = "cliente";
         
-        if(!empty($usuario)) // não é mei nem adm nem cliente
+        if(!empty($usuario))
         {
             $senhaRetorno = $usuario->getUsuario()->getSenha();
+            $id = $usuario->getUsuario()->getId();
         }
     }else
     {
         $senhaRetorno = $usuario->getCliente()->getUsuario()->getSenha();
+        $id = $usuario->getCliente()->getUsuario()->getId();
     }
 }else
 {
     $senhaRetorno = $usuario->getUsuario()->getSenha();
+    $id = $usuario->getUsuario()->getId();
 }
 
 if(empty($usuario) || (!empty($usuario) && $senha != $senhaRetorno))
@@ -41,5 +45,6 @@ else
 {
     $_SESSION['logado'] = $login;
     $_SESSION['tipo'] = $tipo;
+    $_SESSION['usuario_id'] = $id;
     echo $tipo;
 }

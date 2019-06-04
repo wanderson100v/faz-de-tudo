@@ -10,6 +10,20 @@ use entity\Mei;
 
 class MeiCidadeDao extends Dao
 {
+    
+    protected function getSqlReadId()
+    {
+        return "SELECT mc.id, mc.mei_id, ci.nome as nome_cidade , m.cliente_id, cl.tipo,
+                    cl.cpf_cnpj, cl.nome as nome_cliente , cl.nasc, cl.sexo, cl.usuario_id
+                FROM MEI as m
+                INNER JOIN CLIENTE as cl ON (m.cliente_id = cl.id)
+                INNER JOIN USUARIO as u ON (cl.usuario_id = u.id)
+                INNER JOIN MEI_CIDADE mc ON (mc.mei_id = m.id)
+                INNER JOIN CIDADE ci ON (mc.cidade_id = ci.id)
+                WHERE u.ativo = 1
+                and mc.id = :id";
+    }
+    
     protected function getSqlRead()
     {
         return "SELECT mc.id, mc.mei_id, ci.nome as nome_cidade , m.cliente_id, cl.tipo,

@@ -29,10 +29,16 @@ class EnderecoDao extends Dao
         }
     }
     
+    protected function getSqlReadId()
+    {
+        return "select * from endereco e
+                where e.id = :id";
+    }
+    
     protected function getSqlRead()
     {
         return "select * from endereco as e
-                where concat(e.cep, e.num, e.logradouro, e.bairro, e.cidade, e.estado, e.pais) like :busca";
+                where concat_ws(e.cep, e.num, e.logradouro, e.bairro, e.cidade, e.estado, e.pais) like :busca";
     }
     
     protected function castRsObject($rowRs)
@@ -78,7 +84,7 @@ class EnderecoDao extends Dao
     protected function getSqlUpdate()
     {
         return "UPDATE `fdt`.`endereco`
-                SET `cep` = cep, `num` = num, `logradouro` = :logradouro, `bairro` = :bairro,
+                SET `cep` = :cep, `num` = :num, `logradouro` = :logradouro, `bairro` = :bairro,
                 `cidade` = :cidade, `estado` = :estado, `pais` = :pais, `usuario_id` = :usuario_id
                 WHERE `id` = :id";
     }

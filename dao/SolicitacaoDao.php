@@ -8,6 +8,13 @@ use entity\Endereco;
 
 class SolicitacaoDao extends Dao
 {
+    
+    protected function getSqlReadId()
+    {
+        return "select * from SOLICITACAO s
+                where s.id = :id";
+    }
+    
     protected function getSqlRead()
     {
         return "SELECT * FROM SOLICITACAO 

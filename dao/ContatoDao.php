@@ -6,10 +6,17 @@ use entity\Usuario;
 
 class ContatoDao extends Dao
 {
+    
+    protected function getSqlReadId()
+    {
+        return "SELECT * FROM fdt.contato as c
+                where c.id = :id";
+    }
+    
     protected function getSqlRead()
     {
         return "SELECT * FROM fdt.contato as c
-                where concat(c.tipo, c.descricao) like :busca";
+                where concat_ws(c.tipo, c.descricao) like :busca";
     }
     
     protected function castRsObject($rowRs)

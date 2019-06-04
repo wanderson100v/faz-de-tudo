@@ -7,7 +7,6 @@ use PDO;
 
 class ClienteDao extends Dao
 {
-    
     public function buscarUsuario($login)
     {
         try{
@@ -133,6 +132,15 @@ class ClienteDao extends Dao
     }
     
     
+    protected function getSqlReadId()
+    {
+        return "SELECT c.id, c.tipo, c.cpf_cnpj, c.nome, c.nasc, c.sexo,
+                	c.usuario_id, u.ativo, u.login, u.senha 
+                FROM CLIENTE as c 
+                INNER JOIN USUARIO as u ON (c.usuario_id = u.id)
+                WHERE u.ativo = 1 
+                AND c.id = :id";
+    }
     
     protected function getSqlRead()
     {

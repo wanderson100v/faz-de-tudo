@@ -162,8 +162,17 @@ class MeiDao extends Dao
             print("\nErro ao editar administrador: ".$e->getMessage());
         }
     }
-    
-    
+   
+    protected function getSqlReadId()
+    {
+        return "SELECT m.id , m.cliente_id, c.tipo, c.cpf_cnpj, c.nome, c.nasc, c.sexo,
+                	c.usuario_id, u.ativo, u.login, u.senha
+                FROM MEI as m
+                INNER JOIN CLIENTE as c ON (m.cliente_id = c.id)
+                INNER JOIN USUARIO as u ON (c.usuario_id = u.id)
+                WHERE u.ativo = 1
+                and m.id = :id";
+    }
     
     protected function getSqlRead()
     {

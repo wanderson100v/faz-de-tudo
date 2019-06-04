@@ -5,12 +5,18 @@ use entity\Servico;
 
 class ServicoDao extends Dao
 {
+    protected function getSqlReadId()
+    {
+        return "select * from servico as s 
+                where ativo = 1
+                and s.id = :id";
+    }
     
     protected function getSqlRead()
     {
         return "select * from servico as s 
                 where ativo = 1 
-                and concat(s.valor, s.horas, s.descricao) like :busca";
+                and concat_ws(s.valor, s.horas, s.descricao) like :busca";
     }
     
     protected function castRsObject($rowRs)
@@ -60,7 +66,7 @@ class ServicoDao extends Dao
     }
 
     /**
-     * exclusão lógica
+     * exclusï¿½o lï¿½gica
      * {@inheritDoc}
      * @see \dao\Dao::getSqlDelete()
      */

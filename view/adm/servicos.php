@@ -13,6 +13,7 @@
      <nav  class = "flutuante">
         <ul>
             <li><a href="inicio.php">Inicio</a></li>
+            <li><a href="admins.php">Administradores</a></li>
             <li><a href="cidades.php">Cidades</a></li>
             <li id = 'current'><a href="servicos.php">Serviços</a></li>
             <li><a href="perfil.php">Perfil</a></li>
@@ -31,6 +32,7 @@
                     <th>Horas</th>
                     <th>Valor</th>
                     <th>Descrição</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody id = "servicos">
@@ -40,14 +42,14 @@
             <fieldset>
                 <legend>Adicionar um novo serviço</legend>
 
-                <label for="nomeId">Horas</label>
-                <input type="text" id="nomeId">
+                <label for="horasId">Horas</label>
+                <input type="text" id="horasId">
 
-                <label for="nomeId">Valor</label>
-                <input type="text" id="nomeId">
+                <label for="valorId">Valor</label>
+                <input type="text" id="valorId">
                 
-                <label for="nomeId">Descrição</label>
-                <input type="text" id="nomeId">
+                <label for="descId">Descrição</label>
+                <input type="text" id="descId">
 
             </fieldset>
         </form>
@@ -55,6 +57,6 @@
         <span class = 'feedback'></span><br>
     </section>
     <script src = "../js/servicos.js"></script>
-    <script> showInfoServico()</script>
+    <script> initInfoServicos()</script>
 </body>
 </html>

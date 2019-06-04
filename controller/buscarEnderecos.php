@@ -6,13 +6,8 @@ require_once '../Config.php';
 require_once 'util.php';
 
 if(isset($_SESSION['logado'])){
-    $cliente = (new ClienteDao())->buscarUsuario($_SESSION['logado']);
-    if(!empty($cliente)){
-        $enderecos = (new EnderecoDao())->buscarEnderecosUsuario($cliente->getUsuario()->getId());
-        echo json_encode(castObjectClassInArray($enderecos),JSON_UNESCAPED_UNICODE);
-    }else{
-        echo "Nada encontrado!" ;       
-    }
+    $enderecos = (new EnderecoDao())->buscarEnderecosUsuario($_SESSION["usuario_id"]);
+    echo json_encode(castObjectClassInArray($enderecos),JSON_UNESCAPED_UNICODE);
 }else{
     echo "Usuário não está autenticado" ;
 }

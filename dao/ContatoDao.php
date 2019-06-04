@@ -3,10 +3,33 @@ namespace dao;
 
 use entity\Contato;
 use entity\Usuario;
+use PDO;
 
 class ContatoDao extends Dao
 {
     
+    public function buscarContatosUsuario($usuarioId){
+        try{
+          
+            $sql = "select * from contato as a
+                    where a.usuario_id = :usuario_id";
+            
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam("usuario_id",$usuarioId);
+            
+            if($stm->execute()){
+                $adms = array();
+                while($rowRs = $stm->fetch(PDO::FETCH_ASSOC))
+                {
+                    array_push($adms,$this->castRsObject($rowRs));
+                }
+                return $adms;
+            }
+        }catch(\PDOException $e){
+            print("\nErro ao buscar: ".$e->getMessage());
+        }
+    }
+
     protected function getSqlReadId()
     {
         return "SELECT * FROM fdt.contato as c

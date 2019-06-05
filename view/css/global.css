@@ -15,14 +15,10 @@ p{
 
 
 article{
+    margin: 0 10px 0px 10px;
     float: right;
     width: 500px;
     display: block;
-}
-
-article#conteudo{
-    width: 800px;
-
 }
 
 section{
@@ -32,16 +28,11 @@ section{
     display: block;
 }
 
-article#conteudo{
-    float: right;
-    width: 500px;
-    display: block;
-}
 
 article#conteudo{
     padding: 20px;
     float: right;
-    width: 78%;
+    width: 75%;
     display: block;
 }
 
@@ -189,7 +180,6 @@ button:hover{
 
 /*Botões de ação*/
 button.editar, button.excluir{
-    display: inline;
     margin: 0 5px 0 5px;
     color: white;
     padding: 5px;

@@ -1,20 +1,19 @@
 <?php
-    require_once("../../controller/autenticar.php");
-    autenticarTipo("mei");
+     require_once("../../controller/autenticar.php");
+     autenticarTipo("mei");
 ?>
 <html>
 <head>
-    <title>Faz de tudo: Mei</title>
+    <title>Faz de tudo: Solicitações</title>
     <meta charset="utf8">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/global.css">
-    
 </head>
 <body>
-    <nav  class = "flutuante">
+    <nav class = "flutuante">
         <ul>
-            <li id = 'current'><a href="inicio.php">Inicio</a></li>
-            <li><a href="servicos.php">Serviços</a></li>
+            <li><a href="inicio.php">Inicio</a></li>
+            <li id = 'current'><a href="servicos.php">Serviços</a></li>
             <li><a href="cidades.php">Cidades</a></li>
             <li><a href="solicitacao.php">Solicitação</a></li>
             <li><a href="perfil.php">Perfil</a></li>
@@ -22,7 +21,7 @@
         </ul>
     </nav>
     <section id = 'conteudo'>
-        <h1>Em desenvolvimento</h1>
+
     </section>
 </body>
 </html>

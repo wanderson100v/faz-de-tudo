@@ -8,9 +8,31 @@ use entity\Usuario;
 use entity\Cliente;
 use entity\Mei;
 
+use PDO;
+
 class MeiCidadeDao extends Dao
 {
     
+    public function buscarMeiCidade($meiId, $cidadeId)
+    {
+        $sql = "SELECT * FROM MEI_CIDADE AS m
+            WHERE m.cidade_id = :cidadeId
+            AND m.mei_id = :meiId";
+        
+        $stm = $this->pdo->prepare($sql);
+        $stm->bindParam("cidadeId",$cidadeId);
+        $stm->bindParam("meiId",$meiId);
+        
+        if($stm->execute()){
+            $rowRs = $stm->fetch(PDO::FETCH_ASSOC);
+            if(!empty($rowRs)){
+                return true;
+            }
+            return false;
+        }
+
+    }
+
     protected function getSqlReadId()
     {
         return "SELECT mc.id, mc.mei_id, ci.nome as nome_cidade , m.cliente_id, cl.tipo,

@@ -128,7 +128,7 @@ class AdmDao extends Dao
                 $stm->bindParam("id", $id);
                 if($stm->execute()){
                     $this->pdo->commit();
-                    return "*Sucesso ao editar adm!<br>";
+                    return "*Sucesso ao editar adm";
                 }else
                     throw new \PDOException("Erro ao editar administrador");
             }else

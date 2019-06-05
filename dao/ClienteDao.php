@@ -110,7 +110,6 @@ class ClienteDao extends Dao
             
             if($stm->execute()){
                 // fim edi��o usu�rio
-                echo "*Usuário editado com sucesso!<br>";
                 
                 // edi��o cliente
                 $sql = $this->getSqlUpdate();
@@ -119,14 +118,14 @@ class ClienteDao extends Dao
                 $inputParameters = $this->getUpdateInputParameters($entity);
                 if($stm->execute($inputParameters)){
                     $this->pdo->commit();
-                    echo "*Cliente editado com sucesso!<br>";
+                    return "*Sucesso ao editar cliente";
                 }else
                     throw new \PDOException("Erro ao editar administrador");
             }else
                 throw new \PDOException("Erro ao editar usu�rio de administrador");
         }catch (\PDOException $e){
             $this->pdo->rollBack();
-            echo "Ocorreu algum erro ao editar cliente :"
+            return "Ocorreu algum erro ao editar cliente :"
                 .((isset($e->errorInfo[2]))?$e->errorInfo[2]: $e->getMessage());
         }
     }

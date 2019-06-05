@@ -21,7 +21,43 @@
         </ul>
     </nav>
     <section id = 'conteudo'>
-
+        <header>
+            <h1>Serviços fornecidos</h1>
+        </header>
+        <article>
+            <h2>Serviços que você fornece</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Valor</th>
+                        <th>Horas</th>
+                        <th>Descricao</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id = "servicos-mei">
+                </tbody>
+            </table>
+        </article>
+        <article>
+            <h2>Serviços da empresa</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Valor</th>
+                        <th>Horas</th>
+                        <th>Descricao</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id = "servicos">
+                </tbody>
+            </table>
+            <span class = 'feedback'></span><br>
+        </article>
     </section>
+    <script src = '../js/servicos_mei.js'></script>
 </body>
 </html>

@@ -16,7 +16,7 @@ if(isset($_SESSION['logado']))
     $cidadeMei->setCidade($cidade);
     $cidadeMei->setMei($mei);
     $meiCidadeDao = new MeiCidadeDao();
-    if(!$meiCidadeDao->buscarMeiCidade($mei->getId(), $cidade->getId()))
+    if(!$meiCidadeDao->buscarPorMeiCidade($mei->getId(), $cidade->getId()))
         echo $meiCidadeDao->create($cidadeMei);
     else
         echo "Cidade Já adicionada";

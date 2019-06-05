@@ -13,7 +13,7 @@ use PDO;
 class MeiCidadeDao extends Dao
 {
     
-    public function buscarMeiCidade($meiId, $cidadeId)
+    public function buscarPorMeiCidade($meiId, $cidadeId)
     {
         $sql = "SELECT * FROM MEI_CIDADE AS m
             WHERE m.cidade_id = :cidadeId
@@ -31,6 +31,30 @@ class MeiCidadeDao extends Dao
             return false;
         }
 
+    }
+
+    public function buscarPorMei($meiId)
+    {
+        $sql = "SELECT mc.id, mc.mei_id, ci.nome as nome_cidade , m.cliente_id, cl.tipo,
+                    cl.cpf_cnpj, cl.nome as nome_cliente , cl.nasc, cl.sexo, cl.usuario_id
+                FROM MEI as m
+                INNER JOIN CLIENTE as cl ON (m.cliente_id = cl.id)
+                INNER JOIN USUARIO as u ON (cl.usuario_id = u.id)
+                INNER JOIN MEI_CIDADE mc ON (mc.mei_id = m.id)
+                INNER JOIN CIDADE ci ON (mc.cidade_id = ci.id)
+                WHERE u.ativo = 1
+                AND mc.mei_id = :meiId";
+        
+        $stm = $this->pdo->prepare($sql);
+        $stm->bindParam("meiId",$meiId);
+        
+        if($stm->execute()){
+            $adms = array();
+            while($rowRs = $stm->fetch(PDO::FETCH_ASSOC)){
+                array_push($adms,$this->castRsObject($rowRs));
+            }
+            return $adms;
+        }
     }
 
     protected function getSqlReadId()

@@ -1,18 +1,33 @@
-@import url('https://fonts.googleapis.com/css?family=Dosis&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
 
 body{
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Oswald', sans-serif;
     font-size: 20px;
+}
+
+footer{
+    border-top: 3px solid black;
+    padding: 20px 0px 20px 0px;
+    text-align: center;
 }
 
 span.img-replacement{
     display: none;
 }
 
+header{
+    margin-bottom : 20px;
+}
 p{
     padding: 20px;
+    text-align: justify;
+    text-indent: 2em;
 }
 
+a{
+    text-align: center;
+    display: block;
+}
 
 article{
     margin: 0 10px 0px 10px;
@@ -56,7 +71,7 @@ input[type = 'text'],input[type = 'password'],input[type = 'email'],
     height: 32px;
     margin: 5px 0 5px 0;
     padding: 5px;
-    font-size: 18px;
+    font-size: 100%;
 }
 
 .feedback{
@@ -118,7 +133,7 @@ nav.menu{
 }
 
 nav.menu button{
-    font-size: 18px;
+    font-size: 100%;
     margin-bottom: 10px;
     display: block;
     border: 2px solid black;
@@ -136,24 +151,30 @@ nav.menu button:hover{
 
 /* tabela*/
 
-
-table{
+.escopo-tbl{
     height: 300px;
     overflow-y: scroll;
-    display: block;
-    border: 2px solid black;
+    width: auto;
     margin: 20px 0 20px 0;
+    border: 2px solid black;
+}
+
+table{
+    width: 100%;
+    display: table;
 }
 
 th,td{
     padding: 5px 10px 5px 10px;
+    text-align: center;
 }
-
 th{
     background-color: #3d3d3d;
     color : white;
-}
+    width: initial;
+    position: relative;
 
+}
 
 tr:nth-child(odd) {
 	background-color:#ffffff;
@@ -167,7 +188,7 @@ tr:nth-child(even) {
 button{
     color: rgb(255, 255, 255);
     background: rgb(70, 128, 255); 
-    font-size: 18px;
+    font-size: 100%;
     margin: 5px;
     border: 1px solid black;
 }

@@ -1,5 +1,10 @@
 
+
+document.querySelector("#loginId").addEventListener('keyup', validarEnter);
+document.querySelector("#senhaId").addEventListener('keyup', validarEnter);
+
 function logar(){
+    
     document.querySelector(".feedback").innerHTML = "";
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -14,4 +19,11 @@ function logar(){
     xhttp.open("POST", "../controller/login.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("login="+document.querySelector("#loginId").value+"&senha="+document.querySelector("#senhaId").value);
+}
+
+function validarEnter(e){
+    var key = e.which || e.keyCode;
+    if (key == 13) { 
+        logar();
+    }
 }

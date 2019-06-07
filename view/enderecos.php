@@ -1,21 +1,23 @@
 <h2>Seus Endereços</h2>
-<table>
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>CEP</th>
-            <th>Número</th>
-            <th>Logradouro</th>
-            <th>Bairro</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>País</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody id = "enderecos">
-    </tbody>
-</table>
+<div class = 'escopo-tbl'>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>CEP</th>
+                <th>Número</th>
+                <th>Logradouro</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>País</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id = "enderecos">
+        </tbody>
+    </table>
+</div>
 <form>
     <fieldset>
         <legend>Dados para novo endereço</legend>

@@ -25,17 +25,19 @@
             <h1>Cidades</h1>
         </header>
         <h2>Cidades que já trabalhamos</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id = "cidades">
-            </tbody>
-        </table>
+        <div class = 'escopo-tbl'>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id = "cidades">
+                </tbody>
+            </table>
+        </div>
         <form>
             <fieldset>
                 <legend>Fornecer serviços a uma nova cidade</legend>

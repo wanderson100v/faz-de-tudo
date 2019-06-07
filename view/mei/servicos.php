@@ -26,35 +26,39 @@
         </header>
         <article>
             <h2>Serviços que você fornece</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Valor</th>
-                        <th>Horas</th>
-                        <th>Descricao</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id = "servicos-mei">
-                </tbody>
-            </table>
+            <div class = 'escopo-tbl'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Valor</th>
+                            <th>Horas</th>
+                            <th>Descricao</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id = "servicos-mei">
+                    </tbody>
+                </table>
+            </div>
         </article>
         <article>
             <h2>Serviços da empresa</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Valor</th>
-                        <th>Horas</th>
-                        <th>Descricao</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody id = "servicos">
-                </tbody>
-            </table>
+            <div class = 'escopo-tbl'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Valor</th>
+                            <th>Horas</th>
+                            <th>Descricao</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id = "servicos">
+                    </tbody>
+                </table>
+            </div>
             <span class = 'feedback'></span><br>
         </article>
     </section>

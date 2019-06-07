@@ -25,19 +25,21 @@
             <h1>Serviços</h1>
         </header>
         <h2>Serviços padrões que a empresa fornece</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Horas</th>
-                    <th>Valor</th>
-                    <th>Descrição</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id = "servicos">
-            </tbody>
-        </table>
+        <div class = 'escopo-tbl'>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Horas</th>
+                        <th>Valor</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id = "servicos">
+                </tbody>
+            </table>
+        </div>
         <form>
             <fieldset>
                 <legend>Adicionar um novo serviço</legend>

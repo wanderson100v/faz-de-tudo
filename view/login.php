@@ -17,12 +17,12 @@
         <span class = 'feedback'></span>
         <form>
             <label for="loginId">Login</label><br/>
-            <input type="text" name = "loginFld" id ="loginId"><br/>
+            <input type="text" id ="loginId"><br/>
             <label for="senhaId">Senha</label><br/>
-            <input type="password" name ="senhaFld" id ="senhaId"><br/>
+            <input type="password" id ="senhaId"><br/>
         </form>
         <button onclick="logar()">Entrar</button><br><br>
-        <a href="cadastro.html">Cadastrar uma nova conta</a><br/>
+        <a id ='cadastrar' href="cadastro.html">Cadastrar uma nova conta</a><br/>
     </section>
     <script src="js/login.js"></script>
 </body>

@@ -26,31 +26,35 @@
         </header>
         <article>
             <h2>Cidades que você trabalha</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody id = "cidades-mei">
-                </tbody>
-            </table>
+            <div class = 'escopo-tbl'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id = "cidades-mei">
+                    </tbody>
+                </table>
+            </div>
         </article>
         <article>
             <h2>Cidades que prestamos serviços</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody id = "cidades">
-                </tbody>
-            </table>
+            <div class = 'escopo-tbl'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id = "cidades">
+                    </tbody>
+                </table>
+            </div>
             <span class = 'feedback'></span><br>
         </article>
     </section>

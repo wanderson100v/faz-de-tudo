@@ -21,7 +21,10 @@
         </ul>
     </nav>
     <section id = 'conteudo'>
-
+        <header>
+            <h1>Solicitações</h1>
+            <h2>Não implementado: Solicitações de clientes, ativas(cancelamento, conclusão), histórico</h2>
+        </header>
     </section>
 </body>
 </html>

@@ -38,13 +38,12 @@ if(empty($usuario))
     $senhaRetorno = $usuario->getUsuario()->getSenha();
     $id = $usuario->getUsuario()->getId();
 }
-
-if(empty($usuario) || (!empty($usuario) && $senha != $senhaRetorno))
-    echo "Alerta: Dados de acesso inválidos";
-else
+if(!empty($usuario) && $senha == $senhaRetorno )
 {
     $_SESSION['logado'] = $login;
     $_SESSION['tipo'] = $tipo;
     $_SESSION['usuario_id'] = $id;
     echo $tipo;
+}else{
+    echo "Alerta: Dados de acesso inválidos";
 }

@@ -1,5 +1,4 @@
 
-
 function initInfoContatos(){
     attTableContatos();
 }

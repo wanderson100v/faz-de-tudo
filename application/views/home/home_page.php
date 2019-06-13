@@ -16,6 +16,3 @@
         fará o serviço baseado nesse parâmetro. 
     </p>
 </main>
-<footer class = 'footer  mt-5 pt-5 text-center border border-dark border-right-0 border-bottom-0 border-left-0'>
-    <p>Desenvolvido por: Wanderson Pereira</p>
-</footer>

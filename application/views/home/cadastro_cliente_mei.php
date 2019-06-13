@@ -9,7 +9,7 @@
                     Imagem de mei
                 </h1>
             </header>
-            <a href="mei/cadastro.html">Desejo ser um MEI</a>
+            <a href="<?=site_url('mei/cadastrar')?>">Desejo ser um MEI</a>
             <p class ='text-justify'>
                 Com uma conta de micro empreendedor individual (MEI), você poderá definir cidades que 
                 trabalha e serviços que presta, assim clientes poderão solicitar seus serviços.
@@ -24,7 +24,7 @@
                     Imagem de cliente
                 </h1>
             </header>
-            <a href="cliente/cadastro.html">Desejo ser um Cliente</a>
+            <a href="<?=site_url('cliente/cadastrar')?>">Desejo ser um Cliente</a>
             <p class = 'text-justify'>
                 Com uma conta de Cliente você poderá solicitar serviços a MEIs. Definir endereços comuns 
                 que solicita serviços e contatos para auxiliar nesse processo. Ou seja, clientes têm seu 

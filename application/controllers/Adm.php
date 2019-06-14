@@ -3,43 +3,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Adm extends CI_Controller {
 	
+	private $titulos = array(
+		"inicio" => "Inicio",
+		"servicos" => "Serviços",
+		"cidades" => "Cidades",
+		"perfil" => "Perfil",
+		"adms" => "Administradores"
+	);
+
 	public function index()
 	{
-		$this->load->view('page_top', array( 'titulo' =>"Inicio"));
-		$this->load->view('adm/page_nav', array( 'op' =>"inicio"));
-		$this->load->view('adm/inicio');
-		$this->load->view('page_bottom');
+		redirect("adm/painel");
 	}
-
-	public function perfil()
-	{
-		$this->load->view('page_top', array( 'titulo' =>"Perfil"));
-		$this->load->view('adm/page_nav', array( 'op' =>"perfil"));
-		$this->load->view('adm/perfil');
-		$this->load->view('page_bottom');
-	}
-	
-	public function servicos()
-	{
-		$this->load->view('page_top', array( 'titulo' =>"Serviços"));
-		$this->load->view('adm/page_nav', array( 'op' =>"servicos"));
-		$this->load->view('adm/servicos');
-		$this->load->view('page_bottom');
-	}
-
-	public function cidades()
-	{
-		$this->load->view('page_top', array( 'titulo' =>"Cidades"));
-		$this->load->view('adm/page_nav', array( 'op' =>"cidades"));
-		$this->load->view('adm/cidades');
-		$this->load->view('page_bottom');
-	}
-
-	public function administradores()
-	{
-		$this->load->view('page_top', array( 'titulo' =>"Administradores"));
-		$this->load->view('adm/page_nav', array( 'op' =>"adms"));
-		$this->load->view('adm/adms');
+	public function painel($pagina = "inicio"){
+		$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
+		$this->load->view('adm/page_nav', array( 'op' => $pagina));
+		$this->load->view('adm/'.$pagina);
 		$this->load->view('page_bottom');
 	}
 

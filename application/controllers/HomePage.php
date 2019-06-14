@@ -14,6 +14,9 @@ class HomePage extends CI_Controller {
 		'Dados de acesso invalidos',
 		'Logado com sucesso'
 		);
+	public $msg_cadastro = array(
+		''
+	);
 
 	public function index()
 	{
@@ -25,7 +28,13 @@ class HomePage extends CI_Controller {
 
 	public function logar($estado_id = 0,$msg_id = 0){
 		if($this->session->has_userdata("logado")){
-			redirect(site_url("homepage/logout"));
+			if($this->session->tipo == "adm"){
+				redirect(site_url("adm"));
+			}else if($this->session->tipo == "cliente"){
+				redirect(site_url("cliente"));
+			}else if($this->session->tipo == "mei"){
+				redirect(site_url("mei"));
+			}
 		}else{
 			$this->load->view('page_top', array( 'titulo' =>"Logar"));
 			$this->load->view('home/home_page_nav', array( 'op' =>"login"));
@@ -39,26 +48,38 @@ class HomePage extends CI_Controller {
 		
 	}
 
-	public function cadastrar(){
-		$this->load->view('page_top', array( 'titulo' =>"Cadastrar"));
-		$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
-		$this->load->view('home/cadastro_cliente_mei');
-		$this->load->view('page_bottom');
-	}
-
-	public function autenticar(){
-		$login = $_POST["login"];
-		$senha = $_POST["senha"];
-		
-		if(empty($login) || empty($senha))
-			redirect(site_url("homepage/logar/2/1"));
-
-		$this->load->model('usuario_model');
-		if($this->usuario_model->autenticar($login,$senha)){
-			$this->session->set_userdata(array("logado" => $login));
-			redirect(site_url("homepage/logar"));
-		}else{
-			redirect(site_url("homepage/logar/2/2"));
+	public function cadastrar($tipo = "geral", $estado_id = 0, $msg_id = 0){
+		if($tipo == "geral" || $tipo == "cliente" || $tipo == "mei")
+		{	
+			if($tipo == "geral")
+			{
+				$this->load->view('page_top', array( 'titulo' =>"Cadastrar"));
+				$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
+				$this->load->view('home/cadastro_cliente_mei');
+				
+			}
+			else if($tipo == "cliente")
+			{
+				$this->load->view('page_top', array( 'titulo' =>"Cadastrar Cliente"));
+				$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
+				$this->load->view('cliente/cadastro',
+					array( 
+						'estado' => ($this->estado[$estado_id]),
+						'msg' => ($this->msg_cadastro[$msg_id])
+					));
+			}
+			else if($tipo == "mei")
+			{
+				$this->load->view('page_top', array( 'titulo' =>"Cadastrar Cliente"));
+				$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
+				$this->load->view('mei/cadastro',
+					array( 
+						'estado' => ($this->estado[$estado_id]),
+						'msg' => ($this->msg_cadastro[$msg_id])
+					));
+				
+			}
+			$this->load->view('page_bottom');
 		}
 	}
 

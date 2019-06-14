@@ -7,10 +7,10 @@
     <form class = "col-6"  action = "<?=site_url("cliente/criar")?>" method = "POST">            
         <fieldset>
             <legend>Informações de Cliente</legend>
-            <fieldset>
+            <fieldset class = "form-group">
                 <legend>Tipo</legend>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input checked onclick="alterarJualterarFisicoridico()" type="radio" id="fisico" name="tipo"  value= "Físico"class="custom-control-input">
+                    <input checked onclick="alterarFisico()" type="radio" id="fisico" name="tipo"  value= "Físico"class="custom-control-input">
                     <label class="custom-control-label" for="fisico">Físico</label>
                 </div>        
                 <div class="custom-control custom-radio custom-control-inline">
@@ -18,7 +18,7 @@
                     <label class="custom-control-label" for="juridico">Jurídico</label>
                 </div>
             </fieldset>
-            <fieldset class='form-group'>
+            <fieldset id = "sexoFs"class='form-group'>
                 <legend>Sexo</legend>    
                 <div class="custom-control custom-radio custom-control-inline">
                     <input checked type="radio" id="masc" name="sexo"  value= "M"class="custom-control-input">
@@ -34,31 +34,31 @@
                 </div>
             </fieldset>
             <div class='form-group'>
-                <label for="nomeId">Nome*</label>
-                <input type="text" class="form-control" name="nome" id ="nomeId" required>
-            </div>   
+                <label for="nome">Nome*</label>
+                <input type="text" class="form-control" name="nome" id ="nome" placeholder = "Nome completo" required>
+            </div>
             <div class='form-group'>
-                <label for="cpfCnpjId">CPF*</label>
-                <input type="text" class="form-control" name="cpfCnpj" id ="cpfCnpjId" required>
+                <label for="cpfCnpj">CPF*</label>
+                <input type="text" class="form-control" name="cpfCnpj" id ="cpfCnpj" required>
             </div> 
             <div class='form-group'>
-                <label for="nascId">Data de Nascimento</label>
-                <input type="date" class="form-control" name="nasc" id="nascId">
+                <label for="nasc">Data de Nascimento</label>
+                <input type="date" class="form-control" name="nasc" id="nasc">
             </div> 
         </fieldset>       
         <fieldset>
             <legend>Dados de Acesso</legend>
             <div class='form-group'>
                 <label for="login">Login*</label>
-                <input type="text" class="form-control" class="form-control" name="login" id="login" required>
+                <input type="text" class="form-control" class="form-control" name="login" id="login"  placeholder = "Nome de usuário para acessar o sistema" required>
             </div>
             <div class='form-group'>
                 <label for="senha">Senha*</label>
-                <input type="password" class="form-control" name="senha" id="senha" required>
+                <input type="password" class="form-control" name="senha" id="senha" placeholder = "Senha para acesso ao sistema"  required>
             </div>
             <div class='form-group'>
                 <label for="conSenha">Confirmar senha*</label>
-                <input type="password" class="form-control" name="conSenha" id="conSenha" required>
+                <input type="password" class="form-control" name="conSenha" id="conSenha"  placeholder = "Confirmação da senha anterior" required >
             </div>
         </fieldset>
         <button class = "btn btn-primary" type = "submit" onclick="cadastroClienteMei('cliente')">Finalizar cadastro</button>      
@@ -79,3 +79,4 @@
     </div>
 </div>
 </main>
+<script src = "<?=base_url()?>js/tipo-cliente.js"></script>

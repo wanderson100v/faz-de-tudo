@@ -1,5 +1,3 @@
-
-
 function editarTd(td){
     let input = td.querySelector("input")
     if(input != null)

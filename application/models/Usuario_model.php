@@ -11,13 +11,15 @@ class Usuario_model extends CI_Model {
     public function autenticar($login, $senha){
         $this->login = $login;
         $this->senha = $senha;
+        $this->db->where("ativo", true);
         $this->db->where("login", $this->login);
         $this->db->where("senha", $this->senha);
     
         $query = $this->db->get('usuario', 1);
-        if ($query->num_rows() >= 1) {
-            return TRUE;
+        $row  = $query->row();
+        if (isset($row)) {
+            return $row->tipo;
         }
-        return FALSE;
+        return null;
     }   
 }

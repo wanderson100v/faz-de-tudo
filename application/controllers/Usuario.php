@@ -33,4 +33,11 @@ class Usuario extends CI_Controller {
 		}
 	}
 
+	public function editar($id = 0){
+		$this->load->view('page_top', array( 'titulo' => "Editar Cliente"));
+		$this->load->view('cliente/page_nav', array( 'op' =>"perfil"));
+		$this->load->view('edit_user');
+		$this->load->view('page_bottom');
+	}
+
 }

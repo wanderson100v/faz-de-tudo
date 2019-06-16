@@ -1,4 +1,4 @@
-<nav class = mb-5>
+<nav class = 'mb-5' >
     <ul class=" nav nav-tabs justify-content-end">
         <li class="nav-item">
             <a class="nav-link <?=($op == "inicio")? "active" : ""?>" href="<?=site_url("cliente/painel/inicio")?>">Inicio</a>

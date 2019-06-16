@@ -16,9 +16,18 @@ class Mei extends CI_Controller {
 		redirect("mei/painel");
 	}
 	public function painel($pagina = "inicio"){
-		$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
-		$this->load->view('mei/page_nav', array( 'op' => $pagina));
-		$this->load->view('mei/'.$pagina);
-		$this->load->view('page_bottom');
+		if(isset($this->titulos[$pagina]))
+		{
+			$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
+			$this->load->view('mei/page_nav', array( 'op' => $pagina));
+			$this->load->view('mei/'.$pagina);
+			$this->load->view('page_bottom');
+		}else
+		{
+			$this->load->view('errors/html/error_404',array(
+				'heading' => '404 Page Not Found',
+				'message' => 'The page you requested was not found.'
+			));
+		}
 	}
 }

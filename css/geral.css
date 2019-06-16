@@ -1,0 +1,22 @@
+
+/*Botões de ação*/
+a.editar, a.excluir{
+    margin: 0 5px 0 5px;
+    color: white;
+    padding: 5px;
+    border: none;
+    width: 80px;
+}
+
+
+a.editar:hover, a.excluir:hover{
+    color: black;
+}
+
+a.editar{
+   background-color: green;
+}
+
+a.excluir{
+    background-color: red;
+}

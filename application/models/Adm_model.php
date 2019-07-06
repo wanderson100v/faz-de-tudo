@@ -20,7 +20,7 @@ class Adm_model extends CI_Model{
         $this->db->trans_begin();
 
         $this->load->model('usuario_model');
-        $this->usuario_id = $this->usuario_model->create($login, $senha);
+        $this->usuario_id = $this->usuario_model->create("adm",$login, $senha);
 
         $this->grau_acesso = $grau_acesso;
         $this->db->insert('adm', $this);

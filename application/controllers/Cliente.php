@@ -17,41 +17,48 @@ class Cliente extends CI_Controller {
 	}
 	public function painel($pagina = "inicio")
 	{
-		if(isset($this->titulos[$pagina]))
+		if(isset($_SESSION['logado']) && $_SESSION['tipo'] == 'cliente')
 		{
-			if(empty($this->cliente))
+			if(isset($this->titulos[$pagina]))
 			{
-				$this->load->model("usuario_model");
-				$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
+				if(empty($this->cliente))
+				{
+					$this->load->model("usuario_model");
+					$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
 
-				$this->load->model("endereco_model");
-				$enderecos = $this->endereco_model->read_usuario_id($usuario["id"]);
+					$this->load->model("endereco_model");
+					$enderecos = $this->endereco_model->read_usuario_id($usuario["id"]);
 
-				$this->load->model("contato_model");
-				$contatos = $this->contato_model->read_usuario_id($usuario["id"]);
-				
-				$this->load->model("cliente_model");
-				$this->cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
-				
-				$usuario["enderecos"] = $enderecos;
-				$usuario["contatos"] = $contatos;
-				$this->cliente["usuario"] = $usuario;
-				
+					$this->load->model("contato_model");
+					$contatos = $this->contato_model->read_usuario_id($usuario["id"]);
+					
+					$this->load->model("cliente_model");
+					$this->cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
+					
+					$usuario["enderecos"] = $enderecos;
+					$usuario["contatos"] = $contatos;
+					$this->cliente["usuario"] = $usuario;
+					
+				}
+
+				$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
+				$this->load->view('cliente/page_nav', array( 'op' => $pagina));
+				if($pagina == "perfil")
+					$this->load->view('cliente/'.$pagina, array( 'cliente' => $this->cliente));
+				else
+					$this->load->view('cliente/'.$pagina);
+				$this->load->view('page_bottom');
+			}else
+			{
+				$this->load->view('errors/html/error_404',array(
+					'heading' => '404 Page Not Found',
+					'message' => 'The page you requested was not found.'
+				));
 			}
-
-			$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
-			$this->load->view('cliente/page_nav', array( 'op' => $pagina));
-			if($pagina == "perfil")
-				$this->load->view('cliente/'.$pagina, array( 'cliente' => $this->cliente));
-			else
-				$this->load->view('cliente/'.$pagina);
-			$this->load->view('page_bottom');
-		}else
+		}
+		else
 		{
-			$this->load->view('errors/html/error_404',array(
-				'heading' => '404 Page Not Found',
-				'message' => 'The page you requested was not found.'
-			));
+			redirect(site_url('homepage/logar/2/3'));
 		}
 	}
 
@@ -72,15 +79,24 @@ class Cliente extends CI_Controller {
 		$nasc = $this->input->post('nasc');
 		$login = trim($this->input->post('login'));
 		$senha = trim($this->input->post('senha'));
+		$consenha = trim($this->input->post('conSenha'));
 
-		//campos requeridos
-		if(empty($tipo))
-		{
-
+		//validando requeridos
+		if(empty($nome) || empty($cpfCnpj) || empty($login) || empty($senha) ){
+			redirect(site_url('homepage/cadastrar/cliente/2/0'));
+		}
+		//validando senha
+		if($senha != $consenha){
+			redirect(site_url('homepage/cadastrar/cliente/2/1'));
 		}
 
 		$this->load->model("cliente_model");
-		$this->cliente_model->create($tipo, $cpf_cnpj, $nome, $nasc , $sexo, $login, $senha);
-		
+		$codigo_msg = $this->cliente_model->create($tipo, $cpfCnpj, $nome, $nasc , $sexo, $login, $senha);
+		$codigo_estado = 2; // danger
+		if($codigo_msg == 5)
+			$codigo_estado = 1; // sucesso
+
+		redirect(site_url('homepage/cadastrar/cliente/'.$codigo_estado.'/'.$codigo_msg));
+
 	}
 }

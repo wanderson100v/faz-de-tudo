@@ -18,7 +18,7 @@ class Mei_model extends CI_Model{
     public function create($tipo, $cliente_id, $nome, $nasc , $sexo, $login, $senha)
     { 
         $this->load->model('cliente_model');
-        $this->$cliente_id = $this->cliente_model->create($tipo, $cliente_id, $nome, $nasc , $sexo, $login, $senha);
+        $this->$cliente_id = $this->cliente_model->create($tipo, $cliente_id, $nome, $nasc , $sexo, $login, $senha, "mei");
         return $this->db->insert('mei', $this);
     }
 

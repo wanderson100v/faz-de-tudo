@@ -19,22 +19,30 @@ class Cliente_model extends CI_Model{
 		return $this->db->get()->row_array();
 	}
 
-    public function create($tipo, $cpf_cnpj, $nome, $nasc , $sexo, $login, $senha)
+    public function create($tipo, $cpf_cnpj, $nome, $nasc , $sexo, $login, $senha, $tipo_usuario = 'cliente')
     {
         $this->load->model('usuario_model');
-        $this->usuario_id = $this->usuario_model->create($login, $senha);
-
+        $codigo_msg = $this->usuario_id = $this->usuario_model->create($tipo_usuario, $login, $senha);
+        if($codigo_msg != 5){
+            return $codigo_msg;
+        }
         $this->tipo = $tipo;
         $this->cpf_cnpj = $cpf_cnpj;
         $this->nome = $nome;
         $this->nasc = $nasc;
         $this->sexo = $sexo;
+        $this->usuario_id = $this->usuario_model->id;
         
         if($this->db->insert('cliente', $this))
         {
-            return $this->db->insert_id();
+            $this->id = $this->db->insert_id();
+            return 5; // Sucesso ao cadastrar
         }
-        return null;
+        else
+        {
+            return 4 ; // Ocorreu um erro ao cadastrar cliente
+        }
+        
     }
 
     public function read_id($id){

@@ -12,9 +12,15 @@ class HomePage extends CI_Controller {
 		'',
 		'Login ou senha não informado',
 		'Dados de acesso invalidos',
-		'Logado com sucesso'
+		'Acesso negado!'
 		);
 	public $msg_cadastro = array(
+		'Um ou mais campos obrigatórios estão vazios',
+		'Senha e sua confirmação está diferente',
+		'Login informado não esta disponivel',
+		'Ocorreu um erro ao cadastrar usuário',
+		'Ocorreu um erro ao cadastrar cliente',
+		'Sucesso ao cadastrar',
 		''
 	);
 
@@ -27,15 +33,12 @@ class HomePage extends CI_Controller {
 	}
 
 	public function logar($estado_id = 0,$msg_id = 0){
-		if($this->session->has_userdata("logado")){
-			if($this->session->tipo == "adm"){
-				redirect(site_url("adm"));
-			}else if($this->session->tipo == "cliente"){
-				redirect(site_url("cliente"));
-			}else if($this->session->tipo == "mei"){
-				redirect(site_url("mei"));
-			}
-		}else{
+		if(isset($_SESSION["logado"]))
+		{
+			redirect(site_url($this->session->tipo));
+		}
+		else
+		{
 			$this->load->view('page_top', array( 'titulo' =>"Logar"));
 			$this->load->view('home/home_page_nav', array( 'op' =>"login"));
 			$this->load->view('home/logar',
@@ -48,7 +51,7 @@ class HomePage extends CI_Controller {
 		
 	}
 
-	public function cadastrar($tipo = "geral", $estado_id = 0, $msg_id = 0){
+	public function cadastrar($tipo = "geral", $estado_id = 0, $msg_id = 6){
 		if($tipo == "geral" || $tipo == "cliente" || $tipo == "mei")
 		{	
 			if($tipo == "geral")
@@ -70,7 +73,7 @@ class HomePage extends CI_Controller {
 			}
 			else if($tipo == "mei")
 			{
-				$this->load->view('page_top', array( 'titulo' =>"Cadastrar Cliente"));
+				$this->load->view('page_top', array( 'titulo' =>"Cadastrar MEI"));
 				$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
 				$this->load->view('mei/cadastro',
 					array( 

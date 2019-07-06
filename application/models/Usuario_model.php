@@ -5,6 +5,7 @@ class Usuario_model extends CI_Model {
 
     public $id;
     public $ativo;
+    public $tipo;
     public $login;
     public $senha;
 
@@ -34,15 +35,30 @@ class Usuario_model extends CI_Model {
         return $query->row_array();
     }
 
-    public function create($login, $senha)
+    public function create($tipo, $login, $senha, $ativo = true)
     {
         $this->login = $login;
         $this->senha = $senha;
-        if($this->db->insert('usuario', $this))
+        $this->ativo = $ativo;
+        $this->tipo = $tipo;
+    
+        $insert = $this->db->insert('usuario', $this);
+        if($insert)
         {
-            return $this->db->insert_id();
+            $this->id = $this->db->insert_id();
+            return 5; // Sucesso ao cadastrar
         }
-        return null;
+        else
+        {
+            if ($this->db->error()['code'] == 1062) // login já existe
+            { 
+                return 2; // Login informado não esta disponivel
+            } 
+            else // Erro não identificado
+            {
+                return 3; // Ocorreu um erro ao cadastrar usuário
+            }
+        }
     }
 
     public function read($id )

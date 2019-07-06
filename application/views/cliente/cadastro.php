@@ -4,7 +4,7 @@
     <h1>Cadastro Passo 2 : Cliente</h1>
 </header>
 <div class = 'row'>
-    <form class = "col-6"  action = "<?=site_url("cliente/criar")?>" method = "POST">            
+    <form class = "col-6"  action = "<?=site_url("cliente/create")?>" method = "POST">            
         <fieldset>
             <legend>Informações de Cliente</legend>
             <fieldset class = "form-group">
@@ -59,10 +59,10 @@
             <div class='form-group'>
                 <label for="conSenha">Confirmar senha*</label>
                 <input type="password" class="form-control" name="conSenha" id="conSenha"  placeholder = "Confirmação da senha anterior" required >
-            </div>
+            
         </fieldset>
-        <button class = "btn btn-primary" type = "submit" onclick="cadastroClienteMei('cliente')">Finalizar cadastro</button>      
-        <div class="alert alert-<?=$estado?>" role="alert">
+        <button class = "btn btn-primary" type = "submit" onclick="cadastroClienteMei('cliente')">Finalizar cadastro</button>
+        <div class="mt-3 alert alert-<?=$estado?>" role="alert">
             <?=$msg?>
         </div>
     </form>

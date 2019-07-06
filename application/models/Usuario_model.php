@@ -8,7 +8,8 @@ class Usuario_model extends CI_Model {
     public $login;
     public $senha;
 
-    public function autenticar($login, $senha){
+    public function autenticar($login, $senha)
+    {
         $this->login = $login;
         $this->senha = $senha;
         $this->db->where("ativo", true);
@@ -23,30 +24,39 @@ class Usuario_model extends CI_Model {
         return null;
     }
 
-    public function create($login, $senha)
+    public function read_login($login)
     {
-            $this->login = $login;
-            $this->senha = $senha;
-            if($this->db->insert('usuario', $this))
-                return $this->db->insert_id();
-            return null;
+        $this->login = $login;
+        $this->db->where("ativo", true);
+        $this->db->where("login", $this->login);
+    
+        $query = $this->db->get('usuario', 1);
+        return $query->row_array();
     }
 
-    public function read($id = null){
-		
-		if ($id) {
-			$this->db->where('id', $id);
-		}
-		$this->db->order_by("id", 'desc');
+    public function create($login, $senha)
+    {
+        $this->login = $login;
+        $this->senha = $senha;
+        if($this->db->insert('usuario', $this))
+        {
+            return $this->db->insert_id();
+        }
+        return null;
+    }
+
+    public function read($id )
+    {
+        $this->db->where('id', $id);
 		return $this->db->get('usuario');
 	}
 
     public function update($id, $login, $senha, $ativo = true)
     {   
-            $this->login = $login;
-            $this->senha = $senha;
-            $this->ativo = $ativo;
-            $this->db->update('usuario', $this, array('id' => $id));
+        $this->login = $login;
+        $this->senha = $senha;
+        $this->ativo = $ativo;
+        return $this->db->update('usuario', $this, array('id' => $id));
     }
 
     /**
@@ -54,6 +64,6 @@ class Usuario_model extends CI_Model {
      */
     public function delete($id){
         $this->ativo = false;
-        $this->db->update('usuario', $this, array('id' => $id));
+        return $this->db->update('usuario', $this, array('id' => $id));
 	}
 }

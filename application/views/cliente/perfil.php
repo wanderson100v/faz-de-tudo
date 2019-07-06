@@ -28,10 +28,10 @@
                     </a>
                 </div>
                 <p>
-                    Tipo : Físico<br>
-                    Nome : Frederico Jóse de Lima<br>
-                    Data de Nascimento : 18 / 04 / 1992<br>
-                    Sexo : Masculino<br>
+                    Tipo : <?=$cliente['tipo']?><br>
+                    Nome : <?=$cliente['nome']?><br>
+                    Data de Nascimento : <?=$cliente['nasc']?><br>
+                    Sexo : <?=$cliente['sexo']?><br>
                 </p>
                 <div class = 'row pl-2'> 
                     <h5 class = "mr-2">Dados de acesso</h5>
@@ -41,7 +41,7 @@
                     
                 </div>
                 <p>
-                    Login : Cliente<br>
+                    Login : <?=$cliente['usuario']['login']?><br>
                     Senha : ********<br>
                 </p>
             </article>
@@ -64,48 +64,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>
-                                <a href="<?=site_url('endereco/persistir/1')?>" class ="btn editar">Editar</a>
-                                <a href="<?=site_url('endereco/excluir/1')?>" class ="btn excluir">Excluir</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>
-                                <a href="<?=site_url('endereco/persistir/1')?>" class ="btn editar">Editar</a>
-                                <a href="<?=site_url('endereco/excluir/1')?>" class ="btn excluir">Excluir</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>
-                                <a href="<?=site_url('endereco/persistir/1')?>" class ="btn editar">Editar</a>
-                                <a href="<?=site_url('endereco/excluir/1')?>" class ="btn excluir">Excluir</a>
-                            </td>
-                        </tr>
+                    <?php
+                    foreach($cliente['usuario']['enderecos'] as $endereco)
+                    {
+                        echo "<tr>
+                                <th scope='row'>".$endereco['id']."</th>
+                                <td>".$endereco['cep']."</td>
+                                <td>".$endereco['num']."</td>
+                                <td>".$endereco['logradouro']."</td>
+                                <td>".$endereco['bairro']."</td>
+                                <td>".$endereco['cidade']."</td>
+                                <td>".$endereco['estado']."</td>
+                                <td>".$endereco['pais']."</td>
+                                <td>
+                                    <a href=".site_url("endereco/persistir/".$endereco['id'])." class =\"btn editar\">Editar</a>
+                                    <a href=".site_url("endereco/excluir/".$endereco['id'])." class =\"btn excluir\">Excluir</a>
+                                </td>
+                            </tr>";
+                    }
+                    ?>
                     </tbody>
                 </table>
                 <a type="button" class="btn btn-primary btn-sm" href = "<?=site_url('endereco/persistir')?>"> Adicionar Endereço</a>
@@ -124,33 +101,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>E-Mail</td>
-                            <td>dasd@gmail.com</td>
-                            <td>                                
-                                <a href="<?=site_url('contato/persistir/1')?>" class ="btn editar">Editar</a>
-                                <a href="<?=site_url('>contato/excluir/1')?>" class ="btn excluir">Excluir</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>(41) 32131-3123</td>
-                            <td>Otto</td>
-                            <td>
-                                <a href="<?=site_url('contato/persistir/1')?>" class ="btn editar">Editar</a>
-                                <a href="<?=site_url('>contato/excluir/1')?>" class ="btn excluir">Excluir</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>
-                                <a href="<?=site_url('contato/persistir/1')?>" class ="btn editar">Editar</a>
-                                <a href="<?=site_url('>contato/excluir/1')?>" class ="btn excluir">Excluir</a>
-                            </td>
-                        </tr>
+                    <?php
+                    foreach($cliente['usuario']['contatos'] as $contato)
+                    {
+                        echo "<tr>
+                                <th scope='row'>".$contato['id']."</th>
+                                <td>".$contato['tipo']."</td>
+                                <td>".$contato['descricao']."</td>
+                                <td>
+                                    <a href=".site_url("contato/persistir/".$contato['id'])." class =\"btn editar\">Editar</a>
+                                    <a href=".site_url("contato/excluir/".$contato['id'])."  class =\"btn excluir\">Excluir</a>
+                                </td>
+                            </tr>";
+                    }
+                    ?>
                     </tbody>
                 </table>
             </article>

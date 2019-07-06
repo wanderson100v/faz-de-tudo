@@ -1,8 +1,7 @@
     <main class = 'container'>
+        
         <header class = 'row justify-content-center' >
-            <h1 class = "col-3 text-hide" style = 'background-image : url("<?=base_url()?>res/img/logo-faz-de-tudo.png");  background-repeat: no-repeat; text-center width: 250px; height: 250px;'>
-                Logo da empresa
-            </h1>
+            <img class = "col-3 justify-content-center'" src="<?=base_url()?>res/img/logo-faz-de-tudo.png" alt="Logo da empresa">
         </header>
         <p class = 'row text-justify'>
             Nossa empresa fornece serviços de manutenção domiciliar/empresarial, do tipo faz-tudo, desde limpezas 
@@ -14,5 +13,11 @@
             prestador de serviço é em desempenhar suas funções, levando também à liberdade de optar por quem 
             fará o serviço baseado nesse parâmetro. 
         </p>
+        <div>
+            <h3 class = "text-center">Nossos serviços</h3>
+        </div>
+        <div class = "row  justify-content-center">
+            <img class = "col-12'" src="<?=base_url()?>/res/img/servicos.jpg" alt="Serviços que a empresa presta">
+        </div>
     </main>
     

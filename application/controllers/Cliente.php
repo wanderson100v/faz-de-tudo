@@ -9,6 +9,18 @@ class Cliente extends CI_Controller {
 		"solicitacoes" => "Solicitações"
 	);
 
+	public $estado = array('','success','danger');
+
+	public $msg_cadastro = array(
+		'Um ou mais campos obrigatórios estão vazios',
+		'Senha e sua confirmação está diferente',
+		'Login informado não esta disponivel',
+		'Ocorreu um erro ao cadastrar usuário',
+		'Ocorreu um erro ao cadastrar cliente',
+		'Sucesso ao cadastrar',
+		''
+	);
+
 	private $cliente;
 
 	public function index()
@@ -81,22 +93,24 @@ class Cliente extends CI_Controller {
 		$senha = trim($this->input->post('senha'));
 		$consenha = trim($this->input->post('conSenha'));
 
-		//validando requeridos
-		if(empty($nome) || empty($cpfCnpj) || empty($login) || empty($senha) ){
-			redirect(site_url('homepage/cadastrar/cliente/2/0'));
+		if(empty($nome) || empty($cpfCnpj) || empty($login) || empty($senha) ){//validando requeridos
+			echo json_encode(array('estado'=>'danger','msg' =>'Um ou mais campos obrigatórios estão vazios'));
+			return;
 		}
-		//validando senha
-		if($senha != $consenha){
-			redirect(site_url('homepage/cadastrar/cliente/2/1'));
+		
+		if($senha != $consenha){//validando senha
+			echo json_encode(array('estado'=>'danger','msg' =>'Senha e sua confirmação está diferente'));
+			return;
 		}
 
 		$this->load->model("cliente_model");
 		$codigo_msg = $this->cliente_model->create($tipo, $cpfCnpj, $nome, $nasc , $sexo, $login, $senha);
+		
 		$codigo_estado = 2; // danger
-		if($codigo_msg == 5)
-			$codigo_estado = 1; // sucesso
-
-		redirect(site_url('homepage/cadastrar/cliente/'.$codigo_estado.'/'.$codigo_msg));
-
+		if($codigo_msg == 5){
+			$codigo_estado = 1; // success
+		}
+		
+		echo json_encode(array('estado'=> $this->estado[$codigo_estado],'msg' => $this->msg_cadastro[$codigo_msg]));
 	}
 }

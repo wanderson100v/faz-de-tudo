@@ -1,7 +1,7 @@
 <main class = "container">
     <header class = "row">
         <div class = "mr-3">
-            <a type = "button" class=" text-center btn btn-primary" href = "<?=site_url($_SESSION['tipo']'./painel/perfil#enderecos')?>">Voltar</a>
+            <a type = "button" class=" text-center btn btn-primary" href = "<?=site_url($_SESSION['tipo'].'/painel/perfil#enderecos')?>">Voltar</a>
         </div>
         <h1><?=$titulo?></h1>
     </header>
@@ -43,7 +43,7 @@
             </div>
         </fieldset>
         <div class = "row justify-content-end">
-            <a type="button" class="btn btn-secondary" href = "<?=site_url($_SESSION['tipo']'./painel/perfil#enderecos')?>">Cancelar</a>
+            <a type="button" class="btn btn-secondary" href = "<?=site_url($_SESSION['tipo'].'/painel/perfil#enderecos')?>">Cancelar</a>
             <a type="submit" class=" ml-3 mr-3 btn btn-primary"><?=$desc?></a>
         </div>
         

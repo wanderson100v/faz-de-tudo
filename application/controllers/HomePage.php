@@ -14,6 +14,7 @@ class HomePage extends CI_Controller {
 		'Dados de acesso invalidos',
 		'Acesso negado!'
 		);
+		
 	public $msg_cadastro = array(
 		'Um ou mais campos obrigatórios estão vazios',
 		'Senha e sua confirmação está diferente',

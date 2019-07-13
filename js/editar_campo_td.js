@@ -16,10 +16,8 @@ function editarRow(td,url){
 function getValue(td){
     let input = td.querySelector("input")
     if(input != null){
-        console.log("Há input: "+ td.innerHTML);
         return input.value.replace("R$","").replace(",",".");
     }else{
-        console.log("Não Há input");
         return td.innerHTML.replace("R$","").replace(",",".");
     }
 }

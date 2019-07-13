@@ -1,4 +1,4 @@
-    <main class = 'container'>
+﻿    <main class = 'container h-100 mb-5' >
         
         <header class = 'row justify-content-center' >
             <img class = "col-3 justify-content-center'" src="<?=base_url()?>res/img/logo-faz-de-tudo.png" alt="Logo da empresa">

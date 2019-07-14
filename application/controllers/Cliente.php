@@ -9,18 +9,6 @@ class Cliente extends CI_Controller {
 		"solicitacoes" => "Solicitações"
 	);
 
-	public $estado = array('','success','danger');
-
-	public $msg_cadastro = array(
-		'Um ou mais campos obrigatórios estão vazios',
-		'Senha e sua confirmação está diferente',
-		'Login informado não esta disponivel',
-		'Ocorreu um erro ao cadastrar usuário',
-		'Ocorreu um erro ao cadastrar cliente',
-		'Sucesso ao cadastrar',
-		''
-	);
-
 	private $cliente;
 
 	public function index()
@@ -104,13 +92,8 @@ class Cliente extends CI_Controller {
 		}
 
 		$this->load->model("cliente_model");
-		$codigo_msg = $this->cliente_model->create($tipo, $cpfCnpj, $nome, $nasc , $sexo, $login, $senha);
-		
-		$codigo_estado = 2; // danger
-		if($codigo_msg == 5){
-			$codigo_estado = 1; // success
-		}
-		
-		echo json_encode(array('estado'=> $this->estado[$codigo_estado],'msg' => $this->msg_cadastro[$codigo_msg]));
+		$msg = $this->cliente_model->create($tipo, $cpfCnpj, $nome, $nasc , $sexo, $login, $senha);
+		$estado = ($msg == "Sucesso")? "success" : "danger";
+		echo json_encode(array('estado'=> $estado,'msg'=> $msg));
 	}
 }

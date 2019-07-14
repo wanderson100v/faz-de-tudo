@@ -15,11 +15,29 @@ class Mei_model extends CI_Model{
     }
     
 
-    public function create($tipo, $cliente_id, $nome, $nasc , $sexo, $login, $senha)
+    public function create($tipo, $cpfCnpj, $nome, $nasc , $sexo, $login, $senha)
     { 
+        $this->db->trans_begin();
+        
         $this->load->model('cliente_model');
-        $this->$cliente_id = $this->cliente_model->create($tipo, $cliente_id, $nome, $nasc , $sexo, $login, $senha, "mei");
-        return $this->db->insert('mei', $this);
+        $msg =  $this->cliente_model->create($tipo, $cpfCnpj, $nome, $nasc , $sexo, $login, $senha, "mei");
+        if($msg != "Sucesso"){
+            $this->db->trans_rollback();
+            return $msg;
+        } 
+        $this->cliente_id = $this->cliente_model->id;
+       
+        if($this->db->insert('mei', $this))
+        {
+            $this->id = $this->db->insert_id();
+            $this->db->trans_commit();
+            return "Sucesso";
+        }
+        else
+        {
+            $this->db->trans_rollback();
+            return "Ocorreu um erro ao cadastrar MEI" ;
+        }
     }
 
     public function read_id($id){

@@ -80,7 +80,7 @@ function cadastroCliente()
             alerta = $(".feedback");
             alerta.html(json['msg']);
             alerta.removeClass();
-            alerta.addClass("feedback mt-3 alert alert-"+json['estado']);
+            alerta.addClass("feedback alert alert-"+json['estado']);
             alerta.show();
         });
     }

@@ -16,11 +16,20 @@ class Contato_model extends CI_Model{
 		return $this->db->get()->result_array();
 	}
     
-    public function create($tipo, $descricao)
+    public function create($tipo, $descricao, $usuario_id)
     {
         $this->tipo = $tipo;
         $this->descricao = $descricao;
-        return $this->db->insert('contato', $this);
+        $this->usuario_id = $usuario_id;
+        if($this->db->insert('contato', $this))
+        {
+            $this->id = $this->db->insert_id();
+            return "Sucesso";
+        }
+        else
+        {
+            return "Ocorreu um erro ao cadastrar contato" ;
+        }
     }
 
     public function read($id)

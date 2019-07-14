@@ -46,17 +46,17 @@ class Usuario_model extends CI_Model {
         if($insert)
         {
             $this->id = $this->db->insert_id();
-            return 5; // Sucesso ao cadastrar
+            return "Sucesso";
         }
         else
         {
             if ($this->db->error()['code'] == 1062) // login já existe
             { 
-                return 2; // Login informado não esta disponivel
+                return "Login informado não esta disponivel"; 
             } 
             else // Erro não identificado
             {
-                return 3; // Ocorreu um erro ao cadastrar usuário
+                return "Ocorreu um erro ao cadastrar usuário"; 
             }
         }
     }

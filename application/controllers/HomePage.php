@@ -8,23 +8,14 @@ class HomePage extends CI_Controller {
 	
 	public $estado = array('','success','danger');
 
-	public $msg_login = array(
-		'',
-		'Login ou senha não informado',
-		'Dados de acesso invalidos',
-		'Acesso negado!'
+	public $msg_login = 
+		array(
+			'',
+			'Login ou senha não informado',
+			'Dados de acesso invalidos',
+			'Acesso negado!'
 		);
 		
-	public $msg_cadastro = array(
-		'Um ou mais campos obrigatórios estão vazios',
-		'Senha e sua confirmação está diferente',
-		'Login informado não esta disponivel',
-		'Ocorreu um erro ao cadastrar usuário',
-		'Ocorreu um erro ao cadastrar cliente',
-		'Sucesso ao cadastrar',
-		''
-	);
-
 	public function index()
 	{
 		$this->load->view('page_top', array( 'titulo' =>"Inicio"));
@@ -52,37 +43,25 @@ class HomePage extends CI_Controller {
 		
 	}
 
-	public function cadastrar($tipo = "geral", $estado_id = 0, $msg_id = 6){
+	public function cadastrar($tipo = "geral"){
 		if($tipo == "geral" || $tipo == "cliente" || $tipo == "mei")
 		{	
-			if($tipo == "geral")
+			$titulo = "Cadastrar" ;
+			$opcao =  "home/cadastro_cliente_mei";			
+		
+			if($tipo == "cliente")
 			{
-				$this->load->view('page_top', array( 'titulo' =>"Cadastrar"));
-				$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
-				$this->load->view('home/cadastro_cliente_mei');
-				
-			}
-			else if($tipo == "cliente")
-			{
-				$this->load->view('page_top', array( 'titulo' =>"Cadastrar Cliente"));
-				$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
-				$this->load->view('cliente/cadastro',
-					array( 
-						'estado' => ($this->estado[$estado_id]),
-						'msg' => ($this->msg_cadastro[$msg_id])
-					));
+				$titulo = "Cadastrar Cliente" ;
+				$opcao =  "cliente/cadastro";
 			}
 			else if($tipo == "mei")
 			{
-				$this->load->view('page_top', array( 'titulo' =>"Cadastrar MEI"));
-				$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
-				$this->load->view('mei/cadastro',
-					array( 
-						'estado' => ($this->estado[$estado_id]),
-						'msg' => ($this->msg_cadastro[$msg_id])
-					));
-				
+				$titulo = "Cadastrar MEI" ;
+				$opcao =  "mei/cadastro";
 			}
+			$this->load->view('page_top', array( 'titulo' => $titulo));
+			$this->load->view('home/home_page_nav', array( 'op' =>"cadastro"));
+			$this->load->view($opcao);
 			$this->load->view('page_bottom');
 		}
 	}

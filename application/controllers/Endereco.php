@@ -7,7 +7,8 @@ class Endereco extends CI_Controller {
 	{
         
 	}
-	public function create($persistir = 0){	
+    public function create($persistir = 0)
+    {	
         if($persistir){
            
             $this->load->model("usuario_model");
@@ -43,11 +44,16 @@ class Endereco extends CI_Controller {
         }
     }
 
-    public function remover($id){	
-   
+    public function update($id)
+    {	
+        
     }
 
-    public function buscar(){	
-
+    public function delete($id)
+    {
+        $this->load->model("endereco_model");
+        $msg = $this->endereco_model->delete($id);
+        $estado = ($msg == "Sucesso")? "success" : "danger";
+        echo json_encode(array('estado'=> $estado,'msg'=> $msg));
     }
 }

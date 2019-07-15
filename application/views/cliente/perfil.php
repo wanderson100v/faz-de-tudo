@@ -95,8 +95,8 @@
                                 <td>".$endereco['estado']."</td>
                                 <td>".$endereco['pais']."</td>
                                 <td>
-                                    <a href=".site_url("endereco/update/".$endereco['id'])." class =\"btn editar\">Editar</a>
-                                    <a href=".site_url("endereco/excluir/".$endereco['id'])." class =\"btn excluir\">Excluir</a>
+                                    <button onclick = \"editarEndereco(this,'".$endereco['id']."')\" class =\"btn editar\">Editar</button>
+                                    <button onclick = \"excluirEndereco('".$endereco['id']."')\" class =\"btn excluir\">Excluir</button>
                                 </td>
                             </tr>";
                     }
@@ -127,8 +127,8 @@
                                 <td>".$contato['tipo']."</td>
                                 <td>".$contato['descricao']."</td>
                                 <td>
-                                    <a href=".site_url("contato/update/".$contato['id'])." class =\"btn editar\">Editar</a>
-                                    <a href=".site_url("contato/excluir/".$contato['id'])."  class =\"btn excluir\">Excluir</a>
+                                    <button onclick = \"editarContato(this,'".$contato['id']."')\" class =\"btn editar\">Editar</button>
+                                    <button onclick = \"excluirContato('".$contato['id']."')\" class =\"btn excluir\">Excluir</button>
                                 </td>
                             </tr>";
                     }
@@ -142,5 +142,9 @@
             <a href ="#topo" class =" btn btn-outline-primary">Topo</a>
         </div>      
     </main>
+    <div class = "row fixed-bottom text-center justify-content-center">
+        <div class="col-2 feedback" role="alert"></div>
+    </div>
 </div>
 <script src = "<?=base_url()?>js/menu-lateral.js"></script>
+<script src = "<?=base_url()?>js/perfil.js"></script>

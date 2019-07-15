@@ -54,6 +54,8 @@ class Endereco_model extends CI_Model{
 
     public function delete($id)
     {
-        return $this->db->delete('endereco', $this, array('id' => $id));
+        return ($this->db->delete('endereco', array('id' => $id)))? 
+            "Sucesso":
+            "Erro ao excluir contato";
 	}
 }

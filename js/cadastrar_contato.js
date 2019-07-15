@@ -41,6 +41,8 @@ function cadastrarContatos()
             alerta.removeClass();
             alerta.addClass("feedback alert alert-"+json['estado']);
             alerta.show();
+            sleep(3000);
+            alerta.hide();
         })
         .fail(function (jqXHR, textStatus, errorThrown) { 
             console.log(jqXHR); 

@@ -47,6 +47,8 @@ class Contato_model extends CI_Model{
 
     public function delete($id)
     {
-        return $this->db->delete('contato', $this, array('id' => $id));
+        ($this->db->delete('contato', $this, array('id' => $id)))? 
+            "Sucesso":
+            "Erro ao excluir contato";
 	}
 }

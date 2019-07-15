@@ -32,7 +32,16 @@ class Contato extends CI_Controller {
         }
     }
 
-    public function update(){	
+    public function update($id)
+    {	
      
+    }
+
+    public function delete($id)
+    {
+        $this->load->model("contato_model");
+        $msg = $this->contato_model->delete($id);
+        $estado = ($msg == "Sucesso")? "success" : "danger";
+        echo json_encode(array('estado'=> $estado,'msg'=> $msg));
     }
 }

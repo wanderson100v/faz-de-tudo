@@ -9,15 +9,15 @@ a.editar, a.excluir{
 }
 
 
-a.editar:hover, a.excluir:hover{
+button.editar:hover, a.excluir:hover{
     color: black;
 }
 
-a.editar{
+button.editar{
    background-color: green;
 }
 
-a.excluir{
+button.excluir{
     background-color: red;
 }
 
@@ -26,5 +26,5 @@ nav{
 }
 
 main{
-	height = 100%;
+	height : 100%;
 }

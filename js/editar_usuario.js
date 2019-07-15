@@ -61,7 +61,7 @@ function editarUsuario()
             alerta.addClass("feedback alert alert-"+json['estado']);
             alerta.show();
             if(json['estado'] == 'success')
-                window.location.href = base_url+"homepage/logout";
+                window.location.href = base_url+"homepage/logar/1/4";
         });
     }       
 }

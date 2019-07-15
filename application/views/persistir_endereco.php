@@ -1,51 +1,55 @@
 <main class = "container">
-    <header class = "row">
-        <div class = "mr-3">
-            <a type = "button" class=" text-center btn btn-primary" href = "<?=site_url($_SESSION['tipo'].'/painel/perfil#enderecos')?>">Voltar</a>
-        </div>
-        <h1><?=$titulo?></h1>
+    <header class = "row text-center">
+        <h1 class = "col-12"><?=$titulo?></h1>
     </header>
     <form>
         <fieldset>
             <legend>Dados endereço</legend>
-            
             <div class = "form-row">
                 <div class="form-group col-3">
-                    <label for="cepId">CEP</label>
-                    <input class="form-control" type="text" id="cepId" placeholder = "Informe CEP">
+                    <label for="cep">CEP</label>
+                    <input class="form-control" type="text" id="cep" placeholder = "Informe CEP">
+                    <div id = "invf-cep" class="invalid-feedback">CEP não informado</div>
                 </div>
                 <div class="form-group col-3">
-                    <label for="numId">Número</label>
-                    <input class="form-control" type="text" id="numId" placeholder = "Informe Número">
+                    <label for="num">Número</label>
+                    <input class="form-control" type="text" id="num">
+                    <div id = "invf-num" class="invalid-feedback">Número não informado</div>
                 </div>
                 <div class="form-group col-6">
-                    <label for="logrId">Logradouro</label>
-                    <input class="form-control" type="text" id="logrId" placeholder = "Informe Logradouro">
+                    <label for="logradouro">Logradouro</label>
+                    <input class="form-control" type="text" id="logradouro" placeholder = "Informe Logradouro">
+                    <div id = "invf-logradouro" class="invalid-feedback">Logradouro não informado</div>
                 </div>
             </div>
             <div class = "form-row">
                 <div class="form-group col-3">
-                    <label for="bairroId">Bairro</label>
-                    <input class="form-control" type="text" id="bairroId" placeholder = "Informe Bairro">
+                    <label for="bairro">Bairro</label>
+                    <input class="form-control" type="text" id="bairro" placeholder = "Informe Bairro">
+                    <div id = "invf-bairro" class="invalid-feedback">Bairro não informado</div>
                 </div>
                 <div class="form-group col-3">
-                    <label for="cidadeId">Cidade</label>
-                    <input class="form-control" type="text" id="cidadeId" placeholder = "Informe Cidade">
+                    <label for="cidade">Cidade</label>
+                    <input class="form-control" type="text" id="cidade" placeholder = "Informe Cidade">
+                    <div id = "invf-cidade" class="invalid-feedback">Cidade não informado</div>
                 </div>
                 <div class="form-group col-3">
-                    <label for="estadoId">Estado</label>
-                    <input class="form-control" type="text" id="estadoId" placeholder = "Informe Estado">
+                    <label for="estado">Estado</label>
+                    <input class="form-control" type="text" id="estado" placeholder = "Informe Estado">
+                    <div id = "invf-estado" class="invalid-feedback">Estado não informado</div>
                 </div>
                 <div class="form-group col-3">
-                    <label for="paisId">Pais</label>
-                    <input class="form-control" type="text" id="paisId" placeholder = "Informe Pais">
+                    <label for="pais">Pais</label>
+                    <input class="form-control" type="text" id="pais" placeholder = "Informe Pais">
+                    <div id = "invf-pais" class="invalid-feedback">Pais não informado</div>
                 </div>
             </div>
         </fieldset>
-        <div class = "row justify-content-end">
-            <a type="button" class="btn btn-secondary" href = "<?=site_url($_SESSION['tipo'].'/painel/perfil#enderecos')?>">Cancelar</a>
-            <a type="submit" class=" ml-3 mr-3 btn btn-primary"><?=$desc?></a>
+        <div class="feedback" role="alert"></div>
+        <div class = "row mb-4 justify-content-end">
+            <a type="button" class="btn btn-secondary" href = "<?=site_url($_SESSION['tipo'].'/painel/perfil#enderecos')?>">Voltar</a>
+            <button type="submit" class=" ml-3 mr-3 btn btn-primary"><?=$desc?></button>
         </div>
-        
     </form>
 </main>
+<script src = "<?=base_url()?>js/cadastrar_endereco.js"></script>

@@ -95,7 +95,7 @@
                                 <td>".$endereco['estado']."</td>
                                 <td>".$endereco['pais']."</td>
                                 <td>
-                                    <a href=".site_url("endereco/persistir/".$endereco['id'])." class =\"btn editar\">Editar</a>
+                                    <a href=".site_url("endereco/update/".$endereco['id'])." class =\"btn editar\">Editar</a>
                                     <a href=".site_url("endereco/excluir/".$endereco['id'])." class =\"btn excluir\">Excluir</a>
                                 </td>
                             </tr>";
@@ -103,7 +103,7 @@
                     ?>
                     </tbody>
                 </table>
-                <a type="button" class="btn btn-primary btn-sm" href = "<?=site_url('endereco/persistir')?>"> Adicionar Endereço</a>
+                <a type="button" class="btn btn-primary btn-sm" href = "<?=site_url('endereco/create')?>"> Adicionar Endereço</a>
             </article>
             <article id = "contatos" class = "border-top">
                 <header class = "mt-3">
@@ -127,7 +127,7 @@
                                 <td>".$contato['tipo']."</td>
                                 <td>".$contato['descricao']."</td>
                                 <td>
-                                    <a href=".site_url("contato/persistir/".$contato['id'])." class =\"btn editar\">Editar</a>
+                                    <a href=".site_url("contato/update/".$contato['id'])." class =\"btn editar\">Editar</a>
                                     <a href=".site_url("contato/excluir/".$contato['id'])."  class =\"btn excluir\">Excluir</a>
                                 </td>
                             </tr>";
@@ -136,7 +136,7 @@
                     </tbody>
                 </table>
             </article>
-            <a type="button" class="btn btn-primary btn-sm  mb-5" href = "<?=site_url('contato/persistir')?>">Adicionar Contato</a>
+            <a type="button" class="btn btn-primary btn-sm  mb-5" href = "<?=site_url('contato/create')?>">Adicionar Contato</a>
         </section>
         <div class ="fixed-bottom m-2 col-1" >
             <a href ="#topo" class =" btn btn-outline-primary">Topo</a>

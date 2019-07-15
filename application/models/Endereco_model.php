@@ -21,17 +21,17 @@ class Endereco_model extends CI_Model{
 		return $this->db->get()->result_array();
 	}
 
-    public function create($cep, $num, $logradouro, $bairro, $cidade, $estado, $pais, $usuario_id)
+    public function create($endereco)
     {
-        $this->cep = $cep;
-        $this->num = $num;
-        $this->logradouro = $logradouro;
-        $this->bairro = $bairro;
-        $this->cidade = $cidade;
-        $this->estado = $estado;
-        $this->pais = $pais;
-        $this->usuario_id = $usuario_id;
-        return $this->db->insert('endereco', $this);
+        if($this->db->insert('endereco', $endereco))
+        {
+            $this->id = $this->db->insert_id();
+            return "Sucesso";
+        }
+        else
+        {
+            return "Ocorreu um erro ao cadastrar contato" ;
+        }
     }
 
     public function read($id)

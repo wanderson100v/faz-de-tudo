@@ -6,7 +6,7 @@ $("button[type='submit']")
     cadastrarContato();
 });
 
-function cadastrarContatos()
+function cadastrarContato()
 {
     let erro = false;
     // tirando, se existir, o feedback de campo invalido da tela
@@ -41,8 +41,6 @@ function cadastrarContatos()
             alerta.removeClass();
             alerta.addClass("feedback alert alert-"+json['estado']);
             alerta.show();
-            sleep(3000);
-            alerta.hide();
         })
         .fail(function (jqXHR, textStatus, errorThrown) { 
             console.log(jqXHR); 

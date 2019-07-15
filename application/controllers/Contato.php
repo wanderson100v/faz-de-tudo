@@ -32,13 +32,28 @@ class Contato extends CI_Controller {
         }
     }
 
-    public function update($id)
+    public function update()
     {	
-     
+        $contato = array(
+            'descricao' => $this->input->post('descContato')
+        );
+
+        $id = $this->input->post('id');
+
+        if(empty($contato['descricao'])){//validando requeridos
+            echo json_encode(array('estado'=>'danger','msg' =>'Um ou mais campos obrigatórios estão vazios'));
+            return;
+        }
+        
+        $this->load->model("contato_model");
+        $msg =  $this->contato_model->update($id, $contato);
+        $estado = ($msg == "Sucesso")? "success" : "danger";
+        echo json_encode(array('estado'=> $estado,'msg'=> $msg));
     }
 
-    public function delete($id)
+    public function delete()
     {
+        $id = $this->input->post('id');
         $this->load->model("contato_model");
         $msg = $this->contato_model->delete($id);
         $estado = ($msg == "Sucesso")? "success" : "danger";

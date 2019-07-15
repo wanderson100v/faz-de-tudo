@@ -38,16 +38,17 @@ class Contato_model extends CI_Model{
 		return $this->db->get('contato');
 	}
 
-    public function update($id, $tipo, $descricaoe)
-    {   
-        $this->tipo = $tipo;
-        $this->descricao = $descricao;
-        return $this->db->update('contato', $this, array('id' => $id));
+    public function update($id, $contato)
+    {
+        if($this->db->update('contato',$contato, array('id' => $id)))
+            return "Sucesso";
+        else
+            return "Ocorreu um erro ao editar contato";
     }
 
     public function delete($id)
     {
-        ($this->db->delete('contato', $this, array('id' => $id)))? 
+        return ($this->db->delete('contato', array('id' => $id)))? 
             "Sucesso":
             "Erro ao excluir contato";
 	}

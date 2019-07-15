@@ -44,13 +44,14 @@ class Endereco extends CI_Controller {
         }
     }
 
-    public function update($id)
+    public function update()
     {	
         
     }
 
-    public function delete($id)
+    public function delete()
     {
+        $id = $this->input->post('id');
         $this->load->model("endereco_model");
         $msg = $this->endereco_model->delete($id);
         $estado = ($msg == "Sucesso")? "success" : "danger";

@@ -87,13 +87,13 @@
                     {
                         echo "<tr>
                                 <th scope='row'>".$endereco['id']."</th>
-                                <td>".$endereco['cep']."</td>
-                                <td>".$endereco['num']."</td>
-                                <td>".$endereco['logradouro']."</td>
-                                <td>".$endereco['bairro']."</td>
-                                <td>".$endereco['cidade']."</td>
-                                <td>".$endereco['estado']."</td>
-                                <td>".$endereco['pais']."</td>
+                                <td ondblclick ='editarTd(this)' class = 'td-cep' >".$endereco['cep']."</td>
+                                <td ondblclick ='editarTd(this)' class = 'td-num' >".$endereco['num']."</td>
+                                <td ondblclick ='editarTd(this)' class = 'td-logradouro' >".$endereco['logradouro']."</td>
+                                <td ondblclick ='editarTd(this)' class = 'td-bairro' >".$endereco['bairro']."</td>
+                                <td ondblclick ='editarTd(this)' class = 'td-cidade' >".$endereco['cidade']."</td>
+                                <td ondblclick ='editarTd(this)' class = 'td-estado' >".$endereco['estado']."</td>
+                                <td ondblclick ='editarTd(this)' class = 'td-pais' >".$endereco['pais']."</td>
                                 <td>
                                     <button onclick = \"editarEndereco(this,'".$endereco['id']."')\" class =\"btn editar\">Editar</button>
                                     <button onclick = \"excluirEndereco('".$endereco['id']."')\" class =\"btn excluir\">Excluir</button>
@@ -124,8 +124,8 @@
                     {
                         echo "<tr>
                                 <th scope='row'>".$contato['id']."</th>
-                                <td>".$contato['tipo']."</td>
-                                <td>".$contato['descricao']."</td>
+                                <td class = 'td-tipo' >".$contato['tipo']."</td>
+                                <td ondblclick ='editarTd(this)' class = 'td-descricao' >".$contato['descricao']."</td>
                                 <td>
                                     <button onclick = \"editarContato(this,'".$contato['id']."')\" class =\"btn editar\">Editar</button>
                                     <button onclick = \"excluirContato('".$contato['id']."')\" class =\"btn excluir\">Excluir</button>
@@ -148,3 +148,4 @@
 </div>
 <script src = "<?=base_url()?>js/menu-lateral.js"></script>
 <script src = "<?=base_url()?>js/perfil.js"></script>
+<script src = "<?=base_url()?>js/editar_campo_td.js"></script>

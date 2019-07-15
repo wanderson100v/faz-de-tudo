@@ -54,12 +54,18 @@ class Cliente_model extends CI_Model{
 
     public function update($id, $tipo, $cpf_cnpj, $nome, $nasc , $sexo)
     {
-        $this->tipo = $tipo;
-        $this->cpf_cnpj = $cpf_cnpj;
-        $this->nome = $nome;
-        $this->nasc = $nasc;
-        $this->sexo = $sexo;
-        $this->db->update('cliente', $this, array('id' => $id));
+        if( $this->db->update('cliente', 
+            array(
+                'tipo' => $tipo,
+                'cpf_cnpj' => $cpf_cnpj,
+                'nome' => $nome,
+                'nasc' => $nasc,
+                'sexo' => $sexo
+            ), 
+            array('id' => $id)))
+            return "Sucesso";
+        else
+            return "Ocorreu um erro ao editar cliente";
     }
     
 }

@@ -80,12 +80,6 @@ function cadastrarMEI()
             alerta.removeClass();
             alerta.addClass("feedback alert alert-"+json['estado']);
             alerta.show();
-        })
-        .fail(function( xhr, status, errorThrown ) {
-            alert( "Sorry, there was a problem!" );
-            console.log( "Error: " + errorThrown );
-            console.log( "Status: " + status );
-            console.dir( xhr );
         });
     }
     else{

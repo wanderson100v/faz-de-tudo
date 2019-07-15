@@ -9,8 +9,6 @@ class Cliente extends CI_Controller {
 		"solicitacoes" => "Solicitações"
 	);
 
-	private $cliente;
-
 	public function index()
 	{
 		redirect("cliente/painel");
@@ -21,25 +19,22 @@ class Cliente extends CI_Controller {
 		{
 			if(isset($this->titulos[$pagina]))
 			{
-				if(empty($this->cliente))
-				{
-					$this->load->model("usuario_model");
-					$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
+				
+				$this->load->model("usuario_model");
+				$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
 
-					$this->load->model("endereco_model");
-					$enderecos = $this->endereco_model->read_usuario_id($usuario["id"]);
+				$this->load->model("endereco_model");
+				$enderecos = $this->endereco_model->read_usuario_id($usuario["id"]);
 
-					$this->load->model("contato_model");
-					$contatos = $this->contato_model->read_usuario_id($usuario["id"]);
-					
-					$this->load->model("cliente_model");
-					$this->cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
-					
-					$usuario["enderecos"] = $enderecos;
-					$usuario["contatos"] = $contatos;
-					$this->cliente["usuario"] = $usuario;
-					
-				}
+				$this->load->model("contato_model");
+				$contatos = $this->contato_model->read_usuario_id($usuario["id"]);
+				
+				$this->load->model("cliente_model");
+				$this->cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
+				
+				$usuario["enderecos"] = $enderecos;
+				$usuario["contatos"] = $contatos;
+				$this->cliente["usuario"] = $usuario;
 
 				$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
 				$this->load->view('cliente/page_nav', array( 'op' => $pagina));
@@ -62,12 +57,34 @@ class Cliente extends CI_Controller {
 		}
 	}
 
-	public function editar($id = 0)
-	{
-		$this->load->view('page_top', array( 'titulo' => "Editar Cliente"));
-		$this->load->view('cliente/page_nav', array( 'op' =>"perfil"));
-		$this->load->view('cliente/edit_cliente');
-		$this->load->view('page_bottom');
+	public function update($persistir = 0)
+	{			
+		$this->load->model("cliente_model");
+		
+		if($persistir)
+		{
+			$tipo = $this->input->post('tipo');
+			$sexo = $this->input->post('sexo');
+			$nome = trim($this->input->post('nome'));
+			$cpfCnpj = trim($this->input->post('cpfCnpj'));
+			$nasc = $this->input->post('nasc');
+			$id = trim($this->input->post('id'));
+
+			$msg=  $this->cliente_model->update($id, $tipo, $cpfCnpj, $nome, $nasc , $sexo);
+			$estado = ($msg == "Sucesso")? "success" : "danger";
+			echo json_encode(array('estado'=> $estado,'msg'=> $msg));
+		}else
+		{
+			$this->load->model("usuario_model");
+			$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
+
+			$cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
+
+			$this->load->view('page_top', array( 'titulo' => "Editar Cliente"));
+			$this->load->view('cliente/page_nav', array( 'op' =>"perfil"));
+			$this->load->view('cliente/edit_cliente', array('cliente' =>$cliente));
+			$this->load->view('page_bottom');
+		}
 	}
 
 	public function create()

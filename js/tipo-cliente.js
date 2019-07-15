@@ -1,3 +1,11 @@
+$(function(){
+    if($("input[name='tipo']:checked").val() == "Físico"){
+        alterarFisico();
+    }else{
+        alterarJuridico();
+    }
+});
+
 function alterarFisico(){
     document.querySelector("label[for='cpfCnpj']").innerHTML = "CPF*";
     document.querySelector("label[for='nasc']").style.display ="initial";

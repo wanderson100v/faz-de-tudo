@@ -1,9 +1,10 @@
 <div id = "topo" class = "container">
+    <script>var cliente = <?=$cliente?></script>
     <header class = "row mb-5">
         <h1>Perfil Cliente</h1>
     </header>
     <main class = "row">
-        <nav class="col-3 text-center mt-5px"  > 
+        <nav id = "menu" class="col-3 text-center mr-0" style = "display: none;" > 
             <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <li class="nav-item">
                 <a class="btn btn-primary w-100 mt-1"href="#geral">Informações Gerais</a>
@@ -16,34 +17,51 @@
                 </li>
             </ul>
         </nav>
-        <section  class = "col-8 border-left">
+        <section id = 'perfil' class = "col-12 border-left">
             <article id = "geral" class = "border-top">
-                <header class = "mt-3">
+               
+                <button id = "menu-btn" class ="btn btn-outline-primary mt-3" onclick = 'auternarMenu()'>
+                    <img src = "<?=base_url()?>/res/img/menu-ico.png" width = '20' heght= '20' alt = "icone menu">
+                </button>
+
+                <header>
                     <h3 class = "text-center">Informações gerais</h3>
                 </header>
-                <div class = 'row pl-2'> 
-                    <h5 class = "mr-2">Dados cliente</h5>
-                    <a href ="<?=site_url('cliente/editar')?>">
-                        <img src="<?=base_url()?>/res/img/edit-ico.png" alt="Link para editar dados de cliente" />
-                    </a>
+                <div class = 'container pl-2'>
+                    <div class = "row"> 
+                        <h5 class = "mr-2">Dados cliente</h5>
+                        <a href = "<?=site_url("cliente/update")?>">
+                            <img src="<?=base_url()?>/res/img/edit-ico.png" alt="Link para editar dados de cliente" />
+                        </a>
+                    </div>
+                    <div id = "d-cliente-conteudo" class = 'row'>
+                        <p>
+                            Tipo : <?=$cliente['tipo']?><br>
+                            Nome : <?=$cliente['nome']?><br>
+                            <?=($cliente['tipo'] == 'Físico')?
+                                'CPF : '.$cliente['cpf_cnpj'].'<br>'.
+                                'Data de Nascimento : '.$cliente['nasc'].'<br>'.
+                                'Sexo : '.$cliente['sexo'].'<br>'
+                                : 
+                                'CNPJ : '.$cliente['cpf_cnpj'].'<br>'
+                            ?>
+                        </p>
+                    </div>
                 </div>
-                <p>
-                    Tipo : <?=$cliente['tipo']?><br>
-                    Nome : <?=$cliente['nome']?><br>
-                    Data de Nascimento : <?=$cliente['nasc']?><br>
-                    Sexo : <?=$cliente['sexo']?><br>
-                </p>
-                <div class = 'row pl-2'> 
-                    <h5 class = "mr-2">Dados de acesso</h5>
-                    <a href ="<?=site_url('usuario/editar')?>">
-                        <img src="<?=base_url()?>/res/img/edit-ico.png" alt="Link para editar dados de acesso" />
-                    </a>
-                    
-                </div>
-                <p>
-                    Login : <?=$cliente['usuario']['login']?><br>
-                    Senha : ********<br>
-                </p>
+                <div class = 'conteiner pl-2'>
+                    <div class = 'row'> 
+                        <h5 class = "mr-2">Dados de acesso</h5>
+                        <a href ="<?=site_url('usuario/update')?>">
+                            <img src="<?=base_url()?>/res/img/edit-ico.png" alt="Link para editar dados de acesso" />
+                        </a>
+                    </div>
+                    <div id = "d-acesso-conteudo" class = 'row'>
+                        <p>
+                            Login : <?=$cliente['usuario']['login']?><br>
+                            Senha : ********<br>
+                        </p>
+                    </div>
+                <div>
             </article>
             <article id = "enderecos" class = "border-top mb-3">
                 <header class = "mt-3">
@@ -118,8 +136,11 @@
                     </tbody>
                 </table>
             </article>
-            <a type="button" class="btn btn-primary btn-sm" href = "<?=site_url('contato/persistir')?>">Adicionar Contato</a>
+            <a type="button" class="btn btn-primary btn-sm  mb-5" href = "<?=site_url('contato/persistir')?>">Adicionar Contato</a>
         </section>
-        <a href ="#topo" class="m-2 col-1 fixed-bottom btn btn-outline-primary">Subir</a>
+        <div class ="fixed-bottom m-2 col-1" >
+            <a href ="#topo" class =" btn btn-outline-primary">Topo</a>
+        </div>      
     </main>
 </div>
+<script src = "<?=base_url()?>js/menu-lateral.js"></script>

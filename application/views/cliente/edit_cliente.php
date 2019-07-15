@@ -1,5 +1,4 @@
 <main class = "container">
-    <script>console.log("<?=$cliente['nome']?>")</script>
     <header class = "row text-center">
         <h1 class = 'col-12'><?=$titulo?></h1>
     </header>

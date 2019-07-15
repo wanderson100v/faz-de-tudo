@@ -33,11 +33,48 @@ class Usuario extends CI_Controller {
 		}
 	}
 
-	public function editar($id = 0){
-		$this->load->view('page_top', array( 'titulo' => "Editar Cliente"));
-		$this->load->view('cliente/page_nav', array( 'op' =>"perfil"));
-		$this->load->view('edit_user');
-		$this->load->view('page_bottom');
+	public function update($persistir = 0)
+	{
+		$this->load->model("usuario_model");
+		if($persistir)
+		{
+			$login = $this->input->post('login');
+			$senha = $this->input->post('senha');
+			$novaSenha = trim($this->input->post('novaSenha'));
+			$conSenha = trim($this->input->post('conSenha'));
+			$id = trim($this->input->post('id'));
+
+			if(empty($login) || empty($senha) ){//validando requeridos
+				echo json_encode(array('estado'=>'danger','msg' =>'Um ou mais campos obrigatórios estão vazios'));
+				return;
+			}
+			if(!empty($novaSenha))
+				if($novaSenha != $conSenha){//validando nova senha
+					echo json_encode(array('estado'=>'danger','msg' =>'Nova senha e sua confirmação estão diferentes'));
+					return;
+				}else
+					$senha = $novaSenha;
+
+			$usuario =  $this->usuario_model->read_id($id);
+			if($senha != $usuario["senha"]){ // autenticando
+				echo json_encode(array('estado'=>'danger','msg' =>'Senha atual incorreta'));
+				return;
+			}
+
+			$msg=  $this->usuario_model->update($id, $login, $senha);
+			$estado = ($msg == "Sucesso")? "success" : "danger";
+			echo json_encode(array('estado'=> $estado,'msg'=> $msg));
+		}
+		else // carregar visão de editar
+		{
+			$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
+			$usuario["senha"] = null;
+
+			$this->load->view('page_top', array( 'titulo' => "Editar Usuário"));
+			$this->load->view('cliente/page_nav', array( 'op' =>"perfil"));
+			$this->load->view('edit_user', array("usuario" => $usuario));
+			$this->load->view('page_bottom');
+		}
 	}
 
 }

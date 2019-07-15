@@ -61,18 +61,32 @@ class Usuario_model extends CI_Model {
         }
     }
 
-    public function read($id )
+    public function read_id($id )
     {
         $this->db->where('id', $id);
-		return $this->db->get('usuario');
+		return $this->db->get('usuario')->row_array();
 	}
 
     public function update($id, $login, $senha, $ativo = true)
     {   
-        $this->login = $login;
-        $this->senha = $senha;
-        $this->ativo = $ativo;
-        return $this->db->update('usuario', $this, array('id' => $id));
+        if($this->db->update('usuario', 
+            array(
+                'login'=> $login,
+                'senha'=> $senha,
+                'ativo'=> $ativo
+            ), 
+            array('id' => $id)))
+            return "Sucesso";
+        else{
+            if ($this->db->error()['code'] == 1062) // login já existe
+            { 
+                return "Login informado não esta disponivel"; 
+            } 
+            else // Erro não identificado
+            {
+                return "Ocorreu um erro ao editar usuário"; 
+            }
+        }
     }
 
     /**

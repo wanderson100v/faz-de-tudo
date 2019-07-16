@@ -55,13 +55,15 @@ function editarUsuario()
         })
         .done( function( json )
         {
-            alerta = $(".feedback");
-            alerta.html(json['msg']);
-            alerta.removeClass();
-            alerta.addClass("feedback alert alert-"+json['estado']);
-            alerta.show();
             if(json['estado'] == 'success')
                 window.location.href = base_url+"homepage/logar/1/4";
+            else{
+                alerta = $(".feedback");
+                alerta.html(json['msg']);
+                alerta.removeClass();
+                alerta.addClass("feedback alert alert-"+json['estado']);
+                alerta.show();
+            }
         });
     }       
 }

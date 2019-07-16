@@ -45,11 +45,9 @@ function editarContato(td, contato_id){
         id : contato_id
     }
 
-    alert(contato.descContato);
     if(contato.descContato == "" ) 
     {
-        alerta.html("A descrição do contato deve ser informado");
-        alerta.fadeIn().dalay(1000).fadeOut();
+        showMsg("A descrição do contato deve ser informado");
         return;
     }
 
@@ -63,27 +61,56 @@ function editarContato(td, contato_id){
     .done( function( json )
     {
        mostrarResultado(json);
-       
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) { 
-        console.log(jqXHR); 
-        console.log(textStatus); 
-        console.log(errorThrown); 
     }); 
 }
 
-function editarEndereco(td, id){
+function editarEndereco(td, endereco_id){
     let tr = td.parentNode.parentNode;
+
+    let endereco = { 
+        cep : getValue(tr.querySelector(".td-cep")),
+        num : getValue(tr.querySelector(".td-num")),
+        logradouro : getValue(tr.querySelector(".td-logradouro")),
+        bairro :getValue(tr.querySelector(".td-bairro")),
+        cidade : getValue(tr.querySelector(".td-cidade")),
+        estado :getValue(tr.querySelector(".td-estado")),
+        pais : getValue(tr.querySelector(".td-pais")),
+        id : endereco_id
+    }
+
+    for (var prop in endereco) { // para cada propriedade do objeto endereço
+        if(endereco[prop] == "" )
+        {
+            showMsg("Um campo informado esta vazio");
+            return;
+        }
+    }
+
+    $.ajax(
+    {
+        url: base_url+"endereco/update/1",
+        data: endereco,
+        type: "POST",
+        dataType : "json", 
+    })
+    .done( function( json )
+    {
+       mostrarResultado(json);
+    });
 }
 
 function mostrarResultado(json){
-    alerta.html(json['msg']);
+    
+    if(json['estado'] == 'success')
+        window.location.reload();
+    else
+        showMsg(json['msg']);
+
+}
+
+function showMsg(msg){
+    alerta.html(msg);
     alerta.removeClass();
-    alerta.addClass("feedback alert alert-"+json['estado']);
-    setTimeout(function(){
-       if(json['estado'] == 'success')
-           window.location.reload();
-       else
-           alerta.fadeOut();
-    }, 1000);
+    alerta.addClass("feedback alert alert-danger");
+    alerta.fadeIn().delay(1000).fadeOut();
 }

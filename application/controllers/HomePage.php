@@ -13,7 +13,7 @@ class HomePage extends CI_Controller {
 			'',
 			'Login ou senha não informado',
 			'Dados de acesso invalidos',
-			'Acesso negado!',
+			'Acesso negado! É necessário estar autenticado',
 			'Dados de acesso auterados com sucesso'
 		);
 		
@@ -28,7 +28,7 @@ class HomePage extends CI_Controller {
 	public function logar($estado_id = 0,$msg_id = 0){
 		if($msg_id == 4)
 			$this->session->sess_destroy ();
-		if(isset($_SESSION["logado"]))
+		if(isset($_SESSION["logado"])&& $msg_id != 4)
 		{
 			redirect(site_url($this->session->tipo));
 		}

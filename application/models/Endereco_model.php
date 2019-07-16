@@ -40,16 +40,12 @@ class Endereco_model extends CI_Model{
 		return $this->db->get('endereco');
 	}
 
-    public function update($id, $cep, $num, $logradouro, $bairro, $cidade, $estado, $pais)
+    public function update($id, $endereco)
     {   
-        $this->cep = $cep;
-        $this->num = $num;
-        $this->logradouro = $logradouro;
-        $this->bairro = $bairro;
-        $this->cidade = $cidade;
-        $this->estado = $estado;
-        $this->pais = $pais;
-        return $this->db->update('endereco', $this, array('id' => $id));
+        if($this->db->update('endereco',$endereco, array('id' => $id)))
+            return "Sucesso";
+        else
+            return "Ocorreu um erro ao editar contato";
     }
 
     public function delete($id)

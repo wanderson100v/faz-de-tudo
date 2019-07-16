@@ -55,7 +55,7 @@
             </div>
             <div class="feedback" role="alert"></div>
             <div class = "row mb-4 justify-content-end">
-                <a type="button" class="btn btn-secondary" href = "<?=site_url('cliente/painel/perfil#geral')?>">Voltar</a>
+                <a type="button" class="btn btn-secondary" href = "<?=site_url($_SESSION['tipo'].'/painel/perfil#geral')?>">Voltar</a>
                 <button type="submit" class=" ml-3 mr-3 btn btn-primary">Editar</button>
             </div>
         </form>

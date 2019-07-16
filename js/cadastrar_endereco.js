@@ -17,7 +17,7 @@ function cadastrarEndereco()
         bairro : $("#bairro").val().trim(),
         cidade : $("#cidade").val().trim(),
         estado : $("#estado").val().trim(),
-        pais : $("#pais").val().trim(),
+        pais : $("#pais").val().trim()
     }
 
     for (var prop in endereco) { // para cada propriedade do objeto endereço

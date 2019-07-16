@@ -48,17 +48,19 @@ class Usuario extends CI_Controller {
 				echo json_encode(array('estado'=>'danger','msg' =>'Um ou mais campos obrigatórios estão vazios'));
 				return;
 			}
-			if(!empty($novaSenha))
-				if($novaSenha != $conSenha){//validando nova senha
-					echo json_encode(array('estado'=>'danger','msg' =>'Nova senha e sua confirmação estão diferentes'));
-					return;
-				}else
-					$senha = $novaSenha;
 
 			$usuario =  $this->usuario_model->read_id($id);
 			if($senha != $usuario["senha"]){ // autenticando
 				echo json_encode(array('estado'=>'danger','msg' =>'Senha atual incorreta'));
 				return;
+			}
+			
+			if(!empty($novaSenha)){
+				if($novaSenha != $conSenha){//validando nova senha
+					echo json_encode(array('estado'=>'danger','msg' =>'Nova senha e sua confirmação estão diferentes'));
+					return;
+				}else
+					$senha = $novaSenha;
 			}
 
 			$msg=  $this->usuario_model->update($id, $login, $senha);

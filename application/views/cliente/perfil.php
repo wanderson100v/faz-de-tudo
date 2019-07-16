@@ -1,5 +1,4 @@
 <div id = "topo" class = "container">
-    <script>var cliente = <?=$cliente?></script>
     <header class = "row mb-5">
         <h1>Perfil Cliente</h1>
     </header>

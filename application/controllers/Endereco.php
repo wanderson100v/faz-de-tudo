@@ -46,7 +46,28 @@ class Endereco extends CI_Controller {
 
     public function update()
     {	
+        $endereco = array(
+            'cep' => $this->input->post('cep'),
+            'num' => $this->input->post('num'),
+            'logradouro' => $this->input->post('logradouro'),
+            'bairro' => $this->input->post('bairro'),
+            'cidade' => $this->input->post('cidade'),
+            'estado' => $this->input->post('estado'),
+            'pais' => $this->input->post('pais'),
+        );
+        $id = $this->input->post('id');
+
+        foreach($endereco as $valor) {//validando requeridos
+            if($valor == ""){
+                echo json_encode(array('estado'=>'danger','msg' =>'Um ou mais campos obrigatórios estão vazios'));
+                return;
+            }
+        }
         
+        $this->load->model("endereco_model");
+        $msg=  $this->endereco_model->update($id, $endereco);
+        $estado = ($msg == "Sucesso")? "success" : "danger";
+        echo json_encode(array('estado'=> $estado,'msg'=> $msg));
     }
 
     public function delete()

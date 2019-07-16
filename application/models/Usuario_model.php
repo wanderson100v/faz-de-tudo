@@ -93,7 +93,9 @@ class Usuario_model extends CI_Model {
      * Exclusão lógica
      */
     public function delete($id){
-        $this->ativo = false;
-        return $this->db->update('usuario', $this, array('id' => $id));
+        if($this->db->update('usuario',array("ativo" => false), array('id' => $id)))
+            return "Sucesso";
+        else
+            return "Ocorreu um erro ao excluir usuário";
 	}
 }

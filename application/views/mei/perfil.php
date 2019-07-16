@@ -149,3 +149,4 @@
 <script src = "<?=base_url()?>js/menu-lateral.js"></script>
 <script src = "<?=base_url()?>js/perfil.js"></script>
 <script src = "<?=base_url()?>js/editar_campo_td.js"></script>
+<script src = "<?=base_url()?>js/alerta.js"></script>

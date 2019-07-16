@@ -11,8 +11,6 @@ class Adm extends CI_Controller {
 		"adms" => "Administradores"
 	);
 
-	private $usuarioadm;
-
 	public function index()
 	{
 		redirect("adm/painel");
@@ -23,29 +21,32 @@ class Adm extends CI_Controller {
 		{
 			if(isset($this->titulos[$pagina]))
 			{
-				if(empty($this->adm))
-				{
+				$dados = null;
+				
+				if($pagina == "perfil"){
 					$this->load->model("usuario_model");
 					$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
-
+	
 					$this->load->model("contato_model");
 					$contatos = $this->contato_model->read_usuario_id($usuario["id"]);
 				
 					$this->load->model("adm_model");
-					$this->adm = $this->adm_model->read_usuario_id($usuario["id"]);
+					$adm = $this->adm_model->read_usuario_id($usuario["id"]);
 					
 					$usuario["contatos"] = $contatos;
-					$this->adm["usuario"] = $usuario;
+					$adm["usuario"] = $usuario;
+					$dados = array("adm" =>$adm);
 				}
-
+				
 				$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
 				$this->load->view('adm/page_nav', array( 'op' => $pagina));
 				
-				if($pagina == "perfil")
-					$this->load->view('adm/'.$pagina, array( 'adm' => $this->adm));
-				else
+				if(empty($dados)){
 					$this->load->view('adm/'.$pagina);
-				
+				}else{
+					$this->load->view('adm/'.$pagina,$dados);
+				}
+			
 				$this->load->view('page_bottom');
 			}
 			else

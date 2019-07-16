@@ -5,7 +5,7 @@ class Endereco extends CI_Controller {
 	
 	public function index()
 	{
-        
+        redirect(site_url("endereco/create"));
 	}
     public function create($persistir = 0)
     {	

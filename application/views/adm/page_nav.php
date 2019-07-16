@@ -12,10 +12,10 @@
                 <a class="nav-link <?=($op == "adms")? "active" : ""?>" href="<?=site_url("adm/painel/adms")?>">Administradores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?=($op == "cidades")? "active" : ""?>" href="<?=site_url("adm/painel/cidades")?>">Cidades</a>
+                <a class="nav-link <?=($op == "cidades")? "active" : ""?>" href="<?=site_url("cidade")?>">Cidades</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?=($op == "servicos")? "active" : ""?>" href="<?=site_url("adm/painel/servicos")?>">Servicos</a>
+                <a class="nav-link <?=($op == "servicos")? "active" : ""?>" href="<?=site_url("servico")?>">Serviços</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link <?=($op == "perfil")? "active" : ""?>" href="<?=site_url("adm/painel/perfil")?>">Perfil</a>

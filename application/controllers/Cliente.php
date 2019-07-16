@@ -19,7 +19,6 @@ class Cliente extends CI_Controller {
 		{
 			if(isset($this->titulos[$pagina]))
 			{
-				
 				$this->load->model("usuario_model");
 				$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
 
@@ -30,16 +29,16 @@ class Cliente extends CI_Controller {
 				$contatos = $this->contato_model->read_usuario_id($usuario["id"]);
 				
 				$this->load->model("cliente_model");
-				$this->cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
+				$cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
 				
 				$usuario["enderecos"] = $enderecos;
 				$usuario["contatos"] = $contatos;
-				$this->cliente["usuario"] = $usuario;
+				$cliente["usuario"] = $usuario;
 
 				$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
 				$this->load->view('cliente/page_nav', array( 'op' => $pagina));
 				if($pagina == "perfil")
-					$this->load->view('cliente/'.$pagina, array( 'cliente' => $this->cliente));
+					$this->load->view('cliente/'.$pagina, array( 'cliente' => $cliente));
 				else
 					$this->load->view('cliente/'.$pagina);
 				$this->load->view('page_bottom');

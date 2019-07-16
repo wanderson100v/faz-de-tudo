@@ -1,9 +1,3 @@
-var alerta;
-var attTela;
-$(function(){
-    alerta = $(".feedback");
-});
-
 function excluirEndereco(id){
     $.ajax(
         {
@@ -97,20 +91,4 @@ function editarEndereco(td, endereco_id){
     {
        mostrarResultado(json);
     });
-}
-
-function mostrarResultado(json){
-    
-    if(json['estado'] == 'success')
-        window.location.reload();
-    else
-        showMsg(json['msg']);
-
-}
-
-function showMsg(msg){
-    alerta.html(msg);
-    alerta.removeClass();
-    alerta.addClass("feedback alert alert-danger");
-    alerta.fadeIn().delay(1000).fadeOut();
 }

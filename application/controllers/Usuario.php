@@ -5,10 +5,7 @@ class Usuario extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('page_top', array( 'titulo' =>"Inicio"));
-		$this->load->view('cliente/page_nav', array( 'op' =>"inicio"));
-		$this->load->view('cliente/inicio');
-		$this->load->view('page_bottom');
+		redirect(site_url('usuario/update'));
 	}
 
     public function autenticar(){

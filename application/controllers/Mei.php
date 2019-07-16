@@ -11,8 +11,6 @@ class Mei extends CI_Controller {
 		"solicitacoes" => "Solicitações"
 	);
 
-	private $mei;
-
 	public function index()
 	{
 		redirect("mei/painel");
@@ -24,35 +22,31 @@ class Mei extends CI_Controller {
 		{
 			if(isset($this->titulos[$pagina]))
 			{
-				if(empty($this->mei))
-				{
-					$this->load->model("usuario_model");
-					$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
+				$this->load->model("usuario_model");
+				$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
 
-					$this->load->model("endereco_model");
-					$enderecos = $this->endereco_model->read_usuario_id($usuario["id"]);
+				$this->load->model("endereco_model");
+				$enderecos = $this->endereco_model->read_usuario_id($usuario["id"]);
 
-					$this->load->model("contato_model");
-					$contatos = $this->contato_model->read_usuario_id($usuario["id"]);
-					
-					$this->load->model("cliente_model");
-					$cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
+				$this->load->model("contato_model");
+				$contatos = $this->contato_model->read_usuario_id($usuario["id"]);
+				
+				$this->load->model("cliente_model");
+				$cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
 
-					$this->load->model("mei_model");
-					$this->mei = $this->mei_model->read_cliente_id($cliente["id"]);
-					
-					$usuario["enderecos"] = $enderecos;
-					$usuario["contatos"] = $contatos;
-					$cliente["usuario"] = $usuario;
-					$this->mei["cliente"] = $cliente;
-			
-				}
+				$this->load->model("mei_model");
+				$mei = $this->mei_model->read_cliente_id($cliente["id"]);
+				
+				$usuario["enderecos"] = $enderecos;
+				$usuario["contatos"] = $contatos;
+				$cliente["usuario"] = $usuario;
+				$mei["cliente"] = $cliente;
 
 				$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
 				$this->load->view('mei/page_nav', array( 'op' => $pagina));
 				
 				if($pagina == "perfil")
-					$this->load->view('mei/'.$pagina, array( 'mei' => $this->mei));
+					$this->load->view('mei/'.$pagina, array( 'mei' => $mei));
 				else
 					$this->load->view('mei/'.$pagina);
 				

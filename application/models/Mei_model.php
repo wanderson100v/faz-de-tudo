@@ -13,7 +13,15 @@ class Mei_model extends CI_Model{
         $this->db->where('mei.cliente_id', $id);
 		return $this->db->get()->row_array();
     }
-    
+
+    public function read_usuario_id($usuario_id){
+        $this->db->select("mei.id");
+        $this->db->from("mei");
+        $this->db->join('cliente', "mei.cliente_id = cliente.id");
+        $this->db->join('usuario', "cliente.usuario_id = usuario.id");
+        $this->db->where('usuario.id', $usuario_id);
+		return $this->db->get()->row_array();
+    }
 
     public function create($tipo, $cpfCnpj, $nome, $nasc , $sexo, $login, $senha)
     { 

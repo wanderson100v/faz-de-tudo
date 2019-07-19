@@ -52,3 +52,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'homepage';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// usuário
+$route['cliente/painel/perfil/usuario/editar'] = 'usuario/update';
+$route['adm/painel/perfil/usuario/editar'] = 'usuario/update';
+$route['mei/painel/perfil/usuario/editar'] = 'usuario/update';
+
+$route['cliente/painel/perfil/usuario/remover'] = 'usuario/delete';
+$route['adm/painel/perfil/usuario/remover'] = 'usuario/delete';
+$route['mei/painel/perfil/usuario/remover'] = 'usuario/delete';
+
+//cliente
+$route['cliente/painel/perfil/cliente/editar'] = 'cliente/update';
+$route['mei/painel/perfil/cliente/editar'] = 'cliente/update';
+
+//endereço
+$route['cliente/painel/perfil/endereco/criar'] = 'endereco/create';
+$route['adm/painel/perfil/endereco/criar'] = 'endereco/create';
+$route['mei/painel/perfil/endereco/criar'] = 'endereco/create';
+
+//contato
+$route['cliente/painel/perfil/contato/criar'] = 'contato/create';
+$route['adm/painel/perfil/contato/criar'] = 'contato/create';
+$route['mei/painel/perfil/contato/criar'] = 'contato/create';
+
+//serviço
+$route['adm/painel/servicos'] = 'servico';
+
+//cidade
+$route['adm/painel/cidades'] = 'cidade';
+
+//adm
+$route['adm/painel/adms'] = 'adm/create';
+
+//serviços mei
+$route['mei/painel/servicos'] = 'servicoMei';
+
+//cidades mei
+$route['mei/painel/cidades'] = 'meiCidade';
+
+
+
+

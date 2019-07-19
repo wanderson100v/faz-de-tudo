@@ -74,10 +74,7 @@ class Cliente extends CI_Controller {
 			echo json_encode(array('estado'=> $estado,'msg'=> $msg));
 		}else
 		{
-			$this->load->model("usuario_model");
-			$usuario = $this->usuario_model->read_login($_SESSION["logado"]);
-
-			$cliente = $this->cliente_model->read_usuario_id($usuario["id"]);
+			$cliente = $this->cliente_model->read_usuario_id($_SESSION['usuario_id']);
 
 			$this->load->view('page_top', array( 'titulo' => "Editar Cliente"));
 			$this->load->view('cliente/page_nav', array( 'op' =>"perfil"));

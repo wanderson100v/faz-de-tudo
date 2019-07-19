@@ -32,7 +32,7 @@
         </table>
     </section>
     <section class = 'row justify-content-center border mt-4'>
-        <h4 class = 'col-12  text-center pt-2 pb-2 bg-light mb-3'>Novo Cidade</h4>
+        <h4 class = 'col-12  text-center pt-2 pb-2 bg-light mb-3'>Nova Cidade</h4>
         <form class = 'col-4'>
             <div class = "form-row">
                 <div class="form-group col-8">

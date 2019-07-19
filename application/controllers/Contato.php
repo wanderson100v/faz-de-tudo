@@ -16,12 +16,9 @@ class Contato extends CI_Controller {
 				echo json_encode(array('estado'=>'danger','msg' =>'Um ou mais campos obrigatórios estão vazios'));
 				return;
 			}
-                    
-            $this->load->model("usuario_model");
-			$usuario =  $this->usuario_model->read_login($_SESSION['logado']);
             
             $this->load->model("contato_model");
-			$msg=  $this->contato_model->create($tipoContato, $descContato, $usuario['id']);
+			$msg=  $this->contato_model->create($tipoContato, $descContato, $_SESSION['usuario_id']);
 			$estado = ($msg == "Sucesso")? "success" : "danger";
 			echo json_encode(array('estado'=> $estado,'msg'=> $msg));
         }else{ // mostrar tela

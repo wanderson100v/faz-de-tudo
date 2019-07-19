@@ -23,30 +23,27 @@
                 <header class = "mt-3">
                     <h3 class = "text-center">Informações gerais</h3>
                 </header>
-                <div class = 'row pl-2'> 
-                    <h5 class = "mr-2"></h5>
-                </div> 
                 <div class = 'container pl-2'>
-                    <div class = "row"> 
-                        <h5 class = "mr-2">Dados Administrador</h5>
-                    </div>
-                    <div class = 'row'>
-                        <p>
-                            Gral de acesso : <?=$adm['grau_acesso']?><br>
-                        </p>
-                    </div>
+                    <h5 class = "row mr-2">Dados Administrador</h5>
+                    <p>
+                        Gral de acesso : <?=$adm['grau_acesso']?>
+                    </p>
+                </div>
+                <div class = 'container pl-2 mb-2'>
+                    <h5 class = "row ">Desativar conta</h5>
+                    <a href="<?=site_url('adm/painel/perfil/usuario/remover')?>">Desativar conta de acesso</a>
                 </div>
                 <div class = 'conteiner pl-2'>
                     <div class = 'row'> 
                         <h5 class = "mr-2">Dados de acesso</h5>
-                        <a href ="<?=site_url('usuario/update')?>">
+                        <a href ="<?=site_url('adm/painel/perfil/usuario/editar')?>">
                             <img src="<?=base_url()?>/res/img/edit-ico.png" alt="Link para editar dados de acesso" />
                         </a>
                     </div>
-                    <div id = "d-acesso-conteudo" class = 'row'>
+                    <div class = 'row' id = "d-acesso-conteudo">
                         <p>
                             Login : <?=$adm['usuario']['login']?><br>
-                            Senha : ********<br>
+                            Senha : ********
                         </p>
                     </div>
                 <div>
@@ -82,7 +79,7 @@
                     </tbody>
                 </table>
             </article>
-            <a type="button" class="btn btn-primary btn-sm mb-5" href = "<?=site_url('contato/create')?>">Adicionar Contato</a>
+            <a type="button" class="btn btn-primary btn-sm mb-5" href = "<?=site_url('adm/painel/perfil/contato/criar')?>">Adicionar Contato</a>
         </section>
         <div class ="fixed-bottom m-2 col-1" >
             <a href ="#topo" class =" btn btn-outline-primary">Topo</a>

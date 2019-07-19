@@ -31,7 +31,7 @@ function cadastraCidade(){
         })
         .done( function( json )
         {
-        mostrarResultado(json);
+            mostrarResultado(json);
         });
     }
 }

@@ -29,7 +29,7 @@
                 <div class = 'container pl-2'>
                     <div class = "row"> 
                         <h5 class = "mr-2">Dados cliente</h5>
-                        <a href = "<?=site_url("cliente/update")?>">
+                        <a href = "<?=site_url("cliente/painel/perfil/cliente/editar")?>">
                             <img src="<?=base_url()?>/res/img/edit-ico.png" alt="Link para editar dados de cliente" />
                         </a>
                     </div>
@@ -47,10 +47,14 @@
                         </p>
                     </div>
                 </div>
+                <div class = 'container pl-2 mb-2'>
+                    <h5 class = "row ">Desativar conta</h5>
+                    <a href="<?=site_url('cliente/painel/perfil/usuario/remover')?>">Desativar conta de acesso</a>
+                </div>
                 <div class = 'conteiner pl-2'>
                     <div class = 'row'> 
                         <h5 class = "mr-2">Dados de acesso</h5>
-                        <a href ="<?=site_url('usuario/update')?>">
+                        <a href ="<?=site_url('cliente/painel/perfil/usuario/editar')?>">
                             <img src="<?=base_url()?>/res/img/edit-ico.png" alt="Link para editar dados de acesso" />
                         </a>
                     </div>
@@ -102,7 +106,7 @@
                     ?>
                     </tbody>
                 </table>
-                <a type="button" class="btn btn-primary btn-sm" href = "<?=site_url('endereco/create')?>"> Adicionar Endereço</a>
+                <a type="button" class="btn btn-primary btn-sm" href = "<?=site_url('cliente/painel/perfil/endereco/criar')?>"> Adicionar Endereço</a>
             </article>
             <article id = "contatos" class = "border-top">
                 <header class = "mt-3">
@@ -135,7 +139,7 @@
                     </tbody>
                 </table>
             </article>
-            <a type="button" class="btn btn-primary btn-sm  mb-5" href = "<?=site_url('contato/create')?>">Adicionar Contato</a>
+            <a type="button" class="btn btn-primary btn-sm  mb-5" href = "<?=site_url('cliente/painel/perfil/contato/criar')?>">Adicionar Contato</a>
         </section>
         <div class ="fixed-bottom m-2 col-1" >
             <a href ="#topo" class =" btn btn-outline-primary">Topo</a>

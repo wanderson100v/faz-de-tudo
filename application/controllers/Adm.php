@@ -64,4 +64,35 @@ class Adm extends CI_Controller {
 		
 	}
 
+	public function create($persistir = 0){
+		if($persistir){
+			$grau_acesso = trim($this->input->post('grau_acesso'));
+			$login = trim($this->input->post('login'));
+			$senha = trim($this->input->post('senha'));
+			$consenha = trim($this->input->post('conSenha'));
+
+			if(empty($login) ||empty($grau_acesso)|| empty($senha) ){//validando requeridos
+				echo json_encode(array('estado'=>'danger','msg' =>'Um ou mais campos obrigatórios estão vazios'));
+				return;
+			}
+			
+			if($senha != $consenha){//validando senha
+				echo json_encode(array('estado'=>'danger','msg' =>'Senha e sua confirmação está diferente'));
+				return;
+			}
+
+			$this->load->model("adm_model");
+			$msg = $this->adm_model->create($grau_acesso, $login, $senha);
+			$estado = ($msg == "Sucesso")? "success" : "danger";
+			echo json_encode(array('estado'=> $estado,'msg'=> $msg));
+		}else{
+			$this->load->model("adm_model");
+			$adms = $this->adm_model->read();
+			$this->load->view('page_top', array( 'titulo' => "Administradores"));
+			$this->load->view('adm/page_nav', array( 'op' => 'adms'));
+			$this->load->view('adm/adms', array("adms" => $adms));
+			$this->load->view('page_bottom');
+		}
+	}
+
 }

@@ -14,7 +14,8 @@ class HomePage extends CI_Controller {
 			'Login ou senha não informado',
 			'Dados de acesso invalidos',
 			'Acesso negado! É necessário estar autenticado',
-			'Dados de acesso auterados com sucesso'
+			'Dados de acesso auterados com sucesso',
+			'Conta desativada permanentemente'
 		);
 		
 	public function index()
@@ -26,9 +27,9 @@ class HomePage extends CI_Controller {
 	}
 
 	public function logar($estado_id = 0,$msg_id = 0){
-		if($msg_id == 4)
+		if($msg_id == 4 || $msg_id == 5)
 			$this->session->sess_destroy ();
-		if(isset($_SESSION["logado"])&& $msg_id != 4)
+		if(isset($_SESSION["logado"])&& $msg_id != 4 && $msg_id != 5)
 		{
 			redirect(site_url($this->session->tipo));
 		}

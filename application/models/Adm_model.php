@@ -14,36 +14,49 @@ class Adm_model extends CI_Model{
         $this->db->where('adm.usuario_id', $id);
         return $this->db->get()->row_array();
     }
+
     
-    public function create($id, $grau_acesso, $login, $senha)
+    public function read_id($id){
+        $this->db->select("*");
+        $this->db->from("adm");
+        $this->db->where('adm.id', $id);
+		return $this->db->get()->row_array();
+    }
+    
+    public function read(){
+        $this->db->select("adm.id, usuario.login, adm.grau_acesso");
+        $this->db->from("adm");
+        $this->db->join("usuario", "adm.usuario_id = usuario.id");
+		return $this->db->get()->result_array();
+	}
+
+    
+    public function create($grau_acesso, $login, $senha)
     {
         $this->db->trans_begin();
 
         $this->load->model('usuario_model');
-        $this->usuario_id = $this->usuario_model->create("adm",$login, $senha);
+        $msg = $this->usuario_model->create("adm",$login, $senha);
+        if($msg != "Sucesso"){
+            $this->db->trans_rollback();
+            return $msg;
+        }
+        $this->usuario_id =  $this->usuario_model->id;
 
         $this->grau_acesso = $grau_acesso;
-        $this->db->insert('adm', $this);
         
-        if ($this->db->trans_status() === FALSE)
+        
+        if ($this->db->insert('adm', $this))
         {
-                $this->db->trans_rollback();
+            $this->db->trans_commit();
+            return "Sucesso";
         }
         else
         {
-                $this->db->trans_commit();
+            $this->db->trans_rollback();
+            return "Ocorreu um erro ao cadastrar Administrador";
         }
     }
-
-    public function read_id($id){
-        $this->db->select("*");
-        $this->db->from("adm");
-        $this->db->join('usuario', 'usuario.id = adm.usuario_id');
-        $this->db->where('usuario.ativo', true);
-        $this->db->where('adm.id', $id);
-		$this->db->order_by("id", 'desc');
-		return $this->db->get();
-	}
 
     public function update($id, $grau_acesso)
     {

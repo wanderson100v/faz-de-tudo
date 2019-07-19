@@ -17,5 +17,5 @@ function showMsg(msg){
     alerta.html(msg);
     alerta.removeClass();
     alerta.addClass("feedback alert alert-danger");
-    alerta.fadeIn().delay(1000).fadeOut();
+    alerta.fadeIn().delay(3500).fadeOut();
 }

@@ -16,12 +16,13 @@ class Usuario extends CI_Controller {
 			redirect(site_url("homepage/logar/2/1"));
 
 		$this->load->model('usuario_model');
-		$tipo = $this->usuario_model->autenticar($login,$senha);
-		if(isset($tipo)){
+		$usuario = $this->usuario_model->autenticar($login,md5($senha));
+		if(isset($usuario)){
 			$this->session->set_userdata(
 				array(
-					"logado" => $login,
-					"tipo" => $tipo
+					"logado" => $usuario['login'],
+					"tipo" => $usuario['tipo'],
+					"usuario_id" => $usuario['id']
 				)
 			);
 			redirect(site_url("homepage/logar"));
@@ -45,8 +46,9 @@ class Usuario extends CI_Controller {
 				echo json_encode(array('estado'=>'danger','msg' =>'Um ou mais campos obrigatórios estão vazios'));
 				return;
 			}
-
+			
 			$usuario =  $this->usuario_model->read_id($id);
+			$senha = md5($senha);
 			if($senha != $usuario["senha"]){ // autenticando
 				echo json_encode(array('estado'=>'danger','msg' =>'Senha atual incorreta'));
 				return;
@@ -76,4 +78,27 @@ class Usuario extends CI_Controller {
 		}
 	}
 
+	public function delete($remover = 0)
+    {
+		if($remover){
+			$this->load->model("usuario_model");
+			$usuario = $this->usuario_model->read_id($_SESSION['usuario_id']); 
+
+			$senha = $this->input->post('senha');
+
+			if($usuario["senha"] != md5($senha)){
+				echo json_encode(array('estado'=> 'danger','msg'=> "A senha informada esta incorreta"));
+				return;
+			}
+			$msg = $this->usuario_model->delete($usuario["id"]);
+			$estado = ($msg == "Sucesso")? "success" : "danger";
+			echo json_encode(array('estado'=> $estado,'msg'=> $msg));
+			
+		}else{
+			$this->load->view('page_top', array( 'titulo' => "Desativar conta"));
+			$this->load->view($_SESSION['tipo'].'/page_nav', array( 'op' =>"perfil"));
+			$this->load->view('apagar_conta');
+			$this->load->view('page_bottom');
+		}
+    }
 }

@@ -18,11 +18,8 @@ class Usuario_model extends CI_Model {
         $this->db->where("senha", $this->senha);
     
         $query = $this->db->get('usuario', 1);
-        $row  = $query->row();
-        if (isset($row)) {
-            return $row->tipo;
-        }
-        return null;
+        return $query->row_array();
+
     }
 
     public function read_login($login)
@@ -38,7 +35,7 @@ class Usuario_model extends CI_Model {
     public function create($tipo, $login, $senha, $ativo = true)
     {
         $this->login = $login;
-        $this->senha = $senha;
+        $this->senha = md5($senha);
         $this->ativo = $ativo;
         $this->tipo = $tipo;
     

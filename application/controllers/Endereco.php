@@ -9,11 +9,8 @@ class Endereco extends CI_Controller {
 	}
     public function create($persistir = 0)
     {	
-        if($persistir){
-           
-            $this->load->model("usuario_model");
-            $usuario =  $this->usuario_model->read_login($_SESSION['logado']);
-            
+        if($persistir)
+        {        
             $endereco = array(
                 'cep' => $this->input->post('cep'),
                 'num' => $this->input->post('num'),
@@ -22,7 +19,7 @@ class Endereco extends CI_Controller {
                 'cidade' => $this->input->post('cidade'),
                 'estado' => $this->input->post('estado'),
                 'pais' => $this->input->post('pais'),
-                'usuario_id' => $usuario['id'],
+                'usuario_id' => $_SESSION['usuario_id'],
             );
 
 			foreach($endereco as $valor) {//validando requeridos

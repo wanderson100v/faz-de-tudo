@@ -23,7 +23,7 @@ class Contato extends CI_Controller {
 			echo json_encode(array('estado'=> $estado,'msg'=> $msg));
         }else{ // mostrar tela
             $this->load->view('page_top', array( 'titulo' => "Cadastrar contato"));
-            $this->load->view('cliente/page_nav', array( 'op' => "perfil"));
+            $this->load->view($_SESSION['tipo'].'/page_nav', array( 'op' => "perfil"));
             $this->load->view('persistir_contato', array( 'desc' => "Cadastrar"));
             $this->load->view('page_bottom');
         }

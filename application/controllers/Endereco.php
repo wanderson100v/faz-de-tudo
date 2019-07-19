@@ -35,7 +35,7 @@ class Endereco extends CI_Controller {
 			echo json_encode(array('estado'=> $estado,'msg'=> $msg));
         }else{
             $this->load->view('page_top', array( 'titulo' => "Cadastrar endereço"));
-            $this->load->view('cliente/page_nav', array( 'op' => "perfil"));
+            $this->load->view($_SESSION['tipo'].'/page_nav', array( 'op' => "perfil"));
             $this->load->view('persistir_endereco', array( 'desc' => "Cadastrar"));
             $this->load->view('page_bottom');
         }

@@ -72,7 +72,7 @@ class Usuario extends CI_Controller {
 			$usuario["senha"] = null;
 
 			$this->load->view('page_top', array( 'titulo' => "Editar Usuário"));
-			$this->load->view('cliente/page_nav', array( 'op' =>"perfil"));
+			$this->load->view($_SESSION['tipo'].'/page_nav', array( 'op' =>"perfil"));
 			$this->load->view('edit_user', array("usuario" => $usuario));
 			$this->load->view('page_bottom');
 		}

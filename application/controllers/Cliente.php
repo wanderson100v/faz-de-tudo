@@ -36,7 +36,7 @@ class Cliente extends CI_Controller {
 				$cliente["usuario"] = $usuario;
 
 				$this->load->view('page_top', array( 'titulo' => $this->titulos[$pagina]));
-				$this->load->view('cliente/page_nav', array( 'op' => $pagina));
+				$this->load->view($_SESSION['tipo'].'/page_nav', array( 'op' => $pagina));
 				if($pagina == "perfil")
 					$this->load->view('cliente/'.$pagina, array( 'cliente' => $cliente));
 				else
@@ -77,7 +77,7 @@ class Cliente extends CI_Controller {
 			$cliente = $this->cliente_model->read_usuario_id($_SESSION['usuario_id']);
 
 			$this->load->view('page_top', array( 'titulo' => "Editar Cliente"));
-			$this->load->view('cliente/page_nav', array( 'op' =>"perfil"));
+			$this->load->view($_SESSION['tipo'].'/page_nav', array( 'op' =>"perfil"));
 			$this->load->view('cliente/edit_cliente', array('cliente' =>$cliente));
 			$this->load->view('page_bottom');
 		}
